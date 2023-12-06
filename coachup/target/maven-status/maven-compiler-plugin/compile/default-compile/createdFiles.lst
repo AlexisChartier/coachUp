@@ -1,0 +1,10 @@
+coachup\dao\SQLDAOFactory.class
+coachup\Launcher.class
+coachup\MainApp.class
+coachup\controller\LoginController.class
+coachup\model\User.class
+coachup\dao\UserDAO.class
+coachup\facade\UserFacade.class
+coachup\controller\WelcomeController.class
+coachup\dao\UserDAOImpl.class
+coachup\dao\AbstractDAOFactory.class
