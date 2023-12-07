@@ -13,17 +13,22 @@ public class UserFacade {
 
     private UserDAO userDAO;
     private static UserFacade instance;
+    private User currentUser;
 
     /**
      * Constructeur privé pour assurer que seul une instance de UserFacade est créée (Singleton).
      */
     private UserFacade() {
-        AbstractDAOFactory daoFactory = new SQLDAOFactory();
+        AbstractDAOFactory daoFactory = SQLDAOFactory.getInstance();
         try {
             userDAO = daoFactory.getUserDAO();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public User getCurrentUser(){
+        return this.currentUser;
     }
 
     /**
@@ -96,6 +101,12 @@ public class UserFacade {
      * @return true si les informations de connexion sont valides, false sinon.
      */
     public boolean loginUser(String email, String password) {
-        return userDAO.loginUser(email, password);
+        if(userDAO.loginUser(email,password)){
+            this.currentUser = getUserByEmail(email);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

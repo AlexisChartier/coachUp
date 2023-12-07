@@ -5,8 +5,17 @@ import java.sql.SQLException;
 /**
  * Interface décrivant une fabrique abstraite pour créer des DAO (Data Access Object).
  */
-public interface AbstractDAOFactory {
+public abstract class AbstractDAOFactory{
 
+    private static AbstractDAOFactory instance;
+
+    public static AbstractDAOFactory getInstance(){
+        if(instance == null){
+           instance = new SQLDAOFactory();
+        }
+        return instance;
+
+    }
     /**
      * Renvoie une instance de UserDAO pour interagir avec la table des utilisateurs.
      *
@@ -14,5 +23,7 @@ public interface AbstractDAOFactory {
      * @throws SQLException            En cas d'erreur lors de l'accès à la base de données.
      * @throws ClassNotFoundException  Si la classe du pilote de base de données n'est pas trouvée.
      */
-    UserDAO getUserDAO() throws SQLException, ClassNotFoundException;
+    public abstract UserDAO getUserDAO() throws SQLException, ClassNotFoundException;
+
+
 }

@@ -6,7 +6,7 @@ import java.sql.*;
 /**
  * Implémentation de l'interface UserDAO pour la gestion des opérations CRUD (Create, Read, Update, Delete) d'un utilisateur dans une base de données MySQL.
  */
-public class UserDAOImpl implements UserDAO {
+public class UserDAOImpl extends UserDAO {
 
     private Connection connection; // initialisation de la connexion
 
