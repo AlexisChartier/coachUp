@@ -11,6 +11,7 @@ import coachup.facade.UserFacade;
 import coachup.model.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 
 /**
@@ -79,7 +80,7 @@ public class MainApp extends Application {
      * @param password Le mot de passe de l'utilisateur.
      * @return true si l'authentification est réussie, false sinon.
      */
-    public boolean authenticateUser(String email, String password) {
+    public boolean authenticateUser(String email, String password) throws SQLException, ClassNotFoundException {
         UserFacade userFacade = UserFacade.getInstance();
 
         boolean isAuthenticated = userFacade.loginUser(email, password);

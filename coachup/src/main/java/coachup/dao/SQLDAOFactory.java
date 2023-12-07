@@ -8,6 +8,17 @@ import java.sql.SQLException;
  * Fabrique concrète pour créer des objets DAO liés à une base de données SQL.
  */
 public class SQLDAOFactory extends AbstractDAOFactory {
+
+    private static SQLDAOFactory instance;
+    private static UserDAOImpl userDAO;
+
+    public static SQLDAOFactory getInstance() throws SQLException, ClassNotFoundException {
+        if(instance == null){
+            instance = new SQLDAOFactory();
+            userDAO = new UserDAOImpl();
+        }
+        return instance;
+    }
     /**
      * Renvoie une instance de UserDAOImpl pour interagir avec la table des utilisateurs dans une base de données SQL.
      *
@@ -17,6 +28,6 @@ public class SQLDAOFactory extends AbstractDAOFactory {
      */
     @Override
     public UserDAO getUserDAO() throws SQLException, ClassNotFoundException {
-        return new UserDAOImpl();
+        return userDAO;
     }
 }

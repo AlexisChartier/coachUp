@@ -4,6 +4,8 @@ import coachup.facade.UserFacade;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
+
 public class LoginTest extends TestCase {
     public String goodemail ;
     public String goodpassword ;
@@ -20,7 +22,7 @@ public class LoginTest extends TestCase {
     }
 
     @Test
-    public void testLogin() {
+    public void testLogin() throws SQLException, ClassNotFoundException {
         UserFacade userFacade = UserFacade.getInstance();
         boolean goodlogin = userFacade.loginUser(this.goodemail, this.goodpassword);
         boolean badlogin = userFacade.loginUser(this.bademail, this.badpassword);

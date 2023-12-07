@@ -18,7 +18,7 @@ public class UserFacade {
     /**
      * Constructeur privé pour assurer que seul une instance de UserFacade est créée (Singleton).
      */
-    private UserFacade() {
+    private UserFacade() throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = SQLDAOFactory.getInstance();
         try {
             userDAO = daoFactory.getUserDAO();
@@ -36,7 +36,7 @@ public class UserFacade {
      *
      * @return L'instance unique de UserFacade.
      */
-    public static synchronized UserFacade getInstance() {
+    public static synchronized UserFacade getInstance() throws SQLException, ClassNotFoundException {
         if (instance == null) {
             instance = new UserFacade();
         }
