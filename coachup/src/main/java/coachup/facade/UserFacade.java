@@ -11,20 +11,13 @@ import java.sql.SQLException;
  */
 public class UserFacade {
 
-    private UserDAO userDAO;
     private static UserFacade instance;
     private User currentUser;
 
     /**
      * Constructeur privé pour assurer que seul une instance de UserFacade est créée (Singleton).
      */
-    private UserFacade() throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = SQLDAOFactory.getInstance();
-        try {
-            userDAO = daoFactory.getUserDAO();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    private UserFacade(){
     }
 
     public User getCurrentUser(){
@@ -49,8 +42,9 @@ public class UserFacade {
      * @param userId L'identifiant de l'utilisateur.
      * @return L'objet User correspondant à l'identifiant, ou null s'il n'existe pas.
      */
-    public User getUserById(int userId) {
-        return userDAO.getUserById(userId);
+    public User getUserById(int userId) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        return daoFactory.getUserDAO().getUserById(userId);
     }
 
     /**
@@ -59,8 +53,9 @@ public class UserFacade {
      * @param email L'adresse e-mail de l'utilisateur.
      * @return L'objet User correspondant à l'adresse e-mail, ou null s'il n'existe pas.
      */
-    public User getUserByEmail(String email) {
-        return userDAO.getUserByEmail(email);
+    public User getUserByEmail(String email) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        return daoFactory.getUserDAO().getUserByEmail(email);
     }
 
     /**
@@ -68,31 +63,32 @@ public class UserFacade {
      *
      * @param user L'objet User à ajouter.
      * @return true si l'ajout est réussi, false sinon.
-     */
+
     public boolean addUser(User user) {
+        AbstractDAOFactory daoFactory
         return userDAO.addUser(user);
     }
-
+     */
     /**
      * Met à jour les informations d'un utilisateur existant.
      *
      * @param user L'objet User contenant les nouvelles informations.
      * @return true si la mise à jour est réussie, false sinon.
-     */
+
     public boolean updateUser(User user) {
         return userDAO.updateUser(user);
     }
-
+     */
     /**
      * Supprime un utilisateur par son identifiant.
      *
      * @param userId L'identifiant de l'utilisateur à supprimer.
      * @return true si la suppression est réussie, false sinon.
-     */
+
     public boolean deleteUser(int userId) {
         return userDAO.deleteUser(userId);
     }
-
+     */
     /**
      * Vérifie les informations de connexion d'un utilisateur.
      *
@@ -100,8 +96,9 @@ public class UserFacade {
      * @param password Le mot de passe de l'utilisateur.
      * @return true si les informations de connexion sont valides, false sinon.
      */
-    public boolean loginUser(String email, String password) {
-        if(userDAO.loginUser(email,password)){
+    public boolean loginUser(String email, String password) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        if(daoFactory.getUserDAO().loginUser(email,password)){
             this.currentUser = getUserByEmail(email);
             return true;
         }

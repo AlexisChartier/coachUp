@@ -11,7 +11,7 @@ public abstract class AbstractDAOFactory{
 
     public static AbstractDAOFactory getInstance() throws SQLException, ClassNotFoundException {
         if(instance == null){
-           instance = new SQLDAOFactory();
+           instance = SQLDAOFactory.getInstance();
         }
         return instance;
 

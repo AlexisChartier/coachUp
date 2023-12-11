@@ -1,7 +1,5 @@
 package coachup.dao;
 
-import coachup.facade.UserFacade;
-
 import java.sql.SQLException;
 
 /**
@@ -10,12 +8,12 @@ import java.sql.SQLException;
 public class SQLDAOFactory extends AbstractDAOFactory {
 
     private static SQLDAOFactory instance;
-    private static UserDAOImpl userDAO;
+    private static UserDAOSQL userDAO;
 
     public static SQLDAOFactory getInstance() throws SQLException, ClassNotFoundException {
         if(instance == null){
             instance = new SQLDAOFactory();
-            userDAO = new UserDAOImpl();
+            userDAO = new UserDAOSQL();
         }
         return instance;
     }

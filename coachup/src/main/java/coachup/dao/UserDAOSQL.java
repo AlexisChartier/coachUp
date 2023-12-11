@@ -6,7 +6,7 @@ import java.sql.*;
 /**
  * Implémentation de l'interface UserDAO pour la gestion des opérations CRUD (Create, Read, Update, Delete) d'un utilisateur dans une base de données MySQL.
  */
-public class UserDAOImpl extends UserDAO {
+public class UserDAOSQL extends UserDAO {
 
     private Connection connection; // initialisation de la connexion
 
@@ -16,7 +16,7 @@ public class UserDAOImpl extends UserDAO {
      * @throws SQLException            Si une erreur survient lors de la connexion à la base de données.
      * @throws ClassNotFoundException  Si la classe du pilote JDBC n'est pas trouvée.
      */
-    public UserDAOImpl() throws SQLException, ClassNotFoundException {
+    public UserDAOSQL() throws SQLException, ClassNotFoundException {
         connect();
     }
 
