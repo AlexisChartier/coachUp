@@ -17,5 +17,7 @@
     <Label text="Password:"/>
     <PasswordField fx:id="passwordField"/>
     <Button text="Login" onAction="#loginButtonAction"/>
-    <Button text="Back" onAction="#backButtonAction"/>
+    <Button text="Register as a student" onAction="#registerStudentButtonAction"/> <!-- Ajout du bouton Register -->
+    <Button text="Register as a coach" onAction="#registerCoachButtonAction"/>
+    <Button text="Quit" onAction="#quitButtonAction"/>
 </VBox>

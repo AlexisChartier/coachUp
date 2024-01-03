@@ -1,12 +1,21 @@
 package coachup.controller;
+import coachup.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import coachup.model.User;
+
+import java.io.IOException;
 
 /**
  * Contrôleur pour la page de bienvenue (Welcome).
  */
 public class WelcomeController {
+
+    private MainApp mainApp = new MainApp();
+
+    public void setMainApp(MainApp mainApp){
+        this.mainApp = mainApp;
+    }
 
     @FXML
     private Label welcomeLabel;
@@ -41,7 +50,8 @@ public class WelcomeController {
      * @param actionEvent L'événement déclenché par le bouton.
      */
     @FXML
-    public void logoutButtonAction(javafx.event.ActionEvent actionEvent) {
-        // Logique déconnexion
+    public void logoutButtonAction(javafx.event.ActionEvent actionEvent) throws IOException {
+        this.user = null;
+        mainApp.showLoginPage();
     }
 }

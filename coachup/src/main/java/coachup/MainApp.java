@@ -1,5 +1,6 @@
 package coachup;
 
+import coachup.controller.RegisterStudentController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -49,6 +50,17 @@ public class MainApp extends Application {
         this.primaryStage.show();
     }
 
+    public void showLoginPage() throws IOException {
+        this.primaryStage.close();
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/login.fxml")));
+        Parent root = (Parent) loader.load();
+        LoginController loginController = loader.getController();
+        loginController.setMainApp(this);
+        Scene scene = new Scene(root);
+        this.primaryStage = primaryStage;
+        this.primaryStage.setScene(scene);
+        this.primaryStage.show();    }
+
     /**
      * Affiche la page de bienvenue après une authentification réussie.
      *
@@ -61,7 +73,7 @@ public class MainApp extends Application {
 
             WelcomeController welcomeController = loader.getController();
             welcomeController.setUser(user);
-
+            welcomeController.setMainApp(this);
             Stage welcomeStage = new Stage();
             this.primaryStage.close();
             this.primaryStage = welcomeStage;
@@ -72,6 +84,30 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
+
+
+    public void showRegisterStudentPage(){
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/registerStudent.fxml")));
+            Parent root = (Parent) loader.load();
+
+            RegisterStudentController registerStudentController = loader.getController();
+            registerStudentController.setMainApp(this);
+            Stage registerStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = registerStage;
+            Scene scene = new Scene(root);
+            registerStage.setScene(scene);
+            registerStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showRegisterCoachPage(){
+
+    }
+
 
     /**
      * Authentifie l'utilisateur en vérifiant les informations de connexion.

@@ -59,8 +59,18 @@ public class LoginController {
      * @param event L'événement déclenché par le bouton.
      */
     @FXML
-    private void backButtonAction(ActionEvent event) {
+    private void quitButtonAction(ActionEvent event) {
         // Ferme l'application en cas de clic sur le bouton de retour
         System.exit(1);
+    }
+
+    @FXML
+    private void registerStudentButtonAction(ActionEvent event) {
+        mainApp.showRegisterStudentPage();
+    }
+
+    @FXML
+    private void registerCoachButtonAction(ActionEvent event){
+        mainApp.showRegisterCoachPage();
     }
 }
