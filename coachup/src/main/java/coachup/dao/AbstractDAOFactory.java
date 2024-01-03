@@ -11,7 +11,7 @@ public abstract class AbstractDAOFactory{
 
     public static AbstractDAOFactory getInstance() throws SQLException, ClassNotFoundException {
         if(instance == null){
-           instance = SQLDAOFactory.getInstance();
+           instance = PGSQLDAOFactory.getInstance();
         }
         return instance;
 
