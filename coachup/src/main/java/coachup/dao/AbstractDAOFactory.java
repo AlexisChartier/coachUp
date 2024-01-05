@@ -25,5 +25,7 @@ public abstract class AbstractDAOFactory{
      */
     public abstract UserDAO getUserDAO() throws SQLException, ClassNotFoundException;
 
+    public abstract CoachDAO getCoachDAO();
+
 
 }

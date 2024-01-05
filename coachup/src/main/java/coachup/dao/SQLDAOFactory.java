@@ -28,4 +28,9 @@ public class SQLDAOFactory extends AbstractDAOFactory {
     public UserDAO getUserDAO() throws SQLException, ClassNotFoundException {
         return userDAO;
     }
+
+    @Override
+    public CoachDAO getCoachDAO() {
+        return null;
+    }
 }
