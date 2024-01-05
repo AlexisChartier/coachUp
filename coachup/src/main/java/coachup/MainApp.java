@@ -7,6 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import coachup.facade.UserFacade;
+import coachup.facade.CoachFacade;
+import coachup.facade.NotationFacade;
+import coachup.model.Notation;
 import coachup.model.User;
 
 import java.io.IOException;
@@ -154,6 +157,13 @@ public class MainApp extends Application {
         return isAuthenticated;
     }
 
+    /**
+    public boolean addNotation(String comment, int notation, int CoachId, int UserId) throws SQLException, ClassNotFoundException {
+
+    }
+
+*/
+
     public void showWelcomePageAdmin(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/welcomeAdmin.fxml")));
@@ -175,5 +185,10 @@ public class MainApp extends Application {
     public boolean registerStudentUser(User user) throws SQLException, ClassNotFoundException {
         UserFacade userFacade  = UserFacade.getInstance();
         return userFacade.addUser(user);
+    }
+
+    public boolean addNotation(Notation notation) throws SQLException, ClassNotFoundException {
+        NotationFacade notationFacade = NotationFacade.getInstance();
+        return notationFacade.addNotation(notation);
     }
 }

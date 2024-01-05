@@ -27,5 +27,7 @@ public abstract class AbstractDAOFactory{
 
     public abstract CoachDAO getCoachDAO();
 
+    public abstract NotationDAO getNotationDAO();
+
 
 }
