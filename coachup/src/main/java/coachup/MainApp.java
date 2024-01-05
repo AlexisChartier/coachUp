@@ -1,13 +1,11 @@
 package coachup;
 
-import coachup.controller.RegisterStudentController;
+import coachup.controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import coachup.controller.LoginController;
-import coachup.controller.WelcomeController;
 import coachup.facade.UserFacade;
 import coachup.model.User;
 
@@ -108,6 +106,23 @@ public class MainApp extends Application {
 
     }
 
+    public void showUserList(){
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/userListView.fxml")));
+            Parent root = (Parent) loader.load();
+
+            UserListController userListController = loader.getController();
+            //userListController.setMainApp(this);
+            Stage userListStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = userListStage;
+            Scene scene = new Scene(root);
+            userListStage.setScene(scene);
+            userListStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Authentifie l'utilisateur en vérifiant les informations de connexion.
@@ -123,11 +138,42 @@ public class MainApp extends Application {
 
         if (isAuthenticated) {
             User user = userFacade.getUserByEmail(email);
-            showWelcomePage(user);
+            if(Objects.equals(user.getRole(), "student")){
+                showWelcomePage(user);
+            }
+            else if(Objects.equals(user.getRole(), "admin")){
+                showWelcomePageAdmin();
+            }
+            else{
+                showWelcomePage(user);
+            }
         } else {
             System.out.println("Authentication failed. Invalid email or password.");
         }
 
         return isAuthenticated;
+    }
+
+    public void showWelcomePageAdmin(){
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/welcomeAdmin.fxml")));
+            Parent root = (Parent) loader.load();
+
+            WelcomeAdminController welcomeAdminController = loader.getController();
+            welcomeAdminController.setMainApp(this);
+            Stage welcomeAdminStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = welcomeAdminStage;
+            Scene scene = new Scene(root);
+            welcomeAdminStage.setScene(scene);
+            welcomeAdminStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean registerStudentUser(User user) throws SQLException, ClassNotFoundException {
+        UserFacade userFacade  = UserFacade.getInstance();
+        return userFacade.addUser(user);
     }
 }

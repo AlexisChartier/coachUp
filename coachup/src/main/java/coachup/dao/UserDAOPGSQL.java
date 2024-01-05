@@ -3,6 +3,8 @@ package coachup.dao;
 import coachup.model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implémentation de l'interface UserDAO pour la gestion des opérations CRUD (Create, Read, Update, Delete) d'un utilisateur dans une base de données PostgreSQL.
@@ -155,6 +157,29 @@ public class UserDAOPGSQL extends UserDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+
+        try {
+            // Préparation de la requête SQL
+            String query = "SELECT * FROM users";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                // Exécution de la requête
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    // Parcourir les résultats et créer des objets User
+                    while (resultSet.next()) {
+                        User user = mapResultSetToUser(resultSet);
+                        userList.add(user);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userList;
     }
 
     /**

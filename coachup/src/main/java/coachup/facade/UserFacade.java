@@ -5,6 +5,7 @@ import coachup.dao.UserDAO;
 import coachup.model.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Facade pour la gestion des utilisateurs, fournissant des méthodes pour effectuer des opérations sur les utilisateurs.
@@ -63,12 +64,11 @@ public class UserFacade {
      *
      * @param user L'objet User à ajouter.
      * @return true si l'ajout est réussi, false sinon.
-
-    public boolean addUser(User user) {
-        AbstractDAOFactory daoFactory
-        return userDAO.addUser(user);
+    */
+    public boolean addUser(User user) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        return daoFactory.getUserDAO().addUser(user);
     }
-     */
     /**
      * Met à jour les informations d'un utilisateur existant.
      *
@@ -105,5 +105,10 @@ public class UserFacade {
         else{
             return false;
         }
+    }
+
+    public List<User> getAllUsers() throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        return daoFactory.getUserDAO().getAllUsers();
     }
 }

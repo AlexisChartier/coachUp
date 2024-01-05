@@ -2,6 +2,7 @@ package coachup.dao;
 import coachup.model.User;
 
 import java.sql.*;
+import java.util.List;
 
 /**
  * Implémentation de l'interface UserDAO pour la gestion des opérations CRUD (Create, Read, Update, Delete) d'un utilisateur dans une base de données MySQL.
@@ -115,6 +116,11 @@ public class UserDAOSQL extends UserDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return null;
     }
 
     @Override

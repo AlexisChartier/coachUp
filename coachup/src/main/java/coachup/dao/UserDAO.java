@@ -2,6 +2,7 @@ package coachup.dao;
 import coachup.model.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Interface définissant les opérations CRUD (Create, Read, Update, Delete) pour un utilisateur dans la base de données.
@@ -40,6 +41,8 @@ public abstract class UserDAO {
      * @return true si la mise à jour est réussie, false sinon.
      */
     public abstract boolean updateUser(User user);
+
+    public abstract List<User> getAllUsers();
 
     /**
      * Supprime un utilisateur de la base de données.
