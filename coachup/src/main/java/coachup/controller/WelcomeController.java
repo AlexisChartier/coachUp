@@ -54,4 +54,24 @@ public class WelcomeController {
         this.user = null;
         mainApp.showLoginPage();
     }
+
+    @FXML
+    public void AddNotationButtonAction(javafx.event.ActionEvent event) throws IOException {
+        mainApp.showAddNotation();
+    }
+
+    @FXML
+    public void ModifyNotationButtonAction(javafx.event.ActionEvent event) throws IOException {
+        mainApp.showModifyNotation();
+    }
+
+    @FXML
+    public void showAllCoachNotationsButtonAction(javafx.event.ActionEvent event) throws IOException {
+        mainApp.ShowAllCoachNotations();
+    }
+
+    @FXML
+    public void showAllUserNotationsButtonAction(javafx.event.ActionEvent event) throws IOException {
+        mainApp.ShowAllUserNotations();
+    }
 }
