@@ -113,4 +113,6 @@ public class UserFacade {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getUserDAO().getAllUsers();
     }
+
+
 }
