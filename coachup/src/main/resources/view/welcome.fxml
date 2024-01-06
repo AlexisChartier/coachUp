@@ -8,6 +8,9 @@
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
-    <Label fx:id="welcomeLabel" alignment="CENTER" prefHeight="80.0" prefWidth="296.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
-    <Button onAction="#logoutButtonAction" prefWidth="54.0" text="Logout" StackPane.alignment="BOTTOM_CENTER" />
+    <VBox alignment="CENTER" spacing="10">
+        <Label fx:id="welcomeLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        <Button onAction="#logoutButtonAction" text="Logout" />
+        <Button onAction="#profileButtonAction" text="Profil" />
+    </VBox>
 </StackPane>
