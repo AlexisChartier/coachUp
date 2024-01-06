@@ -191,4 +191,10 @@ public class MainApp extends Application {
         NotationFacade notationFacade = NotationFacade.getInstance();
         return notationFacade.addNotation(notation);
     }
+
+    public Notation[] getNotationByCoachId(int coachId) throws SQLException, ClassNotFoundException {
+        NotationFacade notationFacade = NotationFacade.getInstance();
+        return notationFacade.getNotationByCoachId(coachId);
+    }
+
 }

@@ -64,4 +64,12 @@ public class Notation {
         this.UserId = UserId;
     }
 
+    public String getCoachName() {
+        return "Coach Name";
+    }
+
+    public String getUserName() {
+        return "User Name";
+    }
+
 }

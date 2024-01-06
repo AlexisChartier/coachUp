@@ -4,6 +4,8 @@ import coachup.model.Notation;
 
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotationDAOPGSQL extends NotationDAO {
 
@@ -83,5 +85,64 @@ public class NotationDAOPGSQL extends NotationDAO {
         }
         return false;
     }
+
+    @Override
+    public Notation[] getNotationByCoachId(int CoachId){
+        List<Notation> notations = new ArrayList<>();
+        try {
+            // Préparation de la requête SQL
+            String query = "SELECT * FROM notation WHERE CoachId = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, CoachId);
+
+                // Exécution de la requête
+                ResultSet resultSet = statement.executeQuery();
+
+                // Parcourir le ResultSet
+                while (resultSet.next()) {
+                    Notation notation = new Notation();
+                    notation.setNotationId(resultSet.getInt("NotationId"));
+                    notation.setNote(resultSet.getFloat("note"));
+                    notation.setComment(resultSet.getString("comment"));
+                    notation.setCoachId(resultSet.getInt("CoachId"));
+                    notation.setUserId(resultSet.getInt("UserId"));
+                    notations.add(notation);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return notations.toArray(new Notation[0]);
+    }
+
+    @Override
+    public Notation[] getNotationByUserId(int UserId){
+        List<Notation> notations = new ArrayList<>();
+        try {
+            // Préparation de la requête SQL
+            String query = "SELECT * FROM notation WHERE UserId = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, UserId);
+
+                // Exécution de la requête
+                ResultSet resultSet = statement.executeQuery();
+
+                // Parcourir le ResultSet
+                while (resultSet.next()) {
+                    Notation notation = new Notation();
+                    notation.setNotationId(resultSet.getInt("NotationId"));
+                    notation.setNote(resultSet.getFloat("note"));
+                    notation.setComment(resultSet.getString("comment"));
+                    notation.setCoachId(resultSet.getInt("CoachId"));
+                    notation.setUserId(resultSet.getInt("UserId"));
+                    notations.add(notation);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return notations.toArray(new Notation[0]);
+    }
+
 
 }

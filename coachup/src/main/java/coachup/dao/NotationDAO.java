@@ -7,4 +7,8 @@ public abstract class NotationDAO {
     public abstract boolean modifyNotation(Notation notation);
     public abstract boolean deleteNotation(int NotationId);
 
+    public abstract Notation[] getNotationByCoachId(int CoachId);
+
+    public abstract Notation[] getNotationByUserId(int UserId);
+
 }
