@@ -106,22 +106,57 @@ public class MainApp extends Application {
     }
 
     public void showRegisterCoachPage(){
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/registerCoach.fxml")));
+            Parent root = (Parent) loader.load();
 
+            RegisterCoachController registerCoachController = loader.getController();
+            registerCoachController.setMainApp(this);
+            Stage registerCoachStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = registerCoachStage;
+            Scene scene = new Scene(root);
+            registerCoachStage.setScene(scene);
+            registerCoachStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void showUserList(){
+    public void showUserList(User user){
         try {
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/userListView.fxml")));
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/userList.fxml")));
             Parent root = (Parent) loader.load();
 
             UserListController userListController = loader.getController();
-            //userListController.setMainApp(this);
+            userListController.setMainApp(this);
+            userListController.setAdminUser(user);
             Stage userListStage = new Stage();
             this.primaryStage.close();
             this.primaryStage = userListStage;
             Scene scene = new Scene(root);
             userListStage.setScene(scene);
             userListStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showDetailPage(User user, User userAdmin){
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/detailProfile.fxml")));
+            Parent root = (Parent) loader.load();
+
+            DetailProfileController detailProfileController = loader.getController();
+            detailProfileController.setMainApp(this);
+            detailProfileController.setUser(user);
+            detailProfileController.setAdminUser(userAdmin);
+            Stage detailStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = detailStage;
+            Scene scene = new Scene(root);
+            detailStage.setScene(scene);
+            detailStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -145,7 +180,7 @@ public class MainApp extends Application {
                 showWelcomePage(user);
             }
             else if(Objects.equals(user.getRole(), "admin")){
-                showWelcomePageAdmin();
+                showWelcomePageAdmin(user);
             }
             else{
                 showWelcomePage(user);
@@ -164,13 +199,14 @@ public class MainApp extends Application {
 
 */
 
-    public void showWelcomePageAdmin(){
+    public void showWelcomePageAdmin(User user){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/welcomeAdmin.fxml")));
             Parent root = (Parent) loader.load();
 
             WelcomeAdminController welcomeAdminController = loader.getController();
             welcomeAdminController.setMainApp(this);
+            welcomeAdminController.setCurrentUser(user);
             Stage welcomeAdminStage = new Stage();
             this.primaryStage.close();
             this.primaryStage = welcomeAdminStage;

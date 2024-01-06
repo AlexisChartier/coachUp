@@ -1,5 +1,6 @@
 package coachup.controller;
 import coachup.MainApp;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import coachup.model.User;
@@ -53,5 +54,9 @@ public class WelcomeController {
     public void logoutButtonAction(javafx.event.ActionEvent actionEvent) throws IOException {
         this.user = null;
         mainApp.showLoginPage();
+    }
+
+    public void profileButtonAction(ActionEvent actionEvent) {
+        mainApp.showDetailPage(user, null);
     }
 }

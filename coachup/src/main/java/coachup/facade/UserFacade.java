@@ -74,21 +74,23 @@ public class UserFacade {
      *
      * @param user L'objet User contenant les nouvelles informations.
      * @return true si la mise à jour est réussie, false sinon.
-
-    public boolean updateUser(User user) {
-        return userDAO.updateUser(user);
+    */
+    public boolean updateUser(User user) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        return daoFactory.getUserDAO().updateUser(user);
     }
-     */
+
     /**
      * Supprime un utilisateur par son identifiant.
      *
      * @param userId L'identifiant de l'utilisateur à supprimer.
      * @return true si la suppression est réussie, false sinon.
-
-    public boolean deleteUser(int userId) {
-        return userDAO.deleteUser(userId);
+        */
+    public boolean deleteUser(int userId) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        return daoFactory.getUserDAO().deleteUser(userId);
     }
-     */
+
     /**
      * Vérifie les informations de connexion d'un utilisateur.
      *

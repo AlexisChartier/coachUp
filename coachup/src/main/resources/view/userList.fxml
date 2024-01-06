@@ -2,22 +2,31 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.FontWeight?>
-<?import javafx.scene.text.Text?>
-<?import javafx.util.Callback?>
 
-<VBox spacing="10" alignment="center" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.UserListController">
+<?import coachup.cell.UserCellFactory?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="coachup.controller.UserListController">
+
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
-    <Text style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Liste des Utilisateurs"/>
 
-    <ListView fx:id="userListView">
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Liste des Utilisateurs"/>
+
+    <ListView fx:id="userListView" prefHeight="400" prefWidth="600">
+        <cellFactory>
+            <UserCellFactory/> <!-- Remplacez YourListCellFactory par votre propre implémentation -->
+        </cellFactory>
     </ListView>
+
+    <HBox spacing="10">
+        <Button text="Détail" onAction="#handleDetailButton"/>
+        <Button text="Supprimer" onAction="#handleDeleteButton"/>
+    </HBox>
+
 </VBox>
