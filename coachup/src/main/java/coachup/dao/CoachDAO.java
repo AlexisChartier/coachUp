@@ -16,5 +16,6 @@ public abstract class CoachDAO {
 
     public abstract boolean deleteCoach(int coachId);
 
+
     public abstract List<Coach> getUnapprovedCoaches();
 }

@@ -33,4 +33,9 @@ public class SQLDAOFactory extends AbstractDAOFactory {
     public CoachDAO getCoachDAO() {
         return null;
     }
+
+    @Override
+    public NotationDAO getNotationDAO() {
+        return null;
+    }
 }
