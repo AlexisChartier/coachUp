@@ -182,78 +182,6 @@ public class MainApp extends Application {
         }
     }
 
-    public void showAddNotation(){
-        try {
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/addnotation.fxml")));
-            Parent root = (Parent) loader.load();
-
-            AddNotationController addnotationcontroller = loader.getController();
-            addnotationcontroller.setMainApp(this);
-            Stage addnotationstage = new Stage();
-            this.primaryStage.close();
-            this.primaryStage = addnotationstage;
-            Scene scene = new Scene(root);
-            addnotationstage.setScene(scene);
-            addnotationstage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showModifyNotation(){
-        try {
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/modifynotation.fxml")));
-            Parent root = (Parent) loader.load();
-
-            ModifyNotationController modifynotationcontroller = loader.getController();
-            modifynotationcontroller.setMainApp(this);
-            Stage modifynotationstage = new Stage();
-            this.primaryStage.close();
-            this.primaryStage = modifynotationstage;
-            Scene scene = new Scene(root);
-            modifynotationstage.setScene(scene);
-            modifynotationstage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void ShowAllCoachNotations(){
-        try {
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/showAllCoachNotations.fxml")));
-            Parent root = (Parent) loader.load();
-
-            ShowAllCoachNotationsController showAllCoachNotationsController = loader.getController();
-            showAllCoachNotationsController.setMainApp(this);
-            Stage showAllCoachNotationsStage = new Stage();
-            this.primaryStage.close();
-            this.primaryStage = showAllCoachNotationsStage;
-            Scene scene = new Scene(root);
-            showAllCoachNotationsStage.setScene(scene);
-            showAllCoachNotationsStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void ShowAllUserNotations(){
-        try {
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/showAllUserNotations.fxml")));
-            Parent root = (Parent) loader.load();
-
-            ShowAllUserNotationsController showAllUserNotationsController = loader.getController();
-            showAllUserNotationsController.setMainApp(this);
-            Stage showAllUserNotationsStage = new Stage();
-            this.primaryStage.close();
-            this.primaryStage = showAllUserNotationsStage;
-            Scene scene = new Scene(root);
-            showAllUserNotationsStage.setScene(scene);
-            showAllUserNotationsStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public boolean registerStudentUser(User user) throws SQLException, ClassNotFoundException {
         UserFacade userFacade  = UserFacade.getInstance();
         return userFacade.addUser(user);
@@ -263,31 +191,4 @@ public class MainApp extends Application {
         NotationFacade notationFacade = NotationFacade.getInstance();
         return notationFacade.addNotation(notation);
     }
-
-    public Notation[] getNotationByCoachId(int coachId) throws SQLException, ClassNotFoundException {
-        NotationFacade notationFacade = NotationFacade.getInstance();
-        return notationFacade.getNotationByCoachId(coachId);
-    }
-
-    public Notation[] getNotationByUserId(int userId) throws SQLException, ClassNotFoundException {
-        NotationFacade notationFacade = NotationFacade.getInstance();
-        return notationFacade.getNotationByUserId(userId);
-    }
-
-    public boolean deleteNotation(int notationid) throws SQLException, ClassNotFoundException {
-        NotationFacade notationFacade = NotationFacade.getInstance();
-        return notationFacade.deleteNotation(notationid);
-    }
-
-    public Notation getNotationById(int notationid) throws SQLException, ClassNotFoundException {
-        NotationFacade notationFacade = NotationFacade.getInstance();
-        return notationFacade.getNotationById(notationid);
-    }
-
-    public boolean modifyNotation(Notation notation) throws SQLException, ClassNotFoundException {
-        NotationFacade notationFacade = NotationFacade.getInstance();
-        return notationFacade.modifyNotation(notation);
-    }
-
-
 }
