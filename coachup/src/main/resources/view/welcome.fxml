@@ -12,6 +12,7 @@
         <Label fx:id="welcomeLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
         <Button onAction="#logoutButtonAction" text="Logout" />
         <Button onAction="#profileButtonAction" text="Profil" />
-
+        <Button onAction="#seanceHistoryButtonAction" text="Historique des séances"/>
+        <Button onAction="#paymentGestionButtonAction" text="Gestion des paiements"/>
     </VBox>
 </StackPane>

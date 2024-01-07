@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.SeanceDetailController">
+    <children>
+        <VBox alignment="CENTER" prefHeight="200" prefWidth="300" spacing="10">
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Détails de la Séance" />
+            <Label text="Catégorie :" />
+            <Label fx:id="categorieLabel" />
+            <Label text="Date :" />
+            <Label fx:id="dateLabel" />
+            <Label text="Nom du Coach :" />
+            <Label fx:id="coachLabel" />
+            <Label text="Statut du Paiement :" />
+            <Label fx:id="statutPaiementLabel" />
+            <Button mnemonicParsing="false" onAction="#handleReturnButton" text="Retour" />
+        </VBox>
+    </children>
+</AnchorPane>

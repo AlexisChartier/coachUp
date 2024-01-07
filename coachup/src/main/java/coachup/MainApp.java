@@ -353,4 +353,138 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
+
+    public void showHistSeance() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/histSeance.fxml")));
+            Parent root = (Parent) loader.load();
+
+            HistSeanceController histSeanceController = loader.getController();
+            histSeanceController.setMainApp(this);
+            Stage histSeanceStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = histSeanceStage;
+            Scene scene = new Scene(root);
+            histSeanceStage.setScene(scene);
+            histSeanceStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showDetailSeance() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/seanceDetail.fxml")));
+            Parent root = (Parent) loader.load();
+
+            SeanceDetailController seanceDetailController = loader.getController();
+            seanceDetailController.setMainApp(this);
+            Stage seanceDetailStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = seanceDetailStage;
+            Scene scene = new Scene(root);
+            seanceDetailStage.setScene(scene);
+            seanceDetailStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showHubPayment() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/hubPayment.fxml")));
+            Parent root = (Parent) loader.load();
+
+            HubPaymentController hubPaymentController = loader.getController();
+            hubPaymentController.setMainApp(this);
+            Stage hubPayStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = hubPayStage;
+            Scene scene = new Scene(root);
+            hubPayStage.setScene(scene);
+            hubPayStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showPendingPayment() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/pendingPayments.fxml")));
+            Parent root = (Parent) loader.load();
+
+            PendingPaymentsController pendingPaymentsController = loader.getController();
+            pendingPaymentsController.setMainApp(this);
+            Stage pendingSess = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = pendingSess;
+            Scene scene = new Scene(root);
+            pendingSess.setScene(scene);
+            pendingSess.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
+    public void showUpComingSessions() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/upcomingSessions.fxml")));
+            Parent root = (Parent) loader.load();
+
+            UpcomingSessionsController upcomingSessionsController = loader.getController();
+            upcomingSessionsController.setMainApp(this);
+            Stage upcomingSess = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = upcomingSess;
+            Scene scene = new Scene(root);
+            upcomingSess.setScene(scene);
+            upcomingSess.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showPaymentPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/pendingSeance.fxml")));
+            Parent root = (Parent) loader.load();
+
+            PendingSeanceDetailController pendingSeanceDetailController = loader.getController();
+            pendingSeanceDetailController.setMainApp(this);
+            Stage pendingSessD = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = pendingSessD;
+            Scene scene = new Scene(root);
+            pendingSessD.setScene(scene);
+            pendingSessD.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showUpcomingDetail() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/upcomingSeance.fxml")));
+            Parent root = (Parent) loader.load();
+
+            UpcomingSessionDetailController upcomingSessionDetailController = loader.getController();
+            upcomingSessionDetailController.setMainApp(this);
+            Stage upDetail = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = upDetail;
+            Scene scene = new Scene(root);
+            upDetail.setScene(scene);
+            upDetail.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

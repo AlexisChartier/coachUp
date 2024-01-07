@@ -31,5 +31,7 @@ public abstract class AbstractDAOFactory{
 
     public abstract CategorieDAO getCategorieDAO();
 
+    public abstract SeanceDAO getSeanceDAO();
+
 
 }

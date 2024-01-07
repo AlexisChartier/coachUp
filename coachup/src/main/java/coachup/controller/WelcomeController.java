@@ -56,7 +56,18 @@ public class WelcomeController {
         mainApp.showLoginPage();
     }
 
+    @FXML
     public void profileButtonAction(ActionEvent actionEvent) {
         mainApp.showDetailPage(user, null);
+    }
+
+    @FXML
+    public void seanceHistoryButtonAction(ActionEvent actionEvent) {
+        mainApp.showHistSeance();
+    }
+
+    @FXML
+    public void paymentGestionButtonAction(ActionEvent actionEvent) {
+        mainApp.showHubPayment();
     }
 }

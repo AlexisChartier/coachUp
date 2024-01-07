@@ -43,4 +43,9 @@ public class SQLDAOFactory extends AbstractDAOFactory {
     public CategorieDAO getCategorieDAO() {
         return null;
     }
+
+    @Override
+    public SeanceDAO getSeanceDAO() {
+        return null;
+    }
 }

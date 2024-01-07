@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import coachup.cell.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.HistSeanceController">
+    <children>
+        <VBox alignment="CENTER" prefHeight="400" prefWidth="600" spacing="10">
+            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Historique des Séances" />
+
+            <ListView fx:id="histSeanceListView" prefHeight="300" prefWidth="600">
+                <cellFactory>
+                    <HistSeanceCellFactory />
+                </cellFactory>
+            </ListView>
+
+            <Button onAction="#handleDetailButton" text="Détail" />
+            <Button onAction="#handleReturnButton" text="Retour"/>
+        </VBox>
+    </children>
+</AnchorPane>
