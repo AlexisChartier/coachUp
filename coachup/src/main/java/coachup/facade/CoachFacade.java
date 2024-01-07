@@ -131,8 +131,7 @@ public class CoachFacade {
      */
     public boolean approveCoach(int coachId) throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        //TODO METHODE POUR APPROUVER LES COACHS DANS COACH DAO
-        return false;
+        return daoFactory.getCoachDAO().approveCoach(coachId);
         //return daoFactory.getCoachDAO().approveCoach(coachId);
     }
 

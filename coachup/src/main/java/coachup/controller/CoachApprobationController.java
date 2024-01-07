@@ -69,7 +69,6 @@ public class CoachApprobationController implements Initializable {
     public void handleApproveButton(ActionEvent event) throws SQLException, ClassNotFoundException {
         if(selectedCoach != null){
             CoachFacade.getInstance().approveCoach(selectedCoach.getIdUtilisateur());
-
             List<Coach> coaches = CoachFacade.getInstance().getUnapprovedCoaches();
 
             ObservableList<Coach> observableList = FXCollections.observableArrayList(coaches);

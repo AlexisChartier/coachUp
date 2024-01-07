@@ -271,15 +271,19 @@ public class MainApp extends Application {
         return userFacade.addUser(user);
     }
 
-    public boolean registerCoachUser(Coach coach) throws SQLException, ClassNotFoundException {
+    public void registerCoachUser(Coach coach) throws SQLException, ClassNotFoundException, IOException {
         CoachFacade coachFacade = CoachFacade.getInstance();
         User user = new User();
         user.setEmail(coach.getEmail());
+        String email = coach.getEmail();
         user.setNom(coach.getNom());
         user.setMotDePasse(coach.getMotDePasse());
         user.setRole("coach");
         UserFacade.getInstance().addUser(user);
-        return coachFacade.addCoach(coach);
+        user = UserFacade.getInstance().getUserByEmail(email);
+        coach.setIdUtilisateur(user.getIdUtilisateur());
+        coachFacade.addCoach(coach);
+        this.showLoginPage();
     }
 
     public boolean addNotation(Notation notation) throws SQLException, ClassNotFoundException {

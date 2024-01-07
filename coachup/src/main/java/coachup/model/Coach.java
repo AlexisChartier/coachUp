@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Coach extends User {
 
-    private ArrayList<Integer> categories;
-    private ArrayList<Integer> disponibilites;
+    private Integer[] categories = {};
+    private Integer[] disponibilites = {};
 
     private String diplome;
 
@@ -30,30 +30,32 @@ public class Coach extends User {
     public Coach(){}
 
 
-    public Coach(int idCoach, String nom, String email, String motDePasse, ArrayList<Integer> categories, ArrayList<Integer> disponibilites, String diplome) {
+    public Coach(int idCoach, String nom, String email, String motDePasse, Integer[] categories, Integer[] disponibilites, String diplome) {
         super(idCoach, nom, email, motDePasse, "coach");
         this.categories = categories;
         this.disponibilites = disponibilites;
         this.diplome = diplome;
     }
 
-    public ArrayList<Integer> getCategories() {
+    public Integer[] getCategories() {
         return categories;
     }
 
-    public void setCategories(ArrayList<Integer> categories) {
+    public void setCategories(Integer[] categories) {
         this.categories = categories;
     }
 
-    public ArrayList<Integer> getDisponibilites() {
+    public Integer[] getDisponibilites() {
         return disponibilites;
     }
 
-    public void setDisponibilites(ArrayList<Integer> disponibilites) {
+    public void setDisponibilites(Integer[] disponibilites) {
         this.disponibilites = disponibilites;
     }
 
     public String getDiplome() {
         return diplome;
     }
+
+
 }

@@ -6,12 +6,15 @@ import coachup.facade.CoachFacade;
 import coachup.model.Categorie;
 import coachup.model.Coach;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -30,7 +33,7 @@ public class RegisterCoachController {
     public TextField nameField;
 
     @FXML
-    public HBox categoriesBox;
+    public VBox categoriesBox;
 
     private MainApp mainApp = new MainApp();
     private CategorieFacade categorieFacade = CategorieFacade.getInstance();
@@ -48,6 +51,7 @@ public class RegisterCoachController {
     public void initialize() {
         // Appeler la méthode pour charger les catégories depuis la base de données
         loadCategories();
+        categoriesBox.setAlignment(Pos.CENTER);
     }
 
     private void loadCategories() {
@@ -69,7 +73,7 @@ public class RegisterCoachController {
     }
 
     @FXML
-    public void handleRegisterButton() throws SQLException, ClassNotFoundException {
+    public void handleRegisterButton() throws SQLException, ClassNotFoundException, IOException {
         String nom = nameField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
@@ -89,14 +93,17 @@ public class RegisterCoachController {
                     selectedCategoryIds.add(categoryId);
                 }
             }
-            Coach coach = new Coach();
-            coach.setCategories(selectedCategoryIds);
-            coach.setNom(nom);
-            coach.setDiplome(diplome);
-            coach.setMotDePasse(password);
-            coach.setEmail(email);
-            mainApp.registerCoachUser(coach);
+
             // Ajouter votre logique pour gérer l'inscription du coach ici
         }
+        Coach coach = new Coach();
+        Integer[] arr = null;
+        arr = selectedCategoryIds.toArray(selectedCategoryIds.toArray(new Integer[0]));
+        coach.setCategories(arr);
+        coach.setNom(nom);
+        coach.setDiplome(diplome);
+        coach.setMotDePasse(password);
+        coach.setEmail(email);
+        mainApp.registerCoachUser(coach);
     }
 }

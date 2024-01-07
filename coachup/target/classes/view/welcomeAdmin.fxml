@@ -13,4 +13,5 @@
 
     <Button text="User List" onAction="#userListButtonAction"/>
     <Button text="Coach Approval List" onAction="#coachApprovalListButtonAction"/>
+    <Button text="Manage Categories" onAction="#manageCategoriesButtonAction"/>
 </VBox>

@@ -2,7 +2,9 @@ package coachup.controller;
 
 import coachup.MainApp;
 import coachup.cell.UserCellFactory;
+import coachup.facade.CoachFacade;
 import coachup.facade.UserFacade;
+import coachup.model.Coach;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,7 +42,7 @@ public class UserListController {
                 // Votre logique pour récupérer les utilisateurs depuis la base de données
 
                 // Convertissez la liste en ObservableList pour l'assigner à la ListView
-                ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
+        ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
         userListView.setItems(observableUsers);
 
         // Personnalisez la cellule de la ListView avec la factory que nous avons définie
@@ -75,21 +77,36 @@ public class UserListController {
     @FXML
     private void handleDeleteButton() throws SQLException, ClassNotFoundException {
         if (selectedUser != null) {
-            // Appelez votre méthode de suppression dans la classe UserDao (ou similaire)
-            UserFacade.getInstance().deleteUser(selectedUser.getIdUtilisateur());
+            if(selectedUser.getRole().equals("student")){
+                // Appelez votre méthode de suppression dans la classe UserDao (ou similaire)
+                UserFacade.getInstance().deleteUser(selectedUser.getIdUtilisateur());
 
-            // Rafraîchissez la liste après la suppression si nécessaire
-            // userListView.getItems().remove(selectedUser);
-            // ou rechargez toute la liste depuis la base de données
-            List<User> users = UserFacade.getInstance().getAllUsers();
-            // Votre logique pour récupérer les utilisateurs depuis la base de données
+                // Rafraîchissez la liste après la suppression si nécessaire
+                // userListView.getItems().remove(selectedUser);
+                // ou rechargez toute la liste depuis la base de données
+                List<User> users = UserFacade.getInstance().getAllUsers();
+                // Votre logique pour récupérer les utilisateurs depuis la base de données
 
-            // Convertissez la liste en ObservableList pour l'assigner à la ListView
-            ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
-            userListView.setItems(observableUsers);
+                // Convertissez la liste en ObservableList pour l'assigner à la ListView
+                ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
+                userListView.setItems(observableUsers);
 
-            // Réinitialisez la variable selectedUser
-            selectedUser = null;
+                // Réinitialisez la variable selectedUser
+                selectedUser = null;
+            }
+            else if(selectedUser.getRole().equals("coach")){
+                if(CoachFacade.getInstance().getCoachById(selectedUser.getIdUtilisateur()) != null){
+                    CoachFacade.getInstance().deleteCoach(selectedUser.getIdUtilisateur());
+                }
+                List<User> users = UserFacade.getInstance().getAllUsers();
+                UserFacade.getInstance().deleteUser(selectedUser.getIdUtilisateur());
+                // Convertissez la liste en ObservableList pour l'assigner à la ListView
+                ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
+                userListView.setItems(observableUsers);
+
+                // Réinitialisez la variable selectedUser
+                selectedUser = null;
+            }
         }
     }
 

@@ -26,7 +26,7 @@ public class CoachDAOPGSQL extends CoachDAO {
     @Override
     public Coach getCoachById(int coachId) {
         try {
-            String query = "SELECT * FROM coach WHERE id = ?";
+            String query = "SELECT * FROM coach WHERE idcoach = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, coachId);
                 try (ResultSet resultSet = statement.executeQuery()) {
@@ -62,15 +62,20 @@ public class CoachDAOPGSQL extends CoachDAO {
     @Override
     public boolean addCoach(Coach coach) {
         try {
-            String query = "INSERT INTO coach (nom, email, motDePasse, categories, disponibilites, approved, diplome) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO coach (idcoach,nom, email, motDePasse, categories, disponibilites, approved, diplome) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setString(1, coach.getNom());
-                statement.setString(2, coach.getEmail());
-                statement.setString(3, coach.getMotDePasse());
-                statement.setArray(4, (Array) coach.getCategories());
-                statement.setArray(5, (Array) coach.getDisponibilites());
-                statement.setBoolean(6, false);
-                statement.setString(7,coach.getDiplome());
+                Integer[] cats = coach.getCategories();
+                Array arrayCat = connection.createArrayOf("Integer",cats);
+                Integer[] disp = coach.getDisponibilites();
+                Array arrayDisp = connection.createArrayOf("Integer", disp);
+                statement.setInt(1, coach.getIdUtilisateur());
+                statement.setString(2, coach.getNom());
+                statement.setString(3, coach.getEmail());
+                statement.setString(4, coach.getMotDePasse());
+                statement.setArray(5, arrayCat);
+                statement.setArray(6, arrayDisp);
+                statement.setBoolean(7, false);
+                statement.setString(8,coach.getDiplome());
                 int rowsAffected = statement.executeUpdate();
                 return rowsAffected > 0;
             }
@@ -85,11 +90,15 @@ public class CoachDAOPGSQL extends CoachDAO {
         try {
             String query = "UPDATE coach SET nom = ?, email = ?, motDePasse = ?, categories = ?, disponibilites = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
+                Integer[] cats = coach.getCategories();
+                Array arrayCat = connection.createArrayOf("Integer",cats);
+                Integer[] disp = coach.getDisponibilites();
+                Array arrayDisp = connection.createArrayOf("Integer", disp);
                 statement.setString(1, coach.getNom());
                 statement.setString(2, coach.getEmail());
                 statement.setString(3, coach.getMotDePasse());
-                statement.setArray(4, (Array) coach.getCategories());
-                statement.setArray(5, (Array) coach.getDisponibilites());
+                statement.setArray(4, arrayCat);
+                statement.setArray(5, arrayDisp);
                 statement.setInt(6, coach.getIdUtilisateur());
                 int rowsAffected = statement.executeUpdate();
                 return rowsAffected > 0;
@@ -159,18 +168,17 @@ public class CoachDAOPGSQL extends CoachDAO {
     /**
      * Récupère les catégories associées à un coach par son identifiant.
      *
-     * @param coachId L'identifiant du coach.
+     * @param id L'identifiant du coach.
      * @return La liste des catégories associées au coach.
      */
-    public List<Categorie> getCategoriesByCoachId(int coachId) {
+    public List<Categorie> getCategoriesByCoachId(int id) {
         List<Categorie> categories = new ArrayList<>();
 
         try {
             // Préparation de la requête SQL
-            String query = "SELECT idcategorie, nom FROM categories " +
-                    "WHERE idcategorie IN (SELECT unnest(categories) FROM coach WHERE idcoach = ?)";
+            String query = "SELECT * FROM categories WHERE idCategorie = ANY(SELECT UNNEST(categories) FROM coach WHERE idcoach = ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setInt(1, coachId);
+                statement.setInt(1, id);
 
                 // Exécution de la requête
                 try (ResultSet resultSet = statement.executeQuery()) {
@@ -180,6 +188,7 @@ public class CoachDAOPGSQL extends CoachDAO {
                         categorie.setNom(resultSet.getString("nom"));
                         categories.add(categorie);
                     }
+                    return categories;
                 }
             }
         } catch (SQLException e) {
@@ -189,13 +198,33 @@ public class CoachDAOPGSQL extends CoachDAO {
         return categories;
     }
 
+
+    @Override
+    public boolean approveCoach(int id) {
+        try {
+            // Préparation de la requête SQL
+            String query = "UPDATE coachs SET approved = true WHERE idcoach = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+
+                // Exécution de la requête
+                statement.executeUpdate();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     private Coach mapResultSetToCoach(ResultSet resultSet) throws SQLException {
+        Array cats = resultSet.getArray("categories");
+        Array disp = resultSet.getArray("disponibilites");
         int id = resultSet.getInt("idCoach");
         String nom = resultSet.getString("nom");
         String email = resultSet.getString("email");
         String motDePasse = resultSet.getString("motdepasse");
-        ArrayList<Integer> categories = (ArrayList<Integer>) resultSet.getArray("categories");
-        ArrayList<Integer> disponibilites = (ArrayList<Integer>) resultSet.getArray("disponibilites");
+        Integer[] categories = (Integer[])cats.getArray();
+        Integer[] disponibilites = (Integer[]) disp.getArray();
         String diplome = resultSet.getString("diplome");
         return new Coach(id, nom, email, motDePasse, categories, disponibilites, diplome);
     }

@@ -25,7 +25,7 @@
             <PasswordField fx:id="passwordField" />
 
             <Label text="Catégories :" />
-            <HBox fx:id="categoriesBox" spacing="5" />
+            <VBox fx:id="categoriesBox" spacing="5" />
 
             <Label text="Diplôme :"/>
             <TextField fx:id="diplomeField"/>

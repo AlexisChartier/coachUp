@@ -23,4 +23,6 @@ public abstract class CoachDAO {
     public abstract void denyCoach(int id);
 
     public abstract List<Categorie> getCategoriesByCoachId(int id);
+
+    public abstract boolean approveCoach(int id);
 }
