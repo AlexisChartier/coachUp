@@ -1,5 +1,6 @@
 package coachup.dao;
 
+import coachup.model.Categorie;
 import coachup.model.Coach;
 
 import java.sql.*;
@@ -61,13 +62,15 @@ public class CoachDAOPGSQL extends CoachDAO {
     @Override
     public boolean addCoach(Coach coach) {
         try {
-            String query = "INSERT INTO coach (nom, email, motDePasse, categories, disponibilites) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO coach (nom, email, motDePasse, categories, disponibilites, approved, diplome) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, coach.getNom());
                 statement.setString(2, coach.getEmail());
                 statement.setString(3, coach.getMotDePasse());
-                statement.setString(4, coach.getCategories());
+                statement.setArray(4, (Array) coach.getCategories());
                 statement.setArray(5, (Array) coach.getDisponibilites());
+                statement.setBoolean(6, false);
+                statement.setString(7,coach.getDiplome());
                 int rowsAffected = statement.executeUpdate();
                 return rowsAffected > 0;
             }
@@ -85,7 +88,7 @@ public class CoachDAOPGSQL extends CoachDAO {
                 statement.setString(1, coach.getNom());
                 statement.setString(2, coach.getEmail());
                 statement.setString(3, coach.getMotDePasse());
-                statement.setString(4, coach.getCategories());
+                statement.setArray(4, (Array) coach.getCategories());
                 statement.setArray(5, (Array) coach.getDisponibilites());
                 statement.setInt(6, coach.getIdUtilisateur());
                 int rowsAffected = statement.executeUpdate();
@@ -116,7 +119,7 @@ public class CoachDAOPGSQL extends CoachDAO {
     public List<Coach> getUnapprovedCoaches() {
         List<Coach> unapprovedCoaches = new ArrayList<>();
         try {
-            String query = "SELECT * FROM coach WHERE approved = false";
+            String query = "SELECT * FROM coach WHERE approved = false AND denied= false";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
@@ -130,13 +133,70 @@ public class CoachDAOPGSQL extends CoachDAO {
         return unapprovedCoaches;
     }
 
+    /**
+     * Met à jour l'attribut 'denied' du coach avec l'ID spécifié.
+     *
+     * @param coachId L'ID du coach à rejeter.
+     * @return true si la mise à jour est réussie, false sinon.
+     *
+     */
+    @Override
+    public void denyCoach(int coachId) {
+        try {
+            // Préparation de la requête SQL
+            String query = "UPDATE coach SET denied = true WHERE idcoach = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, coachId);
+
+                // Exécution de la requête
+                int rowsAffected = statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Récupère les catégories associées à un coach par son identifiant.
+     *
+     * @param coachId L'identifiant du coach.
+     * @return La liste des catégories associées au coach.
+     */
+    public List<Categorie> getCategoriesByCoachId(int coachId) {
+        List<Categorie> categories = new ArrayList<>();
+
+        try {
+            // Préparation de la requête SQL
+            String query = "SELECT idcategorie, nom FROM categories " +
+                    "WHERE idcategorie IN (SELECT unnest(categories) FROM coach WHERE idcoach = ?)";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, coachId);
+
+                // Exécution de la requête
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Categorie categorie = new Categorie();
+                        categorie.setIdcategorie(resultSet.getInt("idcategorie"));
+                        categorie.setNom(resultSet.getString("nom"));
+                        categories.add(categorie);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return categories;
+    }
+
     private Coach mapResultSetToCoach(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("idCoach");
         String nom = resultSet.getString("nom");
         String email = resultSet.getString("email");
         String motDePasse = resultSet.getString("motdepasse");
-        String categories = resultSet.getString("categories");
-        Array disponibilites = resultSet.getArray("disponibilites");
-        return new Coach(id, nom, email, motDePasse, categories, disponibilites);
+        ArrayList<Integer> categories = (ArrayList<Integer>) resultSet.getArray("categories");
+        ArrayList<Integer> disponibilites = (ArrayList<Integer>) resultSet.getArray("disponibilites");
+        String diplome = resultSet.getString("diplome");
+        return new Coach(id, nom, email, motDePasse, categories, disponibilites, diplome);
     }
 }

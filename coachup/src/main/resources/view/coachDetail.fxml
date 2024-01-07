@@ -3,23 +3,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.DetailProfileController">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.CoachDetailController">
     <children>
         <VBox alignment="CENTER" prefHeight="200" prefWidth="300" spacing="10">
-            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Détails du Profil" />
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Détails du Coach" />
             <Label text="Nom :" />
             <TextField fx:id="nameField" />
             <Label text="Adresse E-mail :" />
             <TextField fx:id="emailField" />
-            <Label text="Mot de Passe :" />
-            <PasswordField fx:id="passwordField" />
+            <Label text="Liste des Catégories :" />
+            <ListView fx:id="categoriesListView" prefHeight="100" />
+            <Label text="Diplôme :" />
+            <TextField fx:id="diplomaField" />
             <Button onAction="#handleSaveButton" text="Enregistrer" />
             <Button onAction="#handleReturnButton" text="Retour" />
-            <!-- Ajout des labels pour afficher les informations de l'utilisateur -->
+            <!-- Ajout des labels pour afficher les informations actuelles du coach -->
             <Label style="-fx-font-weight: bold;" text="Informations actuelles :" />
             <Label fx:id="currentNameLabel" />
             <Label fx:id="currentEmailLabel" />
-            <Label fx:id="currentPasswordField" />
+            <ListView fx:id="currentCategoriesListView" prefHeight="100" >
+                <cellFactory>
+                    <CategorieCellFactory></CategorieCellFactory>
+                </cellFactory>
+            </ListView>
+            <Label fx:id="currentDiplomaField" />
             <Button onAction="#handleDeleteButton" mnemonicParsing="false" text="Supprimer le compte" />
         </VBox>
     </children>

@@ -2,6 +2,7 @@ package coachup.facade;
 
 import coachup.dao.AbstractDAOFactory;
 import coachup.dao.CoachDAO;
+import coachup.model.Categorie;
 import coachup.model.Coach;
 
 import java.sql.SQLException;
@@ -14,6 +15,17 @@ public class CoachFacade {
 
     private static CoachFacade instance;
     private Coach currentCoach;
+
+    public void setCurrentCoach(Coach currentCoach) {
+        this.currentCoach = currentCoach;
+    }
+
+    private Coach managedCoach;
+
+    public Coach getManagedCoach() {
+        return managedCoach;
+    }
+
 
     /**
      * Constructeur privé pour assurer que seule une instance de CoachFacade est créée (Singleton).
@@ -46,6 +58,16 @@ public class CoachFacade {
     public Coach getCoachById(int coachId) throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCoachDAO().getCoachById(coachId);
+    }
+
+    public void denyCoach(int id) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        daoFactory.getCoachDAO().denyCoach(id);
+    }
+
+    public List<Categorie> getCategoriesByCoachID(int id) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        return daoFactory.getCoachDAO().getCategoriesByCoachId(id);
     }
 
     /**
@@ -115,4 +137,7 @@ public class CoachFacade {
     }
 
 
+    public void setManagedCoach(Coach selectedCoach) {
+        managedCoach = selectedCoach;
+    }
 }

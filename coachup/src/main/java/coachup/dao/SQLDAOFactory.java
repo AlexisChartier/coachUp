@@ -38,4 +38,9 @@ public class SQLDAOFactory extends AbstractDAOFactory {
     public NotationDAO getNotationDAO() {
         return null;
     }
+
+    @Override
+    public CategorieDAO getCategorieDAO() {
+        return null;
+    }
 }

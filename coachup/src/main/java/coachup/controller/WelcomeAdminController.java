@@ -26,5 +26,9 @@ public class WelcomeAdminController {
 
     @FXML
     public void coachApprovalListButtonAction(ActionEvent event) {
+        mainApp.showCoachApprovalList(currentUser);
+    }
+
+    public void manageCategoriesButtonAction(ActionEvent actionEvent) {
     }
 }

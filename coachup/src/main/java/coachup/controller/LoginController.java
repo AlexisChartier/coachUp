@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import coachup.MainApp;
 import coachup.facade.UserFacade;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -38,7 +39,7 @@ public class LoginController {
      * @param event L'événement déclenché par le bouton.
      */
     @FXML
-    private void loginButtonAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+    private void loginButtonAction(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
 
         // Récupère le nom d'utilisateur et le mot de passe depuis les champs de saisie
         String username = usernameField.getText();

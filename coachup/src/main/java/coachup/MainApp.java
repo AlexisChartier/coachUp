@@ -1,6 +1,7 @@
 package coachup;
 
 import coachup.controller.*;
+import coachup.model.Coach;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -169,7 +170,7 @@ public class MainApp extends Application {
      * @param password Le mot de passe de l'utilisateur.
      * @return true si l'authentification est réussie, false sinon.
      */
-    public boolean authenticateUser(String email, String password) throws SQLException, ClassNotFoundException {
+    public boolean authenticateUser(String email, String password) throws SQLException, ClassNotFoundException, IOException {
         UserFacade userFacade = UserFacade.getInstance();
 
         boolean isAuthenticated = userFacade.loginUser(email, password);
@@ -182,8 +183,16 @@ public class MainApp extends Application {
             else if(Objects.equals(user.getRole(), "admin")){
                 showWelcomePageAdmin(user);
             }
-            else{
-                showWelcomePage(user);
+            else if(Objects.equals(user.getRole(), "coach")){
+                CoachFacade coachFacade = CoachFacade.getInstance();
+                Coach coach = coachFacade.getCoachById(user.getIdUtilisateur());
+                coachFacade.setCurrentCoach(coach);
+                if(coach.getApproved()){
+                    //ShowWelcomePageCoach
+                }
+                else{
+                    showLoginPage();
+                }
             }
         } else {
             System.out.println("Authentication failed. Invalid email or password.");
@@ -218,9 +227,59 @@ public class MainApp extends Application {
         }
     }
 
+    public void showDetailCoach(){
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/coachDetail.fxml")));
+            Parent root = (Parent) loader.load();
+
+            CoachDetailController coachDetailController = loader.getController();
+            coachDetailController.setMainApp(this);
+            coachDetailController.setMainApp(this);
+            Stage coachDetailStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = coachDetailStage;
+            Scene scene = new Scene(root);
+            coachDetailStage.setScene(scene);
+            coachDetailStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void showCoachApprovalList(User user){
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/coachApprobationList.fxml")));
+            Parent root = (Parent) loader.load();
+
+            CoachApprobationController coachApprobationController = loader.getController();
+            coachApprobationController.setMainApp(this);
+            coachApprobationController.setUser(user);
+            Stage coachAppStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = coachAppStage;
+            Scene scene = new Scene(root);
+            coachAppStage.setScene(scene);
+            coachAppStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     public boolean registerStudentUser(User user) throws SQLException, ClassNotFoundException {
         UserFacade userFacade  = UserFacade.getInstance();
         return userFacade.addUser(user);
+    }
+
+    public boolean registerCoachUser(Coach coach) throws SQLException, ClassNotFoundException {
+        CoachFacade coachFacade = CoachFacade.getInstance();
+        User user = new User();
+        user.setEmail(coach.getEmail());
+        user.setNom(coach.getNom());
+        user.setMotDePasse(coach.getMotDePasse());
+        user.setRole("coach");
+        UserFacade.getInstance().addUser(user);
+        return coachFacade.addCoach(coach);
     }
 
     public boolean addNotation(Notation notation) throws SQLException, ClassNotFoundException {

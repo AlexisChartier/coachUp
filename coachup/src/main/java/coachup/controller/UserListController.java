@@ -67,7 +67,8 @@ public class UserListController {
         }
     }
 
-    public void handleDetailButton(ActionEvent actionEvent) {
+    public void handleDetailButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        UserFacade.getInstance().setManagedUser(selectedUser);
         mainApp.showDetailPage(selectedUser, adminUser);
     }
 
@@ -86,10 +87,13 @@ public class UserListController {
             // Convertissez la liste en ObservableList pour l'assigner à la ListView
             ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
             userListView.setItems(observableUsers);
-            userListView.setItems(observableUsers);
 
             // Réinitialisez la variable selectedUser
             selectedUser = null;
         }
+    }
+
+    public void handleReturnButton(ActionEvent actionEvent) {
+        mainApp.showWelcomePageAdmin(adminUser);
     }
 }

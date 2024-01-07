@@ -15,6 +15,16 @@ public class UserFacade {
     private static UserFacade instance;
     private User currentUser;
 
+    private User managedUser;
+
+    public void setManagedUser(User managedUser) {
+        this.managedUser = managedUser;
+    }
+
+    public User getManagedUser() {
+        return managedUser;
+    }
+
     /**
      * Constructeur privé pour assurer que seul une instance de UserFacade est créée (Singleton).
      */

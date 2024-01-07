@@ -2,24 +2,38 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10" alignment="center" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.RegisterCoachController">
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Coach Registration Page"/>
-    <Label text="Name:"/>
-    <TextField fx:id="nameField"/>
-    <Label text="Email:"/>
-    <TextField fx:id="emailField"/>
-    <Label text="Password:"/>
-    <PasswordField fx:id="passwordField"/>
-    <Label text="Diplômes"/>
-    <TextField fx:id="diplomeField"/>
-    <Button text="Register" onAction="#registerCoachButtonAction"/>
-    <Button text="Back" onAction="#backButtonAction"/>
-</VBox>
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.RegisterCoachController">
+    <children>
+        <VBox alignment="CENTER" spacing="10" prefWidth="300" prefHeight="400">
+            <Label text="Formulaire d'Inscription" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <Label text="Nom :" />
+            <TextField fx:id="nameField" />
+
+            <Label text="Adresse E-mail :" />
+            <TextField fx:id="emailField" />
+
+            <Label text="Mot de Passe :" />
+            <PasswordField fx:id="passwordField" />
+
+            <Label text="Catégories :" />
+            <HBox fx:id="categoriesBox" spacing="5" />
+
+            <Label text="Diplôme :"/>
+            <TextField fx:id="diplomeField"/>
+
+            <!-- Autres champs du formulaire -->
+
+            <Button text="S'inscrire" onAction="#handleRegisterButton" />
+
+        </VBox>
+    </children>
+</AnchorPane>

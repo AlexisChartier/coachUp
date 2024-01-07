@@ -1,5 +1,6 @@
 package coachup.dao;
 
+import coachup.model.Categorie;
 import coachup.model.Coach;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public abstract class CoachDAO {
 
 
     public abstract List<Coach> getUnapprovedCoaches();
+
+    public abstract void denyCoach(int id);
+
+    public abstract List<Categorie> getCategoriesByCoachId(int id);
 }
