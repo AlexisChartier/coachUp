@@ -1,5 +1,9 @@
 package coachup.model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.scene.control.Button;
+
 /**
  * Représente un utilisateur avec ses informations associées.
  */
@@ -46,6 +50,8 @@ public class User {
         return idUtilisateur;
     }
 
+
+
     /**
      * Définit l'identifiant de l'utilisateur.
      *
@@ -63,6 +69,7 @@ public class User {
     public String getNom() {
         return nom;
     }
+
 
     /**
      * Définit le nom de l'utilisateur.

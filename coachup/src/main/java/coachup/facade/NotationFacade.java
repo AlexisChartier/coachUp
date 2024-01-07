@@ -52,23 +52,4 @@ public class NotationFacade {
         NotationDAO notationDAO = daoFactory.getNotationDAO();
         return notationDAO.modifyNotation(notation);
     }
-
-    public Notation getNotationById(int NotationId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        NotationDAO notationDAO = daoFactory.getNotationDAO();
-        return notationDAO.getNotationById(NotationId);
-    }
-
-    public Notation[] getNotationByCoachId(int CoachId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        NotationDAO notationDAO = daoFactory.getNotationDAO();
-        return notationDAO.getNotationByCoachId(CoachId);
-    }
-
-    public Notation[] getNotationByUserId(int UserId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        NotationDAO notationDAO = daoFactory.getNotationDAO();
-        return notationDAO.getNotationByUserId(UserId);
-    }
-    
 }
