@@ -30,5 +30,6 @@ public class WelcomeAdminController {
     }
 
     public void manageCategoriesButtonAction(ActionEvent actionEvent) {
+        mainApp.showCategoriesList(currentUser);
     }
 }

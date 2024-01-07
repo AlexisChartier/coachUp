@@ -82,9 +82,10 @@ public class CategorieDAOPGSQL extends CategorieDAO {
     public void addCategorie(Categorie category) {
         try {
             // Préparation de la requête SQL
-            String query = "INSERT INTO categories (nom) VALUES (?)";
+            String query = "INSERT INTO categories (nom, description) VALUES (?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, category.getNom());
+                statement.setString(2, category.getDescription());
 
                 // Exécution de la requête
                 statement.executeUpdate();
@@ -98,10 +99,11 @@ public class CategorieDAOPGSQL extends CategorieDAO {
     public void updateCategorie(Categorie category) {
         try {
             // Préparation de la requête SQL
-            String query = "UPDATE categories SET nom = ? WHERE idCategorie = ?";
+            String query = "UPDATE categories SET nom = ?, description = ? WHERE idCategorie = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, category.getNom());
-                statement.setInt(2, category.getIdcategorie());
+                statement.setString(2, category.getDescription());
+                statement.setInt(3, category.getIdcategorie());
 
                 // Exécution de la requête
                 statement.executeUpdate();
@@ -134,6 +136,7 @@ public class CategorieDAOPGSQL extends CategorieDAO {
         Categorie categorie = new Categorie();
         categorie.setIdcategorie(resultSet.getInt("idCategorie"));
         categorie.setNom(resultSet.getString("nom"));
+        categorie.setDescription(resultSet.getString("description"));
         return categorie;
     }
 }

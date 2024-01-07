@@ -8,6 +8,16 @@ import java.util.List;
 
 public class CategorieFacade {
 
+    private Categorie managedCategorie;
+
+    public Categorie getManagedCategorie() {
+        return managedCategorie;
+    }
+
+    public void setManagedCategorie(Categorie managedCategorie) {
+        this.managedCategorie = managedCategorie;
+    }
+
     private static CategorieFacade instance;
     private Categorie managedCategory;
 

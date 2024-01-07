@@ -296,4 +296,61 @@ public class MainApp extends Application {
         return notationFacade.getNotationByCoachId(coachId);
     }
 
+    public void showCategoriesList(User currentUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/listCategorie.fxml")));
+            Parent root = (Parent) loader.load();
+
+            ListCategorieController listCategorieController = loader.getController();
+            listCategorieController.setMainApp(this);
+            listCategorieController.setUser(currentUser);
+            Stage listCatStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = listCatStage;
+            Scene scene = new Scene(root);
+            listCatStage.setScene(scene);
+            listCatStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showAddCategoriePage(){
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/ajoutCategorie.fxml")));
+            Parent root = (Parent) loader.load();
+
+            AjoutCategorieController ajoutCategorieController = loader.getController();
+            ajoutCategorieController.setMainApp(this);
+            Stage addCatStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = addCatStage;
+            Scene scene = new Scene(root);
+            addCatStage.setScene(scene);
+            addCatStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showModfiCatPage(){
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/modifCategorie.fxml")));
+            Parent root = (Parent) loader.load();
+
+            ModificationCategorieController modificationCategorieController = loader.getController();
+            modificationCategorieController.setMainApp(this);
+            Stage modifCatStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = modifCatStage;
+            Scene scene = new Scene(root);
+            modifCatStage.setScene(scene);
+            modifCatStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

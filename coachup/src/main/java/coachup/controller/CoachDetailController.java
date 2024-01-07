@@ -113,6 +113,11 @@ public class CoachDetailController {
 
 
     @FXML
-    public void handleAcceptButton(ActionEvent actionEvent) {
+    public void handleAcceptButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        if(coach != null){
+            CoachFacade.getInstance().approveCoach(coach.getIdUtilisateur());
+            coach = null;
+            mainApp.showCoachApprovalList(UserFacade.getInstance().getCurrentUser());
+        }
     }
 }
