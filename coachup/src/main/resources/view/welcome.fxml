@@ -14,11 +14,11 @@
     </padding>
     <VBox alignment="CENTER" spacing="10">
         <Label fx:id="welcomeLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
-        <Button onAction="#logoutButtonAction" text="Déconnexion" />
         <Button onAction="#profileButtonAction" text="Profil" />
         <Button onAction="#seanceHistoryButtonAction" text="Historique des séances"/>
         <Button onAction="#paymentGestionButtonAction" text="Gestion des paiements"/>
         <Button onAction="#RechercheCoachButtonAction" text="Recherche de coachs"/>
         <Button onAction="#showAllUserNotationsButtonAction"  text="Voir toutes les notations" />
+        <Button onAction="#logoutButtonAction" text="Déconnexion" />
     </VBox>
 </StackPane>
