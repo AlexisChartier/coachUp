@@ -4,7 +4,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.net.URL?>
 <StackPane prefHeight="360.0" prefWidth="472.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.WelcomeController">
+    <stylesheets>
+        <URL value="@/css/application.css" />
+    </stylesheets>
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
@@ -14,5 +18,6 @@
         <Button onAction="#profileButtonAction" text="Profil" />
         <Button onAction="#seanceHistoryButtonAction" text="Historique des séances"/>
         <Button onAction="#paymentGestionButtonAction" text="Gestion des paiements"/>
+        <Button onAction="#RechercheCoachButtonAction" text="Recherche de coachs"/>
     </VBox>
 </StackPane>

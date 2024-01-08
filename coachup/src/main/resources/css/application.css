@@ -1,0 +1,106 @@
+/* Application-wide font setting */
+.root {
+    -fx-font-family: "Calibri";
+}
+
+/* Styliser les ListView */
+.list-view {
+    -fx-font-size: 14px;
+    -fx-control-inner-background: #ecf0f1; /* Couleur de fond */
+    -fx-border-color: #bdc3c7; /* Couleur de la bordure */
+    -fx-border-width: 1px;
+}
+
+.list-cell {
+    -fx-background-color: #ecf0f1; /* Couleur de fond des cellules */
+    -fx-text-fill: #34495e; /* Couleur du texte */
+}
+
+.list-cell:hover {
+    -fx-background-color: #d0d3d4; /* Couleur de fond au survol */
+}
+
+.list-cell:selected {
+    -fx-background-color: #bdc3c7; /* Couleur de fond lorsque sélectionné */
+}
+
+/* Ajoutez ces règles à votre fichier CSS */
+
+/* Centre le contenu de l'AnchorPane */
+.anchor-pane {
+    -fx-alignment: center;
+}
+
+/* Définit la largeur et la hauteur de l'AnchorPane */
+.anchor-pane {
+    -fx-min-width: 600px; /* Remplacez 600px par la largeur souhaitée */
+    -fx-min-height: 400px; /* Remplacez 400px par la hauteur souhaitée */
+}
+
+/* Facultatif : Ajoute une marge autour des éléments enfants de l'AnchorPane */
+.anchor-pane > * {
+    -fx-margin: 10px;
+}
+
+/* Facultatif : Centre les éléments enfants de l'AnchorPane */
+.anchor-pane > * {
+    -fx-alignment: center;
+}
+
+/* Styliser les boutons */
+.button {
+    -fx-font-family: "Calibri";
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-background-color: #3498db; /* Couleur de fond */
+    -fx-background-radius: 5px; /* Coins arrondis */
+    -fx-border-radius: 5px; /* Coins arrondis pour la bordure */
+}
+
+.button:hover {
+    -fx-background-color: #2980b9; /* Couleur de fond au survol */
+}
+
+.button:pressed {
+    -fx-background-color: #216a94; /* Couleur de fond lorsqu'appuyé */
+}
+/* Styliser les CheckBox */
+.check-box {
+    -fx-font-family: "Calibri";
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e; /* Couleur du texte */
+}
+
+.check-box:selected {
+    -fx-background-color: #3498db; /* Couleur de fond lorsque sélectionné */
+}
+
+/* Styliser les ComboBox */
+.combo-box {
+    -fx-font-family: "Calibri";
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e; /* Couleur du texte */
+}
+
+/* Styliser les Labels */
+.label {
+    -fx-font-family: "Calibri";
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e; /* Couleur du texte */
+}
+
+/* Styliser les TextField */
+.text-field {
+    -fx-font-family: "Calibri";
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #95a5a6; /* Couleur du texte d'invite */
+    -fx-text-fill: #34495e; /* Couleur du texte */
+}
+
+/* Styliser les PasswordField */
+.password-field {
+    -fx-font-family: "Calibri";
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #95a5a6; /* Couleur du texte d'invite */
+    -fx-text-fill: #34495e; /* Couleur du texte */
+}

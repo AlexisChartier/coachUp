@@ -10,7 +10,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import java.net.URL?>
 <AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.RegisterCoachController">
+    <stylesheets>
+        <URL value="@/css/application.css" />
+    </stylesheets>
     <children>
         <VBox alignment="CENTER" spacing="10" prefWidth="300" prefHeight="400">
             <Label text="Formulaire d'Inscription" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>

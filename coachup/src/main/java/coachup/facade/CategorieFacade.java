@@ -50,9 +50,9 @@ public class CategorieFacade {
         return daoFactory.getCategorieDAO().getAllCategories();
     }
 
-    public void addCategory(Categorie category) throws SQLException, ClassNotFoundException {
+    public int addCategory(Categorie category) throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        daoFactory.getCategorieDAO().addCategorie(category);
+        return daoFactory.getCategorieDAO().addCategorie(category);
     }
 
     public void updateCategory(Categorie category) throws SQLException, ClassNotFoundException {

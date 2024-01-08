@@ -487,4 +487,26 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
+
+    public void showListCoachPage() {
+    }
+
+    public void showRechercheCoach(){
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/rechercheCoach.fxml")));
+            Parent root = (Parent) loader.load();
+
+            RechercheCoachController rechercheCoachController = loader.getController();
+            rechercheCoachController.setMainApp(this);
+            Stage rechercheStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = rechercheStage;
+            Scene scene = new Scene(root);
+            rechercheStage.setScene(scene);
+            rechercheStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

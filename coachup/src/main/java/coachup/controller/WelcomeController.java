@@ -70,4 +70,8 @@ public class WelcomeController {
     public void paymentGestionButtonAction(ActionEvent actionEvent) {
         mainApp.showHubPayment();
     }
+
+    public void RechercheCoachButtonAction(ActionEvent actionEvent) {
+        mainApp.showRechercheCoach();
+    }
 }

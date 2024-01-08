@@ -79,20 +79,31 @@ public class CategorieDAOPGSQL extends CategorieDAO {
     }
 
     @Override
-    public void addCategorie(Categorie category) {
+    public int addCategorie(Categorie category) {
         try {
+            String[] returnId = {"idcategorie"};
+
             // Préparation de la requête SQL
             String query = "INSERT INTO categories (nom, description) VALUES (?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
+            try (PreparedStatement statement = connection.prepareStatement(query, returnId)) {
                 statement.setString(1, category.getNom());
                 statement.setString(2, category.getDescription());
 
                 // Exécution de la requête
                 statement.executeUpdate();
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        return generatedKeys.getInt(1);                    }
+                    else {
+                        throw new SQLException("Creating user failed, no ID obtained.");
+                    }
+                }
+                //return rowsAffected > 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return -1;
     }
 
     @Override
