@@ -374,6 +374,25 @@ public class MainApp extends Application {
         }
     }
 
+    public void openModifyCreneauDispoPage(Creneau_dispo creneau_dispo){
+        try{
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/ModifyCreneauDispo.fxml")));
+            Parent root = (Parent) loader.load();
+            ModifyCreneauDispoController Controller = loader.getController();
+            Controller.setCurrentCreneauDispo(creneau_dispo);
+            Controller.setMainApp(this);
+            Controller.setup();
+            Stage modifyCreneauDispoStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = modifyCreneauDispoStage;
+            Scene scene = new Scene(root);
+            modifyCreneauDispoStage.setScene(scene);
+            modifyCreneauDispoStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void showCoachApprovalList(User user){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/coachApprobationList.fxml")));
