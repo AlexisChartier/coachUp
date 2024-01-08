@@ -589,6 +589,22 @@ public class MainApp extends Application {
 
 
     public void showListCoachPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/listCoach.fxml")));
+            Parent root = (Parent) loader.load();
+
+            ListCoachController listCoachController = loader.getController();
+            listCoachController.setMainApp(this);
+            Stage listCoachStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = listCoachStage;
+            Scene scene = new Scene(root);
+            listCoachStage.setScene(scene);
+            listCoachStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void showRechercheCoach(){

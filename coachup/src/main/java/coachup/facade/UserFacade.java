@@ -2,8 +2,11 @@ package coachup.facade;
 import coachup.dao.AbstractDAOFactory;
 import coachup.dao.SQLDAOFactory;
 import coachup.dao.UserDAO;
+import coachup.model.Categorie;
+import coachup.model.Coach;
 import coachup.model.User;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,6 +19,36 @@ public class UserFacade {
     private User currentUser;
 
     private User managedUser;
+
+    private Date searchedDate;
+
+    private Categorie searchedCategory;
+
+    public Date getSearchedDate() {
+        return searchedDate;
+    }
+
+    public void setSearchedDate(Date searchedDate) {
+        this.searchedDate = searchedDate;
+    }
+
+    public Categorie getSearchedCategory() {
+        return searchedCategory;
+    }
+
+    public void setSearchedCategory(Categorie searchedCategory) {
+        this.searchedCategory = searchedCategory;
+    }
+
+    private List<Coach> coachSearch;
+
+    public List<Coach> getCoachSearch() {
+        return coachSearch;
+    }
+
+    public void setCoachSearch(List<Coach> coachSearch) {
+        this.coachSearch = coachSearch;
+    }
 
     public void setManagedUser(User managedUser) {
         this.managedUser = managedUser;

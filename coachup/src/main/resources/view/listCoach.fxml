@@ -20,6 +20,7 @@
                 <ComboBox fx:id="categorieComboBox" promptText="Catégorie" />
                 <ComboBox fx:id="noteComboBox" promptText="Note Minimum" />
                 <DatePicker fx:id="datePicker" promptText="Date" />
+                <Button onAction="#handleSearchButton" text="Recherche" />
             </HBox>
             <ListView fx:id="coachListView" prefHeight="300" prefWidth="600">
                 <cellFactory>
@@ -28,4 +29,5 @@
             </ListView>
         </VBox>
     </children>
+    <Button onAction="#handleReturnButton" text="Retour"/>
 </AnchorPane>

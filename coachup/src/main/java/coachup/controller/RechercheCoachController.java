@@ -110,6 +110,9 @@ public class RechercheCoachController {
                 showNoResultsAlert();
             } else {
                 // Afficher la liste des coachs disponibles
+                UserFacade.getInstance().setCoachSearch(coachesAvailable);
+                UserFacade.getInstance().setSearchedCategory(CategorieFacade.getInstance().getCategoryById(idCategorie));
+                UserFacade.getInstance().setSearchedDate(Date.valueOf(selectedDate));
                 mainApp.showListCoachPage();
             }
 
