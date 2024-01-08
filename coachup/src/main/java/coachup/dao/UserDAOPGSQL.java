@@ -132,7 +132,7 @@ public class UserDAOPGSQL extends UserDAO {
     public boolean deleteUser(int userId) {
         try {
             // Préparation de la requête SQL
-            String query = "DELETE FROM users WHERE id = ?";
+            String query = "DELETE FROM users WHERE iduser = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, userId);
 

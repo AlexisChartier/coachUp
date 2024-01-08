@@ -20,10 +20,10 @@ public class UserManagementTest {
 
     @Test
     public void registerTest() throws Exception {
-        UserFacade.getInstance().addUser(user);
+        int id = UserFacade.getInstance().addUser(user);
         assertTrue(UserFacade.getInstance().loginUser(user.getEmail(), user.getMotDePasse()));
         assertEquals("student", UserFacade.getInstance().getCurrentUser().getRole());
-        assertTrue(UserFacade.getInstance().deleteUser(user.getIdUtilisateur()));
+        assertTrue(UserFacade.getInstance().deleteUser(id));
     }
 
 }
