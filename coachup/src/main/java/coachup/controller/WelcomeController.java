@@ -40,7 +40,7 @@ public class WelcomeController {
     private void updateWelcomeLabel() {
         if (user != null) {
             System.out.println(user.getNom());
-            String welc = "Welcome, " + user.getNom();
+            String welc = "Bienvenue, " + user.getNom();
             welcomeLabel.setText(welc);
             //welcomeLabel.setText("Welcome, ".concat(user.getNom()));
         }
