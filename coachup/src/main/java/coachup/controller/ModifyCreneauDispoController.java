@@ -1,6 +1,7 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.facade.CreneauDispoFacade;
 import coachup.model.Creneau_dispo;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -42,7 +43,7 @@ public class ModifyCreneauDispoController{
         ZonedDateTime newEndDate = currentCreneauDispo.getDateFin().withHour(Integer.parseInt(endTime.substring(0,2)));
         currentCreneauDispo.setDateDebut(newStartDate);
         currentCreneauDispo.setDateFin(newEndDate);
-        if (mainApp.modifyCreneauDispo(currentCreneauDispo)){
+        if (CreneauDispoFacade.getInstance().modifyCreneauDispo(currentCreneauDispo)){
             System.out.println("Creneau modified");
         }
         else {

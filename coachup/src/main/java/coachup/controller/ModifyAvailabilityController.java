@@ -81,7 +81,7 @@ public class ModifyAvailabilityController implements Initializable {
 
                         deleteButton.setOnAction(event -> {
                             try {
-                                mainApp.deleteCreneauDispo(item.getCreneauDispoId());
+                                CreneauDispoFacade.getInstance().deleteCreneauDispo(item.getCreneauDispoId());
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             } catch (ClassNotFoundException e) {

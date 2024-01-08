@@ -1,6 +1,7 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.facade.NotationFacade;
 import coachup.model.Notation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,7 +33,7 @@ public class AddNotationController {
         notation.setNote(note);
         notation.setCoachId(CoachId);
         notation.setUserId(UserId);
-        if (mainApp.addNotation(notation)){
+        if (NotationFacade.getInstance().addNotation(notation)){
             System.out.println("Notation added");
         }
         else {

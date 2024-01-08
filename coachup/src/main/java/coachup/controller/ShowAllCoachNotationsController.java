@@ -1,6 +1,7 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.facade.NotationFacade;
 import coachup.model.Notation;
 import coachup.model.User;
 import javafx.fxml.FXML;
@@ -40,7 +41,7 @@ public class ShowAllCoachNotationsController implements Initializable {
         // Suppose que l'ID du coach est 1
         Notation[] notations = new Notation[0];
         try {
-            notations = mainApp.getNotationByCoachId(1);
+            notations = NotationFacade.getInstance().getNotationByCoachId(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

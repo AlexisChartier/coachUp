@@ -1,6 +1,7 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.facade.NotationFacade;
 import coachup.model.Notation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +31,7 @@ public class ModifyNotationController implements Initializable {
         // Récupérer la notation que vous modifiez
         Notation notation = null;
         try {
-            notation = mainApp.getNotationById(2);
+            notation = NotationFacade.getInstance().getNotationById(2);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -45,10 +46,10 @@ public class ModifyNotationController implements Initializable {
     @FXML
     private void modifyNotationButtonAction(ActionEvent event) {
         try {
-            Notation notation = mainApp.getNotationById(2);
+        Notation notation = NotationFacade.getInstance().getNotationById(2);
             notation.setComment(commentField.getText());
             notation.setNote((float) notationSlider.getValue());
-            if (mainApp.modifyNotation(notation)){
+            if (NotationFacade.getInstance().modifyNotation(notation)){
                 System.out.println("Notation modified");
             }
             else {
@@ -63,7 +64,7 @@ public class ModifyNotationController implements Initializable {
     private void deleteNotationButtonAction(ActionEvent event) {
         try {
             int notationid = 1;
-            if (mainApp.deleteNotation(notationid)){
+            if (NotationFacade.getInstance().deleteNotation(notationid)){
                 System.out.println("Notation deleted");
             }
             else {

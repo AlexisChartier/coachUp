@@ -433,15 +433,7 @@ public class MainApp extends Application {
         this.showLoginPage();
     }
 
-    public boolean addNotation(Notation notation) throws SQLException, ClassNotFoundException {
-        NotationFacade notationFacade = NotationFacade.getInstance();
-        return notationFacade.addNotation(notation);
-    }
 
-    public Notation[] getNotationByCoachId(int coachId) throws SQLException, ClassNotFoundException {
-        NotationFacade notationFacade = NotationFacade.getInstance();
-        return notationFacade.getNotationByCoachId(coachId);
-    }
 
     public void showCategoriesList(User currentUser) {
         try {
@@ -633,45 +625,6 @@ public class MainApp extends Application {
         catch (IOException e){
             e.printStackTrace();
         }
-    }
-    public Notation[] getNotationByUserId(int userId) throws SQLException, ClassNotFoundException {
-        NotationFacade notationFacade = NotationFacade.getInstance();
-        return notationFacade.getNotationByUserId(userId);
-    }
-
-    public boolean deleteNotation(int notationid) throws SQLException, ClassNotFoundException {
-        NotationFacade notationFacade = NotationFacade.getInstance();
-        return notationFacade.deleteNotation(notationid);
-    }
-
-    public Notation getNotationById(int notationid) throws SQLException, ClassNotFoundException {
-        NotationFacade notationFacade = NotationFacade.getInstance();
-        return notationFacade.getNotationById(notationid);
-    }
-
-    public boolean modifyNotation(Notation notation) throws SQLException, ClassNotFoundException {
-        NotationFacade notationFacade = NotationFacade.getInstance();
-        return notationFacade.modifyNotation(notation);
-    }
-
-    public boolean addAvailability(Creneau_dispo creneau_dispo) throws SQLException, ClassNotFoundException {
-        CreneauDispoFacade creneaudispofacade = CreneauDispoFacade.getInstance();
-        return creneaudispofacade.addCreneauDispo(creneau_dispo);
-    }
-
-    public boolean modifyCreneauDispo(Creneau_dispo creneau_dispo) throws SQLException, ClassNotFoundException {
-        CreneauDispoFacade creneaudispofacade = CreneauDispoFacade.getInstance();
-        return creneaudispofacade.modifyCreneauDispo(creneau_dispo);
-    }
-
-    public List<Creneau_dispo> getCreneauByDay(Integer year, Integer month, Integer day) throws SQLException, ClassNotFoundException {
-        CreneauDispoFacade creneaudispofacade = CreneauDispoFacade.getInstance();
-        return creneaudispofacade.getCreneauByDay(year, month, day);
-    }
-
-    public boolean deleteCreneauDispo(int creneau_dispo_id) throws SQLException, ClassNotFoundException {
-        CreneauDispoFacade creneaudispofacade = CreneauDispoFacade.getInstance();
-        return creneaudispofacade.deleteCreneauDispo(creneau_dispo_id);
     }
 
 

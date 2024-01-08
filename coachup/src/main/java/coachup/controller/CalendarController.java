@@ -1,6 +1,7 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.facade.CreneauDispoFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -198,7 +199,7 @@ public class CalendarController implements Initializable {
 
         Random random = new Random();
         for (int i = 1; i < dateFocus.getMonth().maxLength(); i++) {
-            List<Creneau_dispo> list_creneau_dispo = mainApp.getCreneauByDay(year, month, i);
+            List<Creneau_dispo> list_creneau_dispo = CreneauDispoFacade.getInstance().getCreneauByDay(year, month, i);
             calendarActivities.addAll(list_creneau_dispo);
         }
 

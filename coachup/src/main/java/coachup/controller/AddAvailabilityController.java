@@ -59,7 +59,7 @@ public class AddAvailabilityController implements Initializable {
         String endTime = endTimePicker.getText();
         ZonedDateTime newEndDate = creneau_dispo.getDateFin().withHour(Integer.parseInt(endTime.substring(0,2)));
         Creneau_dispo creneau_dispo = new Creneau_dispo(newStartDate,newEndDate,1,-1);
-        mainApp.addAvailability(creneau_dispo);
+        CreneauDispoFacade.getInstance().addCreneauDispo(creneau_dispo);
     }
 
     public void updateDateLabel() {
