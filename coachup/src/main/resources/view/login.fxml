@@ -16,7 +16,7 @@
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
     <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Connexion "/>
-    <Label text="Pseudo :"/>
+    <Label text="Email :"/>
     <TextField fx:id="usernameField"/>
     <Label text="Mot de passe:"/>
     <PasswordField fx:id="passwordField"/>
