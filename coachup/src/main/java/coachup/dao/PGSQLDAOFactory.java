@@ -12,6 +12,8 @@ public class PGSQLDAOFactory extends AbstractDAOFactory {
 
     private static NotationDAOPGSQL notationDAO;
 
+    private static CreneauDispoDAOPGSQL creneauDispoDAO;
+
     private static CoachDAOPGSQL coachDAO;
 
     private static SeanceDAOPGSQL seanceDAO;
@@ -25,6 +27,7 @@ public class PGSQLDAOFactory extends AbstractDAOFactory {
             notationDAO = new NotationDAOPGSQL();
             categoriesDAOPGSQL = new CategorieDAOPGSQL();
             seanceDAO = new SeanceDAOPGSQL();
+            creneauDispoDAO = new CreneauDispoDAOPGSQL();
         }
         return instance;
     }
@@ -58,5 +61,8 @@ public class PGSQLDAOFactory extends AbstractDAOFactory {
     @Override
     public SeanceDAO getSeanceDAO() {
         return seanceDAO;
+    }
+    public CreneauDispoDAO getCreneauDispoDAO() {
+        return creneauDispoDAO;
     }
 }

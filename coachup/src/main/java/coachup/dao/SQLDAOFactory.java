@@ -48,4 +48,9 @@ public class SQLDAOFactory extends AbstractDAOFactory {
     public SeanceDAO getSeanceDAO() {
         return null;
     }
+    public CreneauDispoDAO getCreneauDispoDAO() {
+        return null;
+    }
+
+
 }

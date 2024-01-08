@@ -2,7 +2,6 @@ package coachup.dao;
 
 import coachup.model.Notation;
 
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ public class NotationDAOPGSQL extends NotationDAO {
     public boolean addNotation(Notation notation) {
         try {
             // Préparation de la requête SQL
-            String query = "INSERT INTO notation (note, comment, CoachId, UserId) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO notation(note, comment, coachid, userid) VALUES (?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setFloat(1, notation.getNote());
                 statement.setString(2, notation.getComment());
@@ -48,7 +47,7 @@ public class NotationDAOPGSQL extends NotationDAO {
     public boolean deleteNotation(int NotationId) {
         try {
             // Préparation de la requête SQL
-            String query = "DELETE FROM notation WHERE NotationId = ?";
+            String query = "DELETE FROM notation WHERE notationid = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, NotationId);
 
@@ -67,7 +66,7 @@ public class NotationDAOPGSQL extends NotationDAO {
     public boolean modifyNotation(Notation notation) {
         try {
             // Préparation de la requête SQL
-            String query = "UPDATE notation SET note = ?, comment = ?, CoachId = ?, UserId = ? WHERE NotationId = ?";
+            String query = "UPDATE notation SET note = ?, comment = ?, coachid = ?, userid = ? WHERE notationid = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setFloat(1, notation.getNote());
                 statement.setString(2, notation.getComment());
@@ -87,11 +86,34 @@ public class NotationDAOPGSQL extends NotationDAO {
     }
 
     @Override
+    public float getAverageNotationByCoachId(int CoachId){
+        float average = 0;
+        try{
+            // Préparation de la requête SQL
+            String query = "SELECT AVG(note) FROM notation WHERE coachid = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, CoachId);
+
+                // Exécution de la requête
+                ResultSet resultSet = statement.executeQuery();
+
+                // Parcourir le ResultSet
+                if (resultSet.next()) {
+                    average = resultSet.getFloat(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return average;
+    }
+
+    @Override
     public Notation[] getNotationByCoachId(int CoachId){
         List<Notation> notations = new ArrayList<>();
         try {
             // Préparation de la requête SQL
-            String query = "SELECT * FROM notation WHERE CoachId = ?";
+            String query = "SELECT * FROM notation WHERE coachid = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, CoachId);
 
@@ -104,8 +126,8 @@ public class NotationDAOPGSQL extends NotationDAO {
                     notation.setNotationId(resultSet.getInt("NotationId"));
                     notation.setNote(resultSet.getFloat("note"));
                     notation.setComment(resultSet.getString("comment"));
-                    notation.setCoachId(resultSet.getInt("CoachId"));
-                    notation.setUserId(resultSet.getInt("UserId"));
+                    notation.setCoachId(resultSet.getInt("coachid"));
+                    notation.setUserId(resultSet.getInt("userid"));
                     notations.add(notation);
                 }
             }
@@ -120,7 +142,7 @@ public class NotationDAOPGSQL extends NotationDAO {
         List<Notation> notations = new ArrayList<>();
         try {
             // Préparation de la requête SQL
-            String query = "SELECT * FROM notation WHERE UserId = ?";
+            String query = "SELECT * FROM notation WHERE userid = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, UserId);
 
@@ -133,8 +155,8 @@ public class NotationDAOPGSQL extends NotationDAO {
                     notation.setNotationId(resultSet.getInt("NotationId"));
                     notation.setNote(resultSet.getFloat("note"));
                     notation.setComment(resultSet.getString("comment"));
-                    notation.setCoachId(resultSet.getInt("CoachId"));
-                    notation.setUserId(resultSet.getInt("UserId"));
+                    notation.setCoachId(resultSet.getInt("coachid"));
+                    notation.setUserId(resultSet.getInt("userid"));
                     notations.add(notation);
                 }
             }
@@ -144,5 +166,31 @@ public class NotationDAOPGSQL extends NotationDAO {
         return notations.toArray(new Notation[0]);
     }
 
+    @Override
+    public Notation getNotationById(int NotationId){
+        Notation notation = new Notation();
+        try {
+            // Préparation de la requête SQL
+            String query = "SELECT * FROM notation WHERE notationid = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, NotationId);
+
+                // Exécution de la requête
+                ResultSet resultSet = statement.executeQuery();
+
+                // Parcourir le ResultSet
+                while (resultSet.next()) {
+                    notation.setNotationId(resultSet.getInt("NotationId"));
+                    notation.setNote(resultSet.getFloat("note"));
+                    notation.setComment(resultSet.getString("comment"));
+                    notation.setCoachId(resultSet.getInt("coachid"));
+                    notation.setUserId(resultSet.getInt("userid"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return notation;
+    }
 
 }
