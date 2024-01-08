@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import coachup.cell.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.CoachDetailController">
+    <stylesheets>
+        <URL value="@/css/application.css" />
+    </stylesheets>
+    <children>
+        <VBox alignment="CENTER" prefHeight="200" prefWidth="300" spacing="10">
+            <Button onAction="#handleAcceptButton" text="Accepter" />
+            <Button onAction="#handleDeleteButton" text="Supprimer" />
+            <!-- Ajout des labels pour afficher les informations actuelles du coach -->
+            <Label style="-fx-font-weight: bold;" text="Informations du coach :" />
+            <Label fx:id="currentNameLabel" />
+            <Label fx:id="currentEmailLabel" />
+            <!-- Remplacement de la ListView par une ComboBox -->
+            <ComboBox fx:id="currentCategoriesComboBox" prefWidth="300.0">
+            <cellFactory>
+                <CategorieCellFactory />
+            </cellFactory>
+            </ComboBox>
+            <Label fx:id="currentDiplomaField" />
+            <Button mnemonicParsing="false" onAction="#handleReturnButton" text="Retour" />
+        </VBox>
+    </children>
+</AnchorPane>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import java.net.URL?>
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.HubPaymentController">
+    <stylesheets>
+        <URL value="@/css/application.css" />
+    </stylesheets>
+    <children>
+        <VBox alignment="CENTER" prefHeight="200" prefWidth="300" spacing="10">
+            <Button onAction="#handlePendingPaymentsButton" text="Séances en attente de paiement" />
+            <Button onAction="#handleUpcomingSessionsButton" text="Séances à venir" />
+            <Button onAction="#handleReturnButton" text="Retour"/>
+        </VBox>
+    </children>
+</AnchorPane>

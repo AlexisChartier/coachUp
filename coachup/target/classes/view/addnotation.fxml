@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<VBox alignment="center" prefHeight="549.0" prefWidth="438.0" spacing="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.AddNotationController">
+    <stylesheets>
+        <URL value="@/css/application.css" />
+    </stylesheets>
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg" />
+        </image>
+    </ImageView>
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Nom du coach" />
+    <Slider fx:id="notationSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" value="7.0" />
+    <TextArea fx:id="commentField" prefHeight="200.0" prefWidth="200.0" promptText="Commentaires (facultatif)" />
+    <Button onAction="#addNotationButtonAction" text="Noter" />
+</VBox>
