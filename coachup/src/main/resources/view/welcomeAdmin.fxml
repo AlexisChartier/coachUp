@@ -18,4 +18,5 @@
     <Button text="Liste des utilisateurs" onAction="#userListButtonAction"/>
     <Button text="Approbation des coachs" onAction="#coachApprovalListButtonAction"/>
     <Button text="Gérer les catégories" onAction="#manageCategoriesButtonAction"/>
+    <Button onAction="#logoutButtonAction" text="Déconnexion" />
 </VBox>

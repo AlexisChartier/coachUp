@@ -1,9 +1,13 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.facade.CoachFacade;
 import coachup.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class WelcomeAdminController {
 
@@ -30,6 +34,11 @@ public class WelcomeAdminController {
         mainApp.showCoachApprovalList(currentUser);
     }
 
+    @FXML
+    public void logoutButtonAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
+        this.currentUser = null;
+        mainApp.showLoginPage();
+    }
     public void manageCategoriesButtonAction(ActionEvent actionEvent) {
         mainApp.showCategoriesList(currentUser);
     }
