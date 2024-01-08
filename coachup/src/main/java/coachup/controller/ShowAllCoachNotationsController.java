@@ -49,10 +49,9 @@ public class ShowAllCoachNotationsController implements Initializable {
         }
         for (Notation notation : notations) {
             HBox notationHBox = new HBox();
-            notationHBox.getChildren().add(new Label("Coach Name: " + notation.getCoachName()));
-            notationHBox.getChildren().add(new Label("Note: " + notation.getNote()));
-            notationHBox.getChildren().add(new Label("Comment: " + notation.getComment()));
-            notationHBox.getChildren().add(new Label("User Name: " + notation.getUserName()));
+            notationHBox.getChildren().add(new Label(" Note: " + notation.getNote()));
+            notationHBox.getChildren().add(new Label(" Commentaire: " + notation.getComment()));
+            notationHBox.getChildren().add(new Label(" Pseudo de l'utilisateur : " + notation.getUserName()));
             notationBox.getChildren().add(notationHBox);
         }
     }

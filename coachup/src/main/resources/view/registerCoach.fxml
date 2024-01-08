@@ -17,7 +17,7 @@
     </stylesheets>
     <children>
         <VBox alignment="CENTER" spacing="10" prefWidth="300" prefHeight="400">
-            <Label text="Formulaire d'Inscription" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Label text="Formulaire d'inscription" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
             <Label text="Nom :" />
             <TextField fx:id="nameField" />

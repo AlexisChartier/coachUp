@@ -15,7 +15,7 @@
     </padding>
     <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Welcome Admin"/>
 
-    <Button text="User List" onAction="#userListButtonAction"/>
-    <Button text="Coach Approval List" onAction="#coachApprovalListButtonAction"/>
-    <Button text="Manage Categories" onAction="#manageCategoriesButtonAction"/>
+    <Button text="Liste des utilisateurs" onAction="#userListButtonAction"/>
+    <Button text="Approbation des coachs" onAction="#coachApprovalListButtonAction"/>
+    <Button text="Gérer les catégories" onAction="#manageCategoriesButtonAction"/>
 </VBox>
