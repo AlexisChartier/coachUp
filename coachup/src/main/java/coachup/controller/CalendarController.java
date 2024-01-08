@@ -206,4 +206,8 @@ public class CalendarController implements Initializable {
         return createCalendarMap(calendarActivities);
     }
 
+    @FXML
+    public void handleReturnButton(ActionEvent actionEvent) {
+        mainApp.showWelcomePageCoach();
+    }
 }

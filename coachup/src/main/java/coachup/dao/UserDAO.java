@@ -39,7 +39,7 @@ public abstract class UserDAO {
      * @param user L'objet User à mettre à jour.
      * @return true si la mise à jour est réussie, false sinon.
      */
-    public abstract boolean updateUser(User user);
+    public abstract int updateUser(User user);
 
     public abstract List<User> getAllUsers();
 

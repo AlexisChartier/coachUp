@@ -90,6 +90,24 @@ public class MainApp extends Application {
         }
     }
 
+    public void showWelcomePageCoach(){
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/welcomeCoach.fxml")));
+            Parent root = (Parent) loader.load();
+
+            WelcomeControllerCoach welcomeControllerCoach = loader.getController();
+            welcomeControllerCoach.setMainApp(this);
+            Stage welcomeStageCoach = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = welcomeStageCoach;
+            Scene scene = new Scene(root);
+            welcomeStageCoach.setScene(scene);
+            welcomeStageCoach.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void showRegisterStudentPage(){
         try {

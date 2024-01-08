@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<StackPane prefHeight="360.0" prefWidth="472.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.WelcomeControllerCoach">
+    <stylesheets>
+        <URL value="@/css/application.css" />
+    </stylesheets>
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+    <VBox alignment="CENTER" spacing="10">
+        <Label fx:id="welcomeLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        <Button onAction="#logoutButtonAction" text="Logout" />
+        <Button onAction="#profileButtonAction" text="Profil" />
+        <Button onAction="#showCalendarButtonAction" text="Gérer les disponibilités" />
+        <Button onAction="#showAllCoachNotationsButtonAction"  text="Voir toutes les notations"  />
+    </VBox>
+</StackPane>

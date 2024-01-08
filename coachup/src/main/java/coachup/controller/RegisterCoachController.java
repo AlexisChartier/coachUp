@@ -7,6 +7,7 @@ import coachup.facade.UserFacade;
 import coachup.model.Categorie;
 import coachup.model.Coach;
 import coachup.model.User;
+import com.sun.javafx.scene.control.IntegerField;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -36,6 +37,9 @@ public class RegisterCoachController {
 
     @FXML
     public VBox categoriesBox;
+
+    @FXML
+    public IntegerField prixField;
 
     private MainApp mainApp = new MainApp();
     private CategorieFacade categorieFacade = CategorieFacade.getInstance();
@@ -80,6 +84,7 @@ public class RegisterCoachController {
         String email = emailField.getText();
         String password = passwordField.getText();
         String diplome = diplomeField.getText();
+        int prix = prixField.getValue();
         ArrayList<Integer> selectedCategoryIds = new ArrayList<>();
 
         for (Node node : categoriesBox.getChildren()) {
@@ -106,6 +111,7 @@ public class RegisterCoachController {
         coach.setDiplome(diplome);
         coach.setMotDePasse(password);
         coach.setEmail(email);
+        coach.setPrix(prix);
         CoachFacade coachFacade = CoachFacade.getInstance();
         User user = new User();
         user.setEmail(coach.getEmail());

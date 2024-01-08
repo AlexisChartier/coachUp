@@ -23,7 +23,7 @@ public class CoachSearchCellFactory implements Callback<ListView<Coach>, ListCel
                     try {
                         setText("Nom: " + coach.getNom() +
                                 "\nNotation Moyenne: " + NotationFacade.getInstance().getAvgNotationByCoachId(coach.getIdUtilisateur()) +
-                                "\nPrix: ") /*+ coach.getPrix())*/;
+                                "\nPrix: " + coach.getPrix());
                     } catch (SQLException | ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }

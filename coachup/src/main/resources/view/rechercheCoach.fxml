@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import java.net.URL?>
 <AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.RechercheCoachController">
     <stylesheets>
         <URL value="@/css/application.css" />
     </stylesheets>
     <children>
-        <VBox alignment="CENTER" spacing="10" prefWidth="300" prefHeight="200">
-            <HBox spacing="10">
+        <VBox alignment="CENTER" prefHeight="200" prefWidth="600" spacing="10">
+            <HBox alignment="CENTER" spacing="10">
                 <ComboBox fx:id="categorieComboBox" promptText="Catégorie" />
                 <ComboBox fx:id="noteComboBox" promptText="Note Minimum" />
                 <DatePicker fx:id="datePicker" promptText="Date" />
             </HBox>
             <Button onAction="#handleRechercheButton" text="Recherche" />
-            <Button onAction="#handleReturnButton" text="Retour"/>
+            <Button onAction="#handleReturnButton" text="Retour" />
         </VBox>
     </children>
 </AnchorPane>

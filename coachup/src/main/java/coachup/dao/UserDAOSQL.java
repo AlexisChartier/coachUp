@@ -96,7 +96,7 @@ public class UserDAOSQL extends UserDAO {
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public int updateUser(User user) {
         try {
             // Préparation de la requête SQL
             String query = "UPDATE users SET nom = ?, email = ?, motDePasse = ?, role = ? WHERE id = ?";
@@ -110,12 +110,12 @@ public class UserDAOSQL extends UserDAO {
                 // Exécution de la requête
                 int rowsAffected = statement.executeUpdate();
 
-                return rowsAffected > 0;
+                return rowsAffected;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return -1;
     }
 
     @Override

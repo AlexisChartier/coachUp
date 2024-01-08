@@ -66,7 +66,7 @@ public class LoginController {
                 Coach coach = coachFacade.getCoachById(user.getIdUtilisateur());
                 coachFacade.setCurrentCoach(coach);
                 if(coach.getApproved()){
-                    //ShowWelcomePageCoach
+                    mainApp.showWelcomePageCoach();
                 }
                 else{
                     mainApp.showLoginPage();

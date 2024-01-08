@@ -106,11 +106,12 @@ public class UserDAOPGSQL extends UserDAO {
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public int updateUser(User user) {
         try {
+            String[] returnId = {"iduser"};
             // Préparation de la requête SQL
             String query = "UPDATE users SET nom = ?, email = ?, motDePasse = ?, role = ? WHERE iduser = ?";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
+            try (PreparedStatement statement = connection.prepareStatement(query, returnId)) {
                 statement.setString(1, user.getNom());
                 statement.setString(2, user.getEmail());
                 statement.setString(3, user.getMotDePasse());
@@ -119,13 +120,19 @@ public class UserDAOPGSQL extends UserDAO {
 
                 // Exécution de la requête
                 int rowsAffected = statement.executeUpdate();
-
-                return rowsAffected > 0;
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        return generatedKeys.getInt(1);                    }
+                    else {
+                        throw new SQLException("Creating user failed, no ID obtained.");
+                    }
+                }
+                //return rowsAffected > 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return -1;
     }
 
     @Override

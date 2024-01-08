@@ -92,7 +92,7 @@ public class UserFacade {
      * @param user L'objet User contenant les nouvelles informations.
      * @return true si la mise à jour est réussie, false sinon.
      */
-    public boolean updateUser(User user) throws SQLException, ClassNotFoundException {
+    public int updateUser(User user) throws SQLException, ClassNotFoundException {
         return daoFactory.getUserDAO().updateUser(user);
     }
 
