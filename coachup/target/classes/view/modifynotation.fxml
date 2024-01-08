@@ -19,7 +19,7 @@
             <Image url="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg" />
         </image>
     </ImageView>
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Nom du coach" />
+    <Label fx:id="coachnameLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Nom du coach" />
     <Slider fx:id="notationSlider" blockIncrement="0.5" majorTickUnit="0.5" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="7.0" />
     <TextArea fx:id="commentField" prefHeight="200.0" prefWidth="200.0" promptText="Commentaires (facultatif)" />
     <HBox>

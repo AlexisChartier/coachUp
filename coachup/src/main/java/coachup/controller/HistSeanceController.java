@@ -46,6 +46,14 @@ public class HistSeanceController {
     }
 
     @FXML
+    public void handleAddNotationButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        Seance selectedSeance = histSeanceListView.getSelectionModel().getSelectedItem();
+        UserFacade userFacade = UserFacade.getInstance();
+        userFacade.setCoachId(selectedSeance.getIdCoach());
+        mainApp.showAddNotation();
+    }
+
+    @FXML
     public void handleReturnButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         mainApp.showWelcomePage(UserFacade.getInstance().getCurrentUser());
     }

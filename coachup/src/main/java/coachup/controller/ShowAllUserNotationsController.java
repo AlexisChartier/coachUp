@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -21,7 +22,12 @@ public class ShowAllUserNotationsController implements Initializable {
     @FXML
     private VBox notationBox;
 
+    private UserFacade userfacade = UserFacade.getInstance();
+
     private MainApp mainApp = new MainApp();
+
+    public ShowAllUserNotationsController() throws SQLException, ClassNotFoundException {
+    }
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -38,11 +44,34 @@ public class ShowAllUserNotationsController implements Initializable {
             throw new RuntimeException(e);
         }
         for (Notation notation : notations) {
+            try {
+                UserFacade userfacade = UserFacade.getInstance();
+                userfacade.setNotationid(notation.getNotationId());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
             HBox notationHBox = new HBox();
-            notationHBox.getChildren().add(new Label("Coach Name: " + notation.getCoachName()));
+            try {
+                notationHBox.getChildren().add(new Label("Nom du coach: " + notation.getCoachName()));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             notationHBox.getChildren().add(new Label("Note: " + notation.getNote()));
-            notationHBox.getChildren().add(new Label("Comment: " + notation.getComment()));
-            notationHBox.getChildren().add(new Label("User Name: " + notation.getUserName()));
+            notationHBox.getChildren().add(new Label("Commentaire: " + notation.getComment()));
+            Button modifyButton = new Button("Modifier");
+
+            modifyButton.setOnAction(event -> {
+                userfacade.setNotationid(notation.getNotationId());
+                mainApp.showModifyNotation();
+            });
+            notationHBox.getChildren().add(modifyButton);
+
+
             notationBox.getChildren().add(notationHBox);
         }
     }

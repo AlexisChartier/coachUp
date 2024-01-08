@@ -18,7 +18,10 @@ public class UserFacade {
     private static UserFacade instance;
     private User currentUser;
 
+    private int coachId;
     private User managedUser;
+
+    private int notationid;
 
     private Date searchedDate;
 
@@ -35,6 +38,22 @@ public class UserFacade {
     private Coach reserveCoach;
 
 
+
+    public int getNotationid() {
+        return notationid;
+    }
+
+    public void setNotationid(int notationid) {
+        this.notationid = notationid;
+    }
+
+    public int getCoachId() {
+        return coachId;
+    }
+
+    public void setCoachId(int coachId) {
+        this.coachId = coachId;
+    }
 
     public Date getSearchedDate() {
         return searchedDate;

@@ -21,8 +21,15 @@ public class ModifyNotationController implements Initializable {
     private Slider notationSlider;
     @FXML
     private TextArea commentField;
+    @FXML
+    private javafx.scene.control.Label coachnameLabel;
+
+    private UserFacade userfacade = UserFacade.getInstance();
 
     private MainApp mainApp = new MainApp();
+
+    public ModifyNotationController() throws SQLException, ClassNotFoundException {
+    }
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -30,10 +37,13 @@ public class ModifyNotationController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Récupérer la notation que vous modifiez
+        int noteid = userfacade.getNotationid();
         Notation notation = null;
         try {
-            notation = NotationFacade.getInstance().getNotationById(2);
+            notation = NotationFacade.getInstance().getNotationById(noteid);
+            int coachid = notation.getCoachId();
+            User coach = userfacade.getUserById(coachid);
+            coachnameLabel.setText(coach.getNom());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -48,7 +58,8 @@ public class ModifyNotationController implements Initializable {
     @FXML
     private void modifyNotationButtonAction(ActionEvent event) {
         try {
-        Notation notation = NotationFacade.getInstance().getNotationById(2);
+            int notationid = userfacade.getNotationid();
+        Notation notation = NotationFacade.getInstance().getNotationById(notationid);
             notation.setComment(commentField.getText());
             notation.setNote((float) notationSlider.getValue());
             if (NotationFacade.getInstance().modifyNotation(notation)){
