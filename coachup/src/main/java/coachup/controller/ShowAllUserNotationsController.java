@@ -54,7 +54,13 @@ public class ShowAllUserNotationsController implements Initializable {
             }
 
             HBox notationHBox = new HBox();
-            notationHBox.getChildren().add(new Label("Nom du coach: " + notation.getCoachName()));
+            try {
+                notationHBox.getChildren().add(new Label("Nom du coach: " + notation.getCoachName()));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             notationHBox.getChildren().add(new Label("Note: " + notation.getNote()));
             notationHBox.getChildren().add(new Label("Commentaire: " + notation.getComment()));
             Button modifyButton = new Button("Modifier");

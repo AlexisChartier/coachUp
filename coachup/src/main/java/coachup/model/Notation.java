@@ -1,5 +1,9 @@
 package coachup.model;
 
+import coachup.facade.UserFacade;
+
+import java.sql.SQLException;
+
 public class Notation {
 
     private int NotationId;
@@ -64,8 +68,14 @@ public class Notation {
         this.UserId = UserId;
     }
 
-    public String getCoachName() {
-        return "Coach Name";
+    public String getCoachName() throws SQLException, ClassNotFoundException {
+        UserFacade userfacade = UserFacade.getInstance();
+        try {
+            User coach = userfacade.getUserById(CoachId);
+            return coach.getNom();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getUserName() {
