@@ -52,7 +52,7 @@ public class SeanceFacade {
         return daoFactory.getSeanceDAO().getSeanceById(id);
     }
 
-    public boolean addSeance(Seance seance) throws SQLException, ClassNotFoundException {
+    public int addSeance(Seance seance) throws SQLException, ClassNotFoundException {
         return daoFactory.getSeanceDAO().addSeance(seance);
     }
 

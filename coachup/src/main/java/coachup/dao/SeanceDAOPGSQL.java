@@ -92,10 +92,11 @@ public class SeanceDAOPGSQL extends SeanceDAO {
     }
 
     @Override
-    public boolean addSeance(Seance seance) {
+    public int addSeance(Seance seance) {
         try {
+            String[] returnid = {"idseance"};
             String query = "INSERT INTO seance (date, idCoach, idUser, idCategorie, statutPaiement) VALUES (?, ?, ?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
+            try (PreparedStatement statement = connection.prepareStatement(query, returnid)) {
                 statement.setDate(1, new Date(seance.getDate().getTime()));
                 statement.setInt(2, seance.getIdCoach());
                 statement.setInt(3, seance.getIdUser());
@@ -103,11 +104,18 @@ public class SeanceDAOPGSQL extends SeanceDAO {
                 statement.setString(5, seance.getStatutPaiement());
 
                 statement.executeUpdate();
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        return generatedKeys.getInt(1);                    }
+                    else {
+                        throw new SQLException("Creating user failed, no ID obtained.");
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return -1;
     }
 
     @Override

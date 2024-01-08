@@ -7,7 +7,7 @@ import java.util.List;
 public abstract class SeanceDAO {
     public abstract List<Seance> getAllSeances();
     public abstract Seance getSeanceById(int id);
-    public abstract boolean addSeance(Seance seance);
+    public abstract int addSeance(Seance seance);
     public abstract void updateSeance(Seance seance);
     public abstract void deleteSeance(int id);
     public abstract List<Seance> getSeancesPassedByUserId(int id);
