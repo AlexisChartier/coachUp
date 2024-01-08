@@ -20,7 +20,5 @@
         <Button onAction="#paymentGestionButtonAction" text="Gestion des paiements"/>
         <Button onAction="#RechercheCoachButtonAction" text="Recherche de coachs"/>
         <Button onAction="#showAllUserNotationsButtonAction"  text="Voir toutes les notations" />
-        <Button onAction="#AddNotationButtonAction"  text="Noter un coach" />
-        <Button onAction="#ModifyNotationButtonAction" text="Modifier une notation" />
     </VBox>
 </StackPane>

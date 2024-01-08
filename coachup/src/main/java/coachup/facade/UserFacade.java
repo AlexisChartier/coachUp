@@ -21,9 +21,19 @@ public class UserFacade {
     private int coachId;
     private User managedUser;
 
+    private int notationid;
+
     private Date searchedDate;
 
     private Categorie searchedCategory;
+
+    public int getNotationid() {
+        return notationid;
+    }
+
+    public void setNotationid(int notationid) {
+        this.notationid = notationid;
+    }
 
     public int getCoachId() {
         return coachId;
