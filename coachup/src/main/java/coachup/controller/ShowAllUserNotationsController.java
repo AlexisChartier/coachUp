@@ -1,12 +1,12 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.model.Notation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import coachup.model.Notation;
 
 import java.net.URL;
 import java.sql.SQLException;

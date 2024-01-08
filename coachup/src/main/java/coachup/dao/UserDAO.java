@@ -1,7 +1,6 @@
 package coachup.dao;
 import coachup.model.User;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**

@@ -1,7 +1,6 @@
 package coachup.facade;
 
 import coachup.dao.AbstractDAOFactory;
-import coachup.dao.CoachDAO;
 import coachup.model.Coach;
 
 import java.sql.SQLException;

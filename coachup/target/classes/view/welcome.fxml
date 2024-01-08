@@ -8,6 +8,7 @@
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
+    <Button onAction="#showCalendarButtonAction" prefWidth="54.0" text="Voir tous les utilisateurs" StackPane.alignment="TOP_CENTER" />
     <Button onAction="#showAllUserNotationsButtonAction" prefWidth="54.0" text="Voir toutes les notations" StackPane.alignment="TOP_RIGHT" />
     <Button onAction="#showAllCoachNotationsButtonAction" prefWidth="54.0" text="Voir toutes les notations" StackPane.alignment="TOP_LEFT" />
     <Label fx:id="welcomeLabel" alignment="CENTER" prefHeight="80.0" prefWidth="296.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" />

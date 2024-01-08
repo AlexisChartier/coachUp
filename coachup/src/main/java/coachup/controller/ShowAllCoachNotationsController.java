@@ -1,12 +1,13 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.model.Notation;
+import coachup.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import coachup.model.Notation;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -17,12 +18,22 @@ public class ShowAllCoachNotationsController implements Initializable {
     @FXML
     private VBox notationBox;
 
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     private MainApp mainApp = new MainApp();
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
+
+    @FXML
+    public void backButtonAction() {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {;

@@ -12,6 +12,8 @@ public class PGSQLDAOFactory extends AbstractDAOFactory {
 
     private static NotationDAOPGSQL notationDAO;
 
+    private static CreneauDispoDAOPGSQL creneauDispoDAO;
+
     private static CoachDAOPGSQL coachDAO;
 
     public static PGSQLDAOFactory getInstance() throws SQLException, ClassNotFoundException {
@@ -20,6 +22,7 @@ public class PGSQLDAOFactory extends AbstractDAOFactory {
             userDAO = new UserDAOPGSQL();
             coachDAO = new CoachDAOPGSQL();
             notationDAO = new NotationDAOPGSQL();
+            creneauDispoDAO = new CreneauDispoDAOPGSQL();
         }
         return instance;
     }
@@ -43,5 +46,10 @@ public class PGSQLDAOFactory extends AbstractDAOFactory {
     @Override
     public NotationDAO getNotationDAO() {
         return notationDAO;
+    }
+
+    @Override
+    public CreneauDispoDAO getCreneauDispoDAO() {
+        return creneauDispoDAO;
     }
 }

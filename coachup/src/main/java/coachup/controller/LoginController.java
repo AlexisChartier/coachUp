@@ -1,11 +1,10 @@
 package coachup.controller;
 
+import coachup.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import coachup.MainApp;
-import coachup.facade.UserFacade;
 
 import java.sql.SQLException;
 

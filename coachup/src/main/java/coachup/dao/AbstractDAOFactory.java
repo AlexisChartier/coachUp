@@ -29,5 +29,7 @@ public abstract class AbstractDAOFactory{
 
     public abstract NotationDAO getNotationDAO();
 
+    public abstract CreneauDispoDAO getCreneauDispoDAO();
+
 
 }

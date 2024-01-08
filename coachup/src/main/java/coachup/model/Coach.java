@@ -1,12 +1,11 @@
 package coachup.model;
 
 import java.sql.Array;
-import java.util.List;
 
 public class Coach extends User {
 
     private String categories;
-    private java.sql.Array disponibilites;
+    private Array disponibilites;
 
     public Coach(int idCoach, String nom, String email, String motDePasse, String categories, Array disponibilites) {
         super(idCoach, nom, email, motDePasse, "coach");
