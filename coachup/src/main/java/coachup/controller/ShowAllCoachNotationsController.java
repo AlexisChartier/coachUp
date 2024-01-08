@@ -1,9 +1,11 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.facade.CoachFacade;
 import coachup.facade.NotationFacade;
 import coachup.model.Notation;
 import coachup.model.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -38,10 +40,9 @@ public class ShowAllCoachNotationsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {;
-        // Suppose que l'ID du coach est 1
         Notation[] notations = new Notation[0];
         try {
-            notations = NotationFacade.getInstance().getNotationByCoachId(1);
+            notations = NotationFacade.getInstance().getNotationByCoachId(CoachFacade.getInstance().getCurrentCoach().getIdUtilisateur());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -54,5 +55,10 @@ public class ShowAllCoachNotationsController implements Initializable {
             notationHBox.getChildren().add(new Label(" Pseudo de l'utilisateur : " + notation.getUserName()));
             notationBox.getChildren().add(notationHBox);
         }
+    }
+
+    @FXML
+    public void handleReturnButton(ActionEvent actionEvent) {
+        mainApp.showWelcomePageCoach();
     }
 }

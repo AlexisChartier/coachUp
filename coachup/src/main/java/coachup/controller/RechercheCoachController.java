@@ -100,17 +100,11 @@ public class RechercheCoachController {
                 }
             }
             // Effectuer la troisième recherche pour vérifier la disponibilité des coachs à la date sélectionnée
-            for(Coach coach : coachesAvailable){
-
-            }
-
-            /*List<Coach> availableCoaches = new ArrayList<>();
-            for (Coach coach : coachesByMinNote) {
-                if (CoachFacade.getInstance().isCoachAvailable(coach.getIdCoach(), selectedDate)) {
-                    availableCoaches.add(coach);
+            for(Coach coach : coachesAvailable) {
+                if (CreneauDispoFacade.getInstance().getCreneauByDayAndCoachId(selectedDate.getYear(), selectedDate.getMonthValue(), selectedDate.getDayOfMonth(), coach.getIdUtilisateur()).isEmpty()) {
+                    coachesAvailable.remove(coach);
                 }
-            }*/
-
+            }
             if (coachesAvailable.isEmpty() || selectedMinNote == -1 || selectedDate == null) {
                 // Afficher un message indiquant qu'aucun coach n'est disponible
                 showNoResultsAlert();

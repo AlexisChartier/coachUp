@@ -2,6 +2,7 @@ package coachup.controller;
 
 import coachup.MainApp;
 import coachup.facade.NotationFacade;
+import coachup.facade.UserFacade;
 import coachup.model.Notation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,5 +41,10 @@ public class AddNotationController {
 
             System.out.println("Notation failed");
         }
+    }
+
+    @FXML
+    public void handleReturnButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        mainApp.showWelcomePage(UserFacade.getInstance().getCurrentUser());
     }
 }

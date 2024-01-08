@@ -13,12 +13,30 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class CoachDetailController {
 
+
+    @FXML
+    public TextField newNameTextField;
+    @FXML
+    public TextField newEmailTextField;
+    @FXML
+    public VBox newCategoriesComboBox;
+
+    @FXML
+    public TextField newDiplomaTextField;
+    @FXML
+    public TextField newPriceTextField;
+    @FXML
+    public Label currentDiplomaLabel;
+
+    @FXML
+    public Label currentPriceLabel;
     private MainApp mainApp;
 
     public void setMainApp(MainApp mainApp) {
@@ -59,9 +77,14 @@ public class CoachDetailController {
 
     @FXML
     public void initialize() {
-        try {
+        try{
             CoachFacade coachFacade = CoachFacade.getInstance();
-            coach = CoachFacade.getInstance().getManagedCoach();
+            if(UserFacade.getInstance().getCurrentUser().getRole().equals("admin")){
+                coach = CoachFacade.getInstance().getManagedCoach();
+            }
+            else{
+                coach = CoachFacade.getInstance().getCurrentCoach();
+            }
             List<Categorie> allCategories = coachFacade.getCategoriesByCoachID(coach.getIdUtilisateur());
 
             // Ajouter un élément fictif pour le texte par défaut
@@ -112,12 +135,9 @@ public class CoachDetailController {
     }
 
 
+
     @FXML
-    public void handleAcceptButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        if(coach != null){
-            CoachFacade.getInstance().approveCoach(coach.getIdUtilisateur());
-            coach = null;
-            mainApp.showCoachApprovalList(UserFacade.getInstance().getCurrentUser());
-        }
+    public void handleSaveButton(ActionEvent actionEvent) {
+
     }
 }

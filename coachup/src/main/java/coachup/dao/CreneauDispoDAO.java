@@ -14,4 +14,6 @@ public abstract class CreneauDispoDAO {
 
     public abstract boolean modifyCreneauDispo(Creneau_dispo creneau_dispo);
 
+    public abstract List<Creneau_dispo> getCreneauByDayAndCoachId(Integer year, Integer month, Integer day, Integer coachId);
+
 }

@@ -62,7 +62,7 @@ public class CoachDAOPGSQL extends CoachDAO {
     @Override
     public boolean addCoach(Coach coach) {
         try {
-            String query = "INSERT INTO coach (idcoach,nom, email, motDePasse, categories, disponibilites, approved, diplome) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+            String query = "INSERT INTO coach (idcoach,nom, email, motDePasse, categories, disponibilites, approved, diplome, prixseance) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 Integer[] cats = coach.getCategories();
                 Array arrayCat = connection.createArrayOf("Integer",cats);
@@ -76,6 +76,7 @@ public class CoachDAOPGSQL extends CoachDAO {
                 statement.setArray(6, arrayDisp);
                 statement.setBoolean(7, false);
                 statement.setString(8,coach.getDiplome());
+                statement.setInt(9,coach.getPrix());
                 int rowsAffected = statement.executeUpdate();
                 return rowsAffected > 0;
             }
@@ -88,7 +89,7 @@ public class CoachDAOPGSQL extends CoachDAO {
     @Override
     public boolean updateCoach(Coach coach) {
         try {
-            String query = "UPDATE coach SET nom = ?, email = ?, motDePasse = ?, categories = ?, disponibilites = ? WHERE id = ?";
+            String query = "UPDATE coach SET nom = ?, email = ?, motDePasse = ?, categories = ?, disponibilites = ?, prixseance = ? WHERE idcoach = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 Integer[] cats = coach.getCategories();
                 Array arrayCat = connection.createArrayOf("Integer",cats);
@@ -99,7 +100,8 @@ public class CoachDAOPGSQL extends CoachDAO {
                 statement.setString(3, coach.getMotDePasse());
                 statement.setArray(4, arrayCat);
                 statement.setArray(5, arrayDisp);
-                statement.setInt(6, coach.getIdUtilisateur());
+                statement.setInt(6, coach.getPrix());
+                statement.setInt(7, coach.getIdUtilisateur());
                 int rowsAffected = statement.executeUpdate();
                 return rowsAffected > 0;
             }
@@ -112,7 +114,7 @@ public class CoachDAOPGSQL extends CoachDAO {
     @Override
     public boolean deleteCoach(int coachId) {
         try {
-            String query = "DELETE FROM coach WHERE id = ?";
+            String query = "DELETE FROM coach WHERE idcoach = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, coachId);
                 int rowsAffected = statement.executeUpdate();
@@ -176,7 +178,7 @@ public class CoachDAOPGSQL extends CoachDAO {
 
         try {
             // Préparation de la requête SQL
-            String query = "SELECT * FROM categories WHERE idCategorie = ANY(SELECT UNNEST(categories) FROM coach WHERE idcoach = ?)";
+            String query = "SELECT * FROM categories WHERE idcategorie = ANY(SELECT UNNEST(categories) FROM coach WHERE idcoach = ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
 
@@ -223,7 +225,7 @@ public class CoachDAOPGSQL extends CoachDAO {
 
         try {
             // Préparation de la requête SQL
-            String query = "SELECT * FROM coachs WHERE ? = ANY(categories)";
+            String query = "SELECT * FROM coach WHERE ? = ANY(categories)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, idCategorie);
 
@@ -254,6 +256,7 @@ public class CoachDAOPGSQL extends CoachDAO {
         Integer[] disponibilites = (Integer[]) disp.getArray();
         String diplome = resultSet.getString("diplome");
         boolean approved = resultSet.getBoolean("approved");
-        return new Coach(id, nom, email, motDePasse, categories, disponibilites, diplome, approved);
+        int prix = resultSet.getInt("prixseance");
+        return new Coach(id, nom, email, motDePasse, categories, disponibilites, diplome, approved, prix);
     }
 }

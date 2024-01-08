@@ -2,16 +2,12 @@ package coachup.dao;
 
 import coachup.model.Creneau_dispo;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.sql.Statement;
 
 
 public class CreneauDispoDAOPGSQL extends CreneauDispoDAO {
@@ -79,6 +75,37 @@ public int addCreneauDispo(Creneau_dispo creneau_dispo) {
                     LocalDateTime date_finwithoutTimezone = resultSet.getTimestamp("date_fin").toLocalDateTime();
                     ZonedDateTime date_fin = date_finwithoutTimezone.atZone(ZoneId.of("Europe/Paris"));
                     Creneau_dispo creneau = new Creneau_dispo(date_debut,date_fin,resultSet.getInt("coachid"),resultSet.getInt("creneau_dispo_id"));
+                    creneaux.add(creneau);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return creneaux;
+    }
+
+    @Override
+    public List<Creneau_dispo> getCreneauByDayAndCoachId(Integer year, Integer month, Integer day, Integer coachId) {
+        List<Creneau_dispo> creneaux = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM creneau_dispo WHERE EXTRACT(YEAR FROM date_debut) = ? " +
+                    "AND EXTRACT(MONTH FROM date_debut) = ? " +
+                    "AND EXTRACT(DAY FROM date_debut) = ? " +
+                    "AND coachid = ? ORDER BY date_debut ASC";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, year);
+                statement.setInt(2, month);
+                statement.setInt(3, day);
+                statement.setInt(4, coachId);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    LocalDateTime dateDebutWithoutTimezone = resultSet.getTimestamp("date_debut").toLocalDateTime();
+                    ZonedDateTime dateDebut = dateDebutWithoutTimezone.atZone(ZoneId.of("Europe/Paris"));
+                    LocalDateTime dateFinWithoutTimezone = resultSet.getTimestamp("date_fin").toLocalDateTime();
+                    ZonedDateTime dateFin = dateFinWithoutTimezone.atZone(ZoneId.of("Europe/Paris"));
+                    Creneau_dispo creneau = new Creneau_dispo(dateDebut, dateFin, resultSet.getInt("coachid"), resultSet.getInt("creneau_dispo_id"));
                     creneaux.add(creneau);
                 }
             }

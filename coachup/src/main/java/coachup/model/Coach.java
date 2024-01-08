@@ -12,6 +12,8 @@ public class Coach extends User {
 
     private String diplome;
 
+    private int prix;
+
     private boolean approved = false;
 
     public void setApproved(boolean b){
@@ -26,16 +28,28 @@ public class Coach extends User {
         this.diplome = diplome;
     }
 
+    public int getPrix() {
+        return prix;
+    }
+
+    public void setPrix(int prix) {
+        this.prix = prix;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
 
     public Coach(){}
 
 
-    public Coach(int idCoach, String nom, String email, String motDePasse, Integer[] categories, Integer[] disponibilites, String diplome, boolean approved) {
+    public Coach(int idCoach, String nom, String email, String motDePasse, Integer[] categories, Integer[] disponibilites, String diplome, boolean approved, int prix) {
         super(idCoach, nom, email, motDePasse, "coach");
         this.categories = categories;
         this.disponibilites = disponibilites;
         this.diplome = diplome;
         this.approved = approved;
+        this.prix = prix;
     }
 
     public Integer[] getCategories() {

@@ -42,4 +42,5 @@
             </Button>
         </children>
     </HBox>
+    <Button onAction="#handleReturnButton" text="Retour"/>
 </VBox>

@@ -18,4 +18,5 @@
             <URL value="@/css/application.css" />
         </stylesheets>
     </VBox>
+    <Button onAction="#handleReturnButton" text="Retour"/>
 </ScrollPane>
