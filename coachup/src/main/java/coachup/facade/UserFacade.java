@@ -35,6 +35,16 @@ public class UserFacade {
         return this.currentUser;
     }
 
+    private static AbstractDAOFactory daoFactory;
+
+    static {
+        try {
+            daoFactory = AbstractDAOFactory.getInstance();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Méthode pour obtenir l'instance unique de UserFacade.
      *
@@ -54,7 +64,6 @@ public class UserFacade {
      * @return L'objet User correspondant à l'identifiant, ou null s'il n'existe pas.
      */
     public User getUserById(int userId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getUserDAO().getUserById(userId);
     }
 
@@ -65,7 +74,6 @@ public class UserFacade {
      * @return L'objet User correspondant à l'adresse e-mail, ou null s'il n'existe pas.
      */
     public User getUserByEmail(String email) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getUserDAO().getUserByEmail(email);
     }
 
@@ -76,7 +84,6 @@ public class UserFacade {
      * @return true si l'ajout est réussi, false sinon.
      */
     public int addUser(User user) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getUserDAO().addUser(user);
     }
     /**
@@ -86,7 +93,6 @@ public class UserFacade {
      * @return true si la mise à jour est réussie, false sinon.
      */
     public boolean updateUser(User user) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getUserDAO().updateUser(user);
     }
 
@@ -97,7 +103,6 @@ public class UserFacade {
      * @return true si la suppression est réussie, false sinon.
      */
     public boolean deleteUser(int userId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getUserDAO().deleteUser(userId);
     }
 
@@ -109,7 +114,6 @@ public class UserFacade {
      * @return true si les informations de connexion sont valides, false sinon.
      */
     public boolean loginUser(String email, String password) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         if(daoFactory.getUserDAO().loginUser(email,password)){
             this.currentUser = getUserByEmail(email);
             return true;
@@ -120,7 +124,6 @@ public class UserFacade {
     }
 
     public List<User> getAllUsers() throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getUserDAO().getAllUsers();
     }
 

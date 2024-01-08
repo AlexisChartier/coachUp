@@ -29,6 +29,16 @@ public class CategorieFacade {
         return managedCategory;
     }
 
+    private static AbstractDAOFactory daoFactory;
+
+    static {
+        try {
+            daoFactory = AbstractDAOFactory.getInstance();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private CategorieFacade() {
         // Constructeur privé pour assurer que seule une instance de CategoryFacade est créée (Singleton).
     }
@@ -41,27 +51,26 @@ public class CategorieFacade {
     }
 
     public Categorie getCategoryById(int categoryId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCategorieDAO().getCategorieById(categoryId);
     }
 
+    public Categorie getCategoryByNom(String nom) throws SQLException, ClassNotFoundException {
+        return daoFactory.getCategorieDAO().getCategorieByNom(nom);
+    }
+
     public List<Categorie> getAllCategories() throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCategorieDAO().getAllCategories();
     }
 
     public int addCategory(Categorie category) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCategorieDAO().addCategorie(category);
     }
 
     public void updateCategory(Categorie category) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         daoFactory.getCategorieDAO().updateCategorie(category);
     }
 
     public void deleteCategory(int categoryId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         daoFactory.getCategorieDAO().deleteCategorie(categoryId);
     }
 }

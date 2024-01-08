@@ -140,6 +140,30 @@ public class CategorieDAOPGSQL extends CategorieDAO {
         }
     }
 
+    @Override
+    public Categorie getCategorieByNom(String nom) {
+        Categorie categorie = null;
+
+        try {
+            // Préparation de la requête SQL
+            String query = "SELECT * FROM categories WHERE nom = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, nom);
+
+                // Exécution de la requête
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        categorie = mapResultSetToCategorie(resultSet);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return categorie;
+    }
+
     /**
      * Méthode pour mapper les résultats d'une requête à un objet Categorie
      */

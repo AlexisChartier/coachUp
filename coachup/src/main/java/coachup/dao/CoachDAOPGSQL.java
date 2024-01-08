@@ -216,6 +216,33 @@ public class CoachDAOPGSQL extends CoachDAO {
         }
         return false;
     }
+
+    @Override
+    public List<Coach> getCoachesByCategoryId(int idCategorie) {
+        List<Coach> coaches = new ArrayList<>();
+
+        try {
+            // Préparation de la requête SQL
+            String query = "SELECT * FROM coachs WHERE ? = ANY(categories)";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, idCategorie);
+
+                // Exécution de la requête
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Coach coach = mapResultSetToCoach(resultSet);
+                        coaches.add(coach);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return coaches;
+    }
+
+
     private Coach mapResultSetToCoach(ResultSet resultSet) throws SQLException {
         Array cats = resultSet.getArray("categories");
         Array disp = resultSet.getArray("disponibilites");
