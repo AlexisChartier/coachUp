@@ -8,15 +8,15 @@
             fx:controller="coachup.controller.ModifyCreneauDispoController"
             prefHeight="200.0" prefWidth="400.0">
 
-    <Label text="Modify availability" layoutX="150" layoutY="20" />
+    <Label text="Modifier les disponibilités" layoutX="150" layoutY="20" />
 
-    <Label text="Date début:" layoutX="50" layoutY="80" />
+    <Label text="Heure début:" layoutX="50" layoutY="80" />
     <TextField fx:id="startTimePicker" layoutX="150" layoutY="70" />
 
-    <Label text="Date Fin:" layoutX="50" layoutY="130" />
+    <Label text="Heure Fin:" layoutX="50" layoutY="130" />
     <TextField fx:id="endTimePicker" layoutX="150" layoutY="120" />
 
-    <Button text="Submit" layoutX="150" layoutY="170" onAction="#modifyCreneauButtonAction" />
+    <Button text="Envoyé" layoutX="150" layoutY="170" onAction="#modifyCreneauButtonAction" />
     <Button text="Fermé" layoutX="250" layoutY="170" onAction="#close" />
 
 </AnchorPane>

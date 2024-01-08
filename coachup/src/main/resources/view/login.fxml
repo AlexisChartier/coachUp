@@ -15,13 +15,13 @@
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Login Page"/>
-    <Label text="Username:"/>
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Connexion "/>
+    <Label text="Pseudo :"/>
     <TextField fx:id="usernameField"/>
-    <Label text="Password:"/>
+    <Label text="Mot de passe:"/>
     <PasswordField fx:id="passwordField"/>
-    <Button text="Login" onAction="#loginButtonAction"/>
-    <Button text="Register as a student" onAction="#registerStudentButtonAction"/> <!-- Ajout du bouton Register -->
-    <Button text="Register as a coach" onAction="#registerCoachButtonAction"/>
-    <Button text="Quit" onAction="#quitButtonAction"/>
+    <Button text="Se connecter" onAction="#loginButtonAction"/>
+    <Button text="S'enregistrer en tant qu'élève" onAction="#registerStudentButtonAction"/> <!-- Ajout du bouton Register -->
+    <Button text="S'enregistrer en tant que coach" onAction="#registerCoachButtonAction"/>
+    <Button text="Quitter" onAction="#quitButtonAction"/>
 </VBox>
