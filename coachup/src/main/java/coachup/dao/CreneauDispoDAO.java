@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class CreneauDispoDAO {
 
-    public abstract boolean addCreneauDispo(Creneau_dispo creneau_dispo);
+    public abstract int addCreneauDispo(Creneau_dispo creneau_dispo);
 
     public abstract List<Creneau_dispo> getCreneauByDay(Integer year, Integer month, Integer day);
 

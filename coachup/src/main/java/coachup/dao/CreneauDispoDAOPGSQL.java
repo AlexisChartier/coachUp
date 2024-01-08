@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.sql.Statement;
 
 
 public class CreneauDispoDAOPGSQL extends CreneauDispoDAO {
@@ -31,25 +31,34 @@ public class CreneauDispoDAOPGSQL extends CreneauDispoDAO {
     }
 
 @Override
-    public boolean addCreneauDispo(Creneau_dispo creneau_dispo) {
-        try{
-            String query = "INSERT INTO creneau_dispo(date_debut, date_fin, coachid) VALUES (?, ?, ?)";
-            try (java.sql.PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setTimestamp(1, creneau_dispo.getDateDebutTimestamp());
-                statement.setTimestamp(2, creneau_dispo.getDateFinTimestamp());
-                statement.setInt(3, creneau_dispo.getCoachId());
+public int addCreneauDispo(Creneau_dispo creneau_dispo) {
+    try{
+        String query = "INSERT INTO creneau_dispo(date_debut, date_fin, coachid) VALUES (?, ?, ?)";
+        try (java.sql.PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setTimestamp(1, creneau_dispo.getDateDebutTimestamp());
+            statement.setTimestamp(2, creneau_dispo.getDateFinTimestamp());
+            statement.setInt(3, creneau_dispo.getCoachId());
 
-                // Exécution de la requête
-                System.out.println(statement);
-                int rowsAffected = statement.executeUpdate();
+            // Exécution de la requête
+            int rowsAffected = statement.executeUpdate();
 
-                return rowsAffected > 0;
+            System.out.println("Rows affected: " + rowsAffected); // Ajout d'un message de débogage
+
+            if (rowsAffected > 0) {
+                ResultSet resultSet = statement.getGeneratedKeys();
+                if (resultSet.next()) {
+                    int generatedId = resultSet.getInt(4);
+                    creneau_dispo.setCreneauDispoId(generatedId);
+                    return generatedId;
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return false;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        System.out.println("SQLException: " + e.getMessage()); // Ajout d'un message de débogage
     }
+    return -1; // Retourner -1 ou une autre valeur pour indiquer qu'une erreur s'est produite
+}
 
     @Override
     public List<Creneau_dispo> getCreneauByDay(Integer year, Integer month, Integer day) {

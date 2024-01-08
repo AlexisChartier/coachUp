@@ -56,6 +56,10 @@ public class Creneau_dispo {
         return Creneau_dispo_id;
     }
 
+    public void setCreneauDispoId(Integer creneau_dispo_id) {
+        this.Creneau_dispo_id = creneau_dispo_id;
+    }
+
 
 
 

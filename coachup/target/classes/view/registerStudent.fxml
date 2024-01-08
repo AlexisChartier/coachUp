@@ -15,7 +15,7 @@
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Registration Page Student"/>
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Formulaire d'inscription"/>
 
     <Label text="Nom:"/>
     <TextField fx:id="nomField"/>
@@ -26,6 +26,6 @@
     <Label text="Mot de Passe:"/>
     <PasswordField fx:id="passwordField"/>
 
-    <Button text="Register" onAction="#registerButtonAction"/>
-    <Button text="Back" onAction="#backButtonAction"/>
+    <Button text="S'inscrire" onAction="#registerButtonAction"/>
+    <Button text="Retour" onAction="#backButtonAction"/>
 </VBox>

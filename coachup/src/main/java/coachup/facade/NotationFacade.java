@@ -34,7 +34,7 @@ public class NotationFacade {
         return instance;
     }
 
-    public boolean addNotation(Notation notation) throws SQLException, ClassNotFoundException {
+    public int addNotation(Notation notation) throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         NotationDAO notationDAO = daoFactory.getNotationDAO();
         return notationDAO.addNotation(notation);

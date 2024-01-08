@@ -22,11 +22,11 @@ public class NotationDAOPGSQL extends NotationDAO {
         connect();
     }
     @Override
-    public boolean addNotation(Notation notation) {
+    public int addNotation(Notation notation) {
         try {
             // Préparation de la requête SQL
             String query = "INSERT INTO notation(note, comment, coachid, userid) VALUES (?, ?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
+            try (PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setFloat(1, notation.getNote());
                 statement.setString(2, notation.getComment());
                 statement.setInt(3, notation.getCoachId());
@@ -35,12 +35,19 @@ public class NotationDAOPGSQL extends NotationDAO {
                 // Exécution de la requête
                 int rowsAffected = statement.executeUpdate();
 
-                return rowsAffected > 0;
+                // Récupération de l'ID généré
+                if (rowsAffected > 0) {
+                    try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                        if (resultSet.next()) {
+                            return resultSet.getInt(5);
+                        }
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return -1; // Retourner -1 ou une autre valeur pour indiquer qu'une erreur s'est produite
     }
 
     @Override

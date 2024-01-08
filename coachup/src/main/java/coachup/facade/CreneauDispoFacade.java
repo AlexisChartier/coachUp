@@ -1,5 +1,6 @@
 package coachup.facade;
 
+import coachup.dao.CreneauDispoDAOPGSQL;
 import coachup.model.Creneau_dispo;
 import coachup.dao.CreneauDispoDAO;
 import coachup.dao.AbstractDAOFactory;
@@ -36,7 +37,7 @@ public class CreneauDispoFacade {
         return instance;
     }
 
-    public boolean addCreneauDispo(Creneau_dispo creneau_dispo) throws SQLException, ClassNotFoundException {
+    public int addCreneauDispo(Creneau_dispo creneau_dispo) throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         CreneauDispoDAO creneauDispoDAO = daoFactory.getCreneauDispoDAO();
         return creneauDispoDAO.addCreneauDispo(creneau_dispo);

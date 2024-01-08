@@ -33,7 +33,7 @@ public class AddNotationController {
         notation.setNote(note);
         notation.setCoachId(CoachId);
         notation.setUserId(UserId);
-        if (NotationFacade.getInstance().addNotation(notation)){
+        if (NotationFacade.getInstance().addNotation(notation)!=-1){
             System.out.println("Notation added");
         }
         else {
