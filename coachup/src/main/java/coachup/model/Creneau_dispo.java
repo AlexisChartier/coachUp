@@ -13,7 +13,17 @@ public class Creneau_dispo {
     private Integer CoachId;
     private Integer Creneau_dispo_id;
 
-    public Creneau_dispo(ZonedDateTime date_debut,ZonedDateTime date_fin, Integer CoachId,Integer Creneau_dispo_id) {
+    private boolean reserve;
+
+    public boolean isReserve() {
+        return reserve;
+    }
+
+    public void setReserve(boolean reserve) {
+        this.reserve = reserve;
+    }
+
+    public Creneau_dispo(ZonedDateTime date_debut, ZonedDateTime date_fin, Integer CoachId, Integer Creneau_dispo_id) {
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.CoachId = CoachId;

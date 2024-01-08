@@ -91,7 +91,7 @@ public int addCreneauDispo(Creneau_dispo creneau_dispo) {
             String query = "SELECT * FROM creneau_dispo WHERE EXTRACT(YEAR FROM date_debut) = ? " +
                     "AND EXTRACT(MONTH FROM date_debut) = ? " +
                     "AND EXTRACT(DAY FROM date_debut) = ? " +
-                    "AND coachid = ? ORDER BY date_debut ASC";
+                    "AND coachid = ? AND reserve = false ORDER BY date_debut ASC";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, year);
                 statement.setInt(2, month);
@@ -113,6 +113,62 @@ public int addCreneauDispo(Creneau_dispo creneau_dispo) {
             e.printStackTrace();
         }
         return creneaux;
+    }
+
+    @Override
+    public void reserverCreneau(Creneau_dispo creneau_dispo, int iduser, int idCategorie) throws SQLException {
+        try {
+            // Ouverture de la connexion à la base de données
+            // Préparation de la requête SQL pour insérer une nouvelle séance
+            String query = "INSERT INTO seance (date, idcoach, idcategorie, iduser, statut_paiement, datefin) VALUES (?, ?, ?, ?,?)";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                // Extraction de la date de début et de fin du créneau
+                LocalDateTime dateDebut = creneau_dispo.getDateDebut().toLocalDateTime();
+                LocalDateTime dateFin = creneau_dispo.getDateFin().toLocalDateTime();
+
+                Timestamp timestamp = creneau_dispo.getDateDebutTimestamp();
+
+                // Assignation des valeurs aux paramètres de la requête
+                Date date = new Date(timestamp.getTime());
+                statement.setDate(1, date);
+                statement.setInt(2, creneau_dispo.getCoachId());
+                statement.setInt(3, idCategorie);
+                statement.setInt(4, iduser);
+                statement.setString(4, "En Attente");
+                statement.setTimestamp(5, creneau_dispo.getDateFinTimestamp());
+
+                // Exécution de la requête
+                statement.executeUpdate();
+            } finally {
+                // Fermeture de la connexion
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Override
+    public void setReserved(int id) throws SQLException {
+        try {
+            // Ouverture de la connexion à la base de données
+            // Préparation de la requête SQL pour mettre à jour l'attribut "reserve"
+            String query = "UPDATE creneau_dispo SET reserve = true WHERE creneau_dispo_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                // Assignation de la valeur à l'ID du créneau
+                statement.setInt(1, id);
+
+                // Exécution de la requête
+                statement.executeUpdate();
+            } finally {
+                // Fermeture de la connexion
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     @Override

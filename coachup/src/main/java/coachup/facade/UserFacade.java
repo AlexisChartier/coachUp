@@ -24,6 +24,18 @@ public class UserFacade {
 
     private Categorie searchedCategory;
 
+    public Coach getReserveCoach() {
+        return reserveCoach;
+    }
+
+    public void setReserveCoach(Coach reserveCoach) {
+        this.reserveCoach = reserveCoach;
+    }
+
+    private Coach reserveCoach;
+
+
+
     public Date getSearchedDate() {
         return searchedDate;
     }

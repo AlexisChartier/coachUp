@@ -625,4 +625,23 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
+
+    public void showReservationPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/reservationPage.fxml")));
+            Parent root = (Parent) loader.load();
+
+            ReservationPageController reservationPageController = loader.getController();
+            reservationPageController.setMainApp(this);
+            Stage rechercheStage = new Stage();
+            this.primaryStage.close();
+            this.primaryStage = rechercheStage;
+            Scene scene = new Scene(root);
+            rechercheStage.setScene(scene);
+            rechercheStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

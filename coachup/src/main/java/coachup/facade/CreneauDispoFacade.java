@@ -72,4 +72,9 @@ public class CreneauDispoFacade {
     public List<Creneau_dispo> getCreneauByDayAndCoachId(int year, int monthValue, int dayOfMonth, int idUtilisateur) {
         return daoFactory.getCreneauDispoDAO().getCreneauByDayAndCoachId(year,monthValue,dayOfMonth,idUtilisateur);
     }
+
+    public void reserverCreneau(Creneau_dispo selectedCreneau, int iduser, int idcategorie) throws SQLException {
+        daoFactory.getCreneauDispoDAO().reserverCreneau(selectedCreneau, iduser, idcategorie);
+        daoFactory.getCreneauDispoDAO().setReserved(selectedCreneau.getCreneauDispoId());
+    }
 }
