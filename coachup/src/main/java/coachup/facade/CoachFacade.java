@@ -60,6 +60,11 @@ public class CoachFacade {
         return daoFactory.getCoachDAO().getCoachById(coachId);
     }
 
+    public List<Coach> getCoachesByCatId(int id) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        return daoFactory.getCoachDAO().getCoachesByCategoryId(id);
+    }
+
     public void denyCoach(int id) throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         daoFactory.getCoachDAO().denyCoach(id);

@@ -45,6 +45,11 @@ public class CategorieFacade {
         return daoFactory.getCategorieDAO().getCategorieById(categoryId);
     }
 
+    public Categorie getCategoryByNom(String nom) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        return daoFactory.getCategorieDAO().getCategorieByNom(nom);
+    }
+
     public List<Categorie> getAllCategories() throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCategorieDAO().getAllCategories();

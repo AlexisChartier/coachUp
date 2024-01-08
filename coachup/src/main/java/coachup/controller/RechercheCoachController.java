@@ -3,6 +3,7 @@ package coachup.controller;
 import coachup.MainApp;
 import coachup.facade.CategorieFacade;
 import coachup.facade.CoachFacade;
+import coachup.facade.NotationFacade;
 import coachup.facade.UserFacade;
 import coachup.model.Categorie;
 import coachup.model.Coach;
@@ -35,6 +36,8 @@ public class RechercheCoachController {
     @FXML
     private ComboBox<String> categorieComboBox;
 
+    private int idCategorie;
+
     @FXML
     private ComboBox<String> noteComboBox;
 
@@ -63,44 +66,63 @@ public class RechercheCoachController {
     }
 
     @FXML
-    public void handleRechercheButton(ActionEvent actionEvent) {
-        /*try {
+    public void handleRechercheButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        try {
             // Récupérer l'id de la catégorie sélectionnée
-            int selectedCategoryId = categorieComboBox.getSelectionModel().getSelectedItem().getIdCategorie();
-
+            idCategorie = CategorieFacade.getInstance().getCategoryByNom(categorieComboBox.getSelectionModel().getSelectedItem()).getIdcategorie();
+            float selectedMinNote = -1;
             // Récupérer la note minimum
-            int selectedMinNote = noteComboBox.getSelectionModel().getSelectedItem().getMinNote();
-
+            if(noteComboBox.getSelectionModel().getSelectedItem().equals("0 ou +")){
+                selectedMinNote = 0;
+            }
+            else if(noteComboBox.getSelectionModel().getSelectedItem().equals("1 ou +")){
+                selectedMinNote = 1;
+            }
+            else if(noteComboBox.getSelectionModel().getSelectedItem().equals("2 ou +")){
+                selectedMinNote = 2;
+            }
+            else if(noteComboBox.getSelectionModel().getSelectedItem().equals("3 ou +")){
+                selectedMinNote = 3;
+            }
+            else if(noteComboBox.getSelectionModel().getSelectedItem().equals("4 ou +")){
+                selectedMinNote = 4;
+            }
+            else if(noteComboBox.getSelectionModel().getSelectedItem().equals("5 ou +")){
+                selectedMinNote = 5;
+            }
             // Récupérer la date sélectionnée
             LocalDate selectedDate = datePicker.getValue();
 
             // Effectuer la première recherche pour récupérer les coachs de la catégorie
-            List<Coach> coachesByCategory = CoachFacade.getInstance().getCoachesByCategory(selectedCategoryId);
+            List<Coach> coachesAvailable = CoachFacade.getInstance().getCoachesByCatId(idCategorie);
 
             // Effectuer la deuxième recherche pour récupérer les coachs avec une note supérieure à la note minimum
-            List<Coach> coachesByMinNote = coachesByCategory.stream()
-                    .filter(coach -> coach.getAverageRating() >= selectedMinNote)
-                    .collect(Collectors.toList());
-
+            for(Coach coach : coachesAvailable){
+                if(NotationFacade.getInstance().getAvgNotationByCoachId(coach.getIdUtilisateur()) < selectedMinNote){
+                    coachesAvailable.remove(coach);
+                }
+            }
             // Effectuer la troisième recherche pour vérifier la disponibilité des coachs à la date sélectionnée
-            List<Coach> availableCoaches = new ArrayList<>();
+
+
+            /*List<Coach> availableCoaches = new ArrayList<>();
             for (Coach coach : coachesByMinNote) {
                 if (CoachFacade.getInstance().isCoachAvailable(coach.getIdCoach(), selectedDate)) {
                     availableCoaches.add(coach);
                 }
-            }
+            }*/
 
-            if (availableCoaches.isEmpty()) {
+            if (coachesAvailable.isEmpty() || selectedMinNote == -1 || selectedDate == null) {
                 // Afficher un message indiquant qu'aucun coach n'est disponible
-                showNoResultsPopup();
+                showNoResultsAlert();
             } else {
                 // Afficher la liste des coachs disponibles
-                mainApp.showListCoachPage(availableCoaches);
+                mainApp.showListCoachPage();
             }
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     private void showNoResultsAlert() {

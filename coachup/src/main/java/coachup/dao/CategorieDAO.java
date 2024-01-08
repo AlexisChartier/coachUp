@@ -10,4 +10,6 @@ public abstract class CategorieDAO {
     public abstract int addCategorie(Categorie category);
     public abstract void updateCategorie(Categorie category);
     public abstract void deleteCategorie(int id);
+
+    public abstract Categorie getCategorieByNom(String nom);
 }

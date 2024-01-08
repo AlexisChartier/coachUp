@@ -1,9 +1,12 @@
 package coachup.cell;
 
+import coachup.facade.NotationFacade;
 import coachup.model.Coach;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
+
+import java.sql.SQLException;
 
 public class CoachSearchCellFactory implements Callback<ListView<Coach>, ListCell<Coach>> {
 
@@ -17,9 +20,13 @@ public class CoachSearchCellFactory implements Callback<ListView<Coach>, ListCel
                     setText(null);
                 } else {
                     // Affichage des détails du coach
-                    setText("Nom: " + coach.getNom() +
-                            "\nNotation Moyenne: " + /*coach.getNotationMoyenne() +*/
-                            "\nPrix: ") /*+ coach.getPrix())*/;
+                    try {
+                        setText("Nom: " + coach.getNom() +
+                                "\nNotation Moyenne: " + NotationFacade.getInstance().getAvgNotationByCoachId(coach.getIdUtilisateur()) +
+                                "\nPrix: ") /*+ coach.getPrix())*/;
+                    } catch (SQLException | ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         };

@@ -40,6 +40,11 @@ public class NotationFacade {
         return notationDAO.addNotation(notation);
     }
 
+    public float getAvgNotationByCoachId(int id) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory abstractDAOFactory = AbstractDAOFactory.getInstance();
+        return abstractDAOFactory.getNotationDAO().getAverageNotationByCoachId(id);
+    }
+
     public boolean deleteNotation(int NotationId) throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         NotationDAO notationDAO = daoFactory.getNotationDAO();
