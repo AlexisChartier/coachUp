@@ -6,11 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import java.net.URL?>
 <VBox alignment="center" prefHeight="549.0" prefWidth="438.0" spacing="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.ModifyNotationController">
-    <stylesheets>
-        <URL value="@/css/application.css" />
-    </stylesheets>
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
@@ -20,7 +16,7 @@
         </image>
     </ImageView>
     <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Nom du coach" />
-    <Slider fx:id="notationSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" value="7.0" />
+    <Slider fx:id="notationSlider" blockIncrement="0.5" majorTickUnit="0.5" max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="7.0" />
     <TextArea fx:id="commentField" prefHeight="200.0" prefWidth="200.0" promptText="Commentaires (facultatif)" />
     <HBox>
         <children>

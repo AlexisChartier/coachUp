@@ -4,16 +4,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<?import java.net.URL?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="coachup.controller.ShowNotationByCoachController"
             prefHeight="400.0" prefWidth="600.0">
 
     <VBox fx:id="notationBox" spacing="10">
-        <stylesheets>
-            <URL value="@/css/application.css" />
-        </stylesheets>
         <Label fx:id="coachNameLabel" text="Coach Name" />
         <Label fx:id="noteLabel" text="Note" />
         <Label fx:id="commentLabel" text="Comment" />

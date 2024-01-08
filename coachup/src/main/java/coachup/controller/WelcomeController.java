@@ -1,9 +1,9 @@
 package coachup.controller;
+
 import coachup.MainApp;
-import javafx.event.ActionEvent;
+import coachup.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import coachup.model.User;
 
 import java.io.IOException;
 
@@ -59,6 +59,29 @@ public class WelcomeController {
     @FXML
     public void profileButtonAction(ActionEvent actionEvent) {
         mainApp.showDetailPage(user, null);
+    }
+    public void AddNotationButtonAction(javafx.event.ActionEvent event) throws IOException {
+        mainApp.showAddNotation();
+    }
+
+    @FXML
+    public void ModifyNotationButtonAction(javafx.event.ActionEvent event) throws IOException {
+        mainApp.showModifyNotation();
+    }
+
+    @FXML
+    public void showAllCoachNotationsButtonAction(javafx.event.ActionEvent event) throws IOException {
+        mainApp.ShowAllCoachNotations();
+    }
+
+    @FXML
+    public void showAllUserNotationsButtonAction(javafx.event.ActionEvent event) throws IOException {
+        mainApp.ShowAllUserNotations();
+    }
+
+    @FXML
+    public void showCalendarButtonAction(javafx.event.ActionEvent event) throws IOException {
+        mainApp.showCalendarPage();
     }
 
     @FXML

@@ -20,4 +20,11 @@
         <Button onAction="#paymentGestionButtonAction" text="Gestion des paiements"/>
         <Button onAction="#RechercheCoachButtonAction" text="Recherche de coachs"/>
     </VBox>
+    <Button onAction="#showCalendarButtonAction" prefWidth="54.0" text="Voir tous les utilisateurs" StackPane.alignment="TOP_CENTER" />
+    <Button onAction="#showAllUserNotationsButtonAction" prefWidth="54.0" text="Voir toutes les notations" StackPane.alignment="TOP_RIGHT" />
+    <Button onAction="#showAllCoachNotationsButtonAction" prefWidth="54.0" text="Voir toutes les notations" StackPane.alignment="TOP_LEFT" />
+    <Label fx:id="welcomeLabel" alignment="CENTER" prefHeight="80.0" prefWidth="296.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+    <Button onAction="#AddNotationButtonAction" prefWidth="54.0" text="Noter un coach" StackPane.alignment="BOTTOM_LEFT" />
+    <Button onAction="#ModifyNotationButtonAction" prefWidth="54.0" text="Modifier une notation" StackPane.alignment="BOTTOM_RIGHT" />
+    <Button onAction="#logoutButtonAction" prefWidth="54.0" text="Logout" StackPane.alignment="BOTTOM_CENTER" />
 </StackPane>

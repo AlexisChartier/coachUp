@@ -37,7 +37,7 @@ public class UserDAOPGSQL extends UserDAO {
     public User getUserById(int userId) {
         try {
             // Préparation de la requête SQL
-            String query = "SELECT * FROM users WHERE iduser = ?";
+            String query = "SELECT * FROM users WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, userId);
 
@@ -109,7 +109,7 @@ public class UserDAOPGSQL extends UserDAO {
     public boolean updateUser(User user) {
         try {
             // Préparation de la requête SQL
-            String query = "UPDATE users SET nom = ?, email = ?, motDePasse = ?, role = ? WHERE iduser = ?";
+            String query = "UPDATE users SET nom = ?, email = ?, motDePasse = ?, role = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, user.getNom());
                 statement.setString(2, user.getEmail());
@@ -132,7 +132,7 @@ public class UserDAOPGSQL extends UserDAO {
     public boolean deleteUser(int userId) {
         try {
             // Préparation de la requête SQL
-            String query = "DELETE FROM users WHERE iduser = ?";
+            String query = "DELETE FROM users WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, userId);
 

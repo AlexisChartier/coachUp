@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="coachup.controller.ModifyAvailabilityController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <VBox layoutX="20" layoutY="20" spacing="10">
+        <ListView fx:id="creneauListView" prefHeight="300.0" prefWidth="560.0" />
+        <Button  text="Fermer" onAction="#close" />
+        <Button text="Ajouter un créneau" onAction="#addCreneauButtonAction" />
+    </VBox>
+
+</AnchorPane>

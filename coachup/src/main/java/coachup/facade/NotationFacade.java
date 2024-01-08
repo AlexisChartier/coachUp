@@ -5,7 +5,6 @@ import coachup.dao.NotationDAO;
 import coachup.model.Notation;
 
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * Facade pour la gestion des notations, fournissant des méthodes pour effectuer des opérations sur les notations.
@@ -51,6 +50,12 @@ public class NotationFacade {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         NotationDAO notationDAO = daoFactory.getNotationDAO();
         return notationDAO.modifyNotation(notation);
+    }
+
+    public Notation getNotationById(int NotationId) throws SQLException, ClassNotFoundException {
+        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+        NotationDAO notationDAO = daoFactory.getNotationDAO();
+        return notationDAO.getNotationById(NotationId);
     }
 
     public Notation[] getNotationByCoachId(int CoachId) throws SQLException, ClassNotFoundException {

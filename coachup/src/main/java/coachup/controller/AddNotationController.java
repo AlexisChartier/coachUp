@@ -1,13 +1,11 @@
 package coachup.controller;
 
+import coachup.MainApp;
+import coachup.model.Notation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
-import coachup.MainApp;
-import coachup.model.Notation;
 import javafx.scene.control.TextArea;
-
 
 import java.sql.SQLException;
 
