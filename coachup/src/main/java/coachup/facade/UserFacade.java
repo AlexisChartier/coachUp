@@ -18,11 +18,20 @@ public class UserFacade {
     private static UserFacade instance;
     private User currentUser;
 
+    private int coachId;
     private User managedUser;
 
     private Date searchedDate;
 
     private Categorie searchedCategory;
+
+    public int getCoachId() {
+        return coachId;
+    }
+
+    public void setCoachId(int coachId) {
+        this.coachId = coachId;
+    }
 
     public Date getSearchedDate() {
         return searchedDate;

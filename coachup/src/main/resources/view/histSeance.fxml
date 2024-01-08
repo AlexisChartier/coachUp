@@ -19,6 +19,7 @@
                 </cellFactory>
             </ListView>
 
+            <Button onAction="#handleAddNotationButton" text="Noter le coach" />
             <Button onAction="#handleDetailButton" text="Détail" />
             <Button onAction="#handleReturnButton" text="Retour"/>
         </VBox>
