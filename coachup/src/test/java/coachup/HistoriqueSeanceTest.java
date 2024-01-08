@@ -10,35 +10,28 @@ import coachup.model.Seance;
 import java.sql.SQLException;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HistoriqueSeanceTest {
-
-    User user = new User();
 
     Seance seance = new Seance();
 
     Date anciennedate = new Date(0);
     public HistoriqueSeanceTest(){
-        user.setNom("userTestCase");
-        user.setEmail("testEmail");
-        user.setMotDePasse("testMDP");
-        user.setRole("student");
-        seance.setIdSeance(-1);
         seance.setDate(anciennedate);
-        seance.setIdCoach(-1);
-        seance.setIdUser(-1);
+        seance.setIdCoach(23);
+        seance.setIdUser(1);
         seance.setIdCategorie(1);
-        seance.setStatutPaiement("en attente");
+        seance.setStatutPaiement("En Attente");
 
     }
 
     @Test
     public void showHistoriqueTest() throws SQLException, ClassNotFoundException {
-        UserFacade.getInstance().addUser(user);
-        //assertTrue(SeanceFacade.getInstance().addSeance(seance));
+        int idSeance = SeanceFacade.getInstance().addSeance(seance);
+        assertEquals(idSeance,SeanceFacade.getInstance().getSeanceById(idSeance).getIdSeance());
+        seance = SeanceFacade.getInstance().getSeanceById(idSeance);
         SeanceFacade.getInstance().paySeance(seance);
-        assertEquals(seance,SeanceFacade.getInstance().getSeancesPassedByUserId(user.getIdUtilisateur()).get(0));
+        assertNotNull(SeanceFacade.getInstance().getSeancesPassedByUserId(1).get(0));
     }
 }

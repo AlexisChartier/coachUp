@@ -109,7 +109,7 @@ public class UserDAOPGSQL extends UserDAO {
     public boolean updateUser(User user) {
         try {
             // Préparation de la requête SQL
-            String query = "UPDATE users SET nom = ?, email = ?, motDePasse = ?, role = ? WHERE id = ?";
+            String query = "UPDATE users SET nom = ?, email = ?, motDePasse = ?, role = ? WHERE iduser = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, user.getNom());
                 statement.setString(2, user.getEmail());
