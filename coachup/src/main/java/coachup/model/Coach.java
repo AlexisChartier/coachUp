@@ -30,11 +30,12 @@ public class Coach extends User {
     public Coach(){}
 
 
-    public Coach(int idCoach, String nom, String email, String motDePasse, Integer[] categories, Integer[] disponibilites, String diplome) {
+    public Coach(int idCoach, String nom, String email, String motDePasse, Integer[] categories, Integer[] disponibilites, String diplome, boolean approved) {
         super(idCoach, nom, email, motDePasse, "coach");
         this.categories = categories;
         this.disponibilites = disponibilites;
         this.diplome = diplome;
+        this.approved = approved;
     }
 
     public Integer[] getCategories() {

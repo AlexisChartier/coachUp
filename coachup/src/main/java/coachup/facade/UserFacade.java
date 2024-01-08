@@ -75,7 +75,7 @@ public class UserFacade {
      * @param user L'objet User à ajouter.
      * @return true si l'ajout est réussi, false sinon.
     */
-    public boolean addUser(User user) throws SQLException, ClassNotFoundException {
+    public int addUser(User user) throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getUserDAO().addUser(user);
     }

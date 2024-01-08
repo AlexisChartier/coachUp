@@ -74,7 +74,7 @@ public class UserDAOSQL extends UserDAO {
     }
 
     @Override
-    public boolean addUser(User user) {
+    public int addUser(User user) {
         try {
             // Préparation de la requête SQL
             String query = "INSERT INTO users (nom, email, motDePasse, role) VALUES (?, ?, ?, ?)";
@@ -86,13 +86,13 @@ public class UserDAOSQL extends UserDAO {
 
                 // Exécution de la requête
                 int rowsAffected = statement.executeUpdate();
-
-                return rowsAffected > 0;
+                return statement.getGeneratedKeys().getInt(1);
+                //return rowsAffected > 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return -1;
     }
 
     @Override

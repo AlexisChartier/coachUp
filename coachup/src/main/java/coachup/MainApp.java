@@ -266,7 +266,7 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean registerStudentUser(User user) throws SQLException, ClassNotFoundException {
+    public int registerStudentUser(User user) throws SQLException, ClassNotFoundException {
         UserFacade userFacade  = UserFacade.getInstance();
         return userFacade.addUser(user);
     }
@@ -279,8 +279,8 @@ public class MainApp extends Application {
         user.setNom(coach.getNom());
         user.setMotDePasse(coach.getMotDePasse());
         user.setRole("coach");
-        UserFacade.getInstance().addUser(user);
-        user = UserFacade.getInstance().getUserByEmail(email);
+        int iduser = UserFacade.getInstance().addUser(user);
+        user = UserFacade.getInstance().getUserById(iduser);
         coach.setIdUtilisateur(user.getIdUtilisateur());
         coachFacade.addCoach(coach);
         this.showLoginPage();

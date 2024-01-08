@@ -203,7 +203,7 @@ public class CoachDAOPGSQL extends CoachDAO {
     public boolean approveCoach(int id) {
         try {
             // Préparation de la requête SQL
-            String query = "UPDATE coachs SET approved = true WHERE idcoach = ?";
+            String query = "UPDATE coach SET approved = true WHERE idcoach = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
 
@@ -226,6 +226,7 @@ public class CoachDAOPGSQL extends CoachDAO {
         Integer[] categories = (Integer[])cats.getArray();
         Integer[] disponibilites = (Integer[]) disp.getArray();
         String diplome = resultSet.getString("diplome");
-        return new Coach(id, nom, email, motDePasse, categories, disponibilites, diplome);
+        boolean approved = resultSet.getBoolean("approved");
+        return new Coach(id, nom, email, motDePasse, categories, disponibilites, diplome, approved);
     }
 }

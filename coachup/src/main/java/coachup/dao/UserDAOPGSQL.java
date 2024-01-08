@@ -2,6 +2,7 @@ package coachup.dao;
 
 import coachup.model.User;
 
+import java.beans.Statement;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,11 +77,12 @@ public class UserDAOPGSQL extends UserDAO {
     }
 
     @Override
-    public boolean addUser(User user) {
+    public int addUser(User user) {
         try {
+            String[] returnId = {"iduser"};
             // Préparation de la requête SQL
             String query = "INSERT INTO users (nom, email, motDePasse, role) VALUES (?, ?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
+            try (PreparedStatement statement = connection.prepareStatement(query, returnId)) {
                 statement.setString(1, user.getNom());
                 statement.setString(2, user.getEmail());
                 statement.setString(3, user.getMotDePasse());
@@ -88,13 +90,19 @@ public class UserDAOPGSQL extends UserDAO {
 
                 // Exécution de la requête
                 int rowsAffected = statement.executeUpdate();
-
-                return rowsAffected > 0;
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        return generatedKeys.getInt(1);                    }
+                    else {
+                        throw new SQLException("Creating user failed, no ID obtained.");
+                    }
+                }
+                //return rowsAffected > 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return -1;
     }
 
     @Override

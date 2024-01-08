@@ -1,7 +1,6 @@
 package coachup.dao;
 import coachup.model.User;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -32,7 +31,7 @@ public abstract class UserDAO {
      * @param user L'objet User à ajouter.
      * @return true si l'ajout est réussi, false sinon.
      */
-    public abstract boolean addUser(User user);
+    public abstract int addUser(User user);
 
     /**
      * Met à jour les informations d'un utilisateur dans la base de données.

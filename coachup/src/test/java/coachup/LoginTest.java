@@ -1,12 +1,14 @@
 package coachup;
 
 import coachup.facade.UserFacade;
-import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 
-public class LoginTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class LoginTest {
     public String goodemail ;
     public String goodpassword ;
     public String bademail ;
@@ -15,8 +17,8 @@ public class LoginTest extends TestCase {
 
 
     public LoginTest(){
-        this.goodemail = "usr1@gmail.com";
-        this.goodpassword = "1234";
+        this.goodemail = "test";
+        this.goodpassword = "test";
         this.bademail = "bademail";
         this.badpassword = "badpassword";
     }

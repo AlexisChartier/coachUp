@@ -50,7 +50,7 @@ public class RegisterStudentController {
         newUser.setRole("student");
         // Appeler la méthode d'ajout d'utilisateur de votre façade ou service
         // Par exemple : mainApp.getUserFacade().addUser(newUser);
-        if(mainApp.registerStudentUser(newUser)){
+        if(mainApp.registerStudentUser(newUser) != -1){
             mainApp.showLoginPage();
         }
         else{
