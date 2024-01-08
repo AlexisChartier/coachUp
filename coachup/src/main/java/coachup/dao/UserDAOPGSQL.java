@@ -37,7 +37,7 @@ public class UserDAOPGSQL extends UserDAO {
     public User getUserById(int userId) {
         try {
             // Préparation de la requête SQL
-            String query = "SELECT * FROM users WHERE id = ?";
+            String query = "SELECT * FROM users WHERE iduser = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, userId);
 
