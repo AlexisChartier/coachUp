@@ -64,7 +64,7 @@ public class RechercheCoachController {
 
     @FXML
     public void handleRechercheButton(ActionEvent actionEvent) {
-        try {
+        /*try {
             // Récupérer l'id de la catégorie sélectionnée
             int selectedCategoryId = categorieComboBox.getSelectionModel().getSelectedItem().getIdCategorie();
 
@@ -100,7 +100,7 @@ public class RechercheCoachController {
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     private void showNoResultsAlert() {

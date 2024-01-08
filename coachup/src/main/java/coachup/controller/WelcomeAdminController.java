@@ -1,6 +1,7 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -8,13 +9,20 @@ public class WelcomeAdminController {
 
     private MainApp mainApp = new MainApp();
 
+    private User currentUser;
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+
     public void setMainApp(MainApp mainApp){
         this.mainApp = mainApp;
     }
 
     @FXML
     public void userListButtonAction(ActionEvent event) {
-        mainApp.showUserList();
+        mainApp.showUserList(currentUser);
     }
 
     @FXML

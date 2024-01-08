@@ -1,7 +1,9 @@
 package coachup;
 
 import coachup.controller.*;
+import coachup.facade.CreneauDispoFacade;
 import coachup.model.Coach;
+import coachup.model.Creneau_dispo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

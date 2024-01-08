@@ -2,6 +2,7 @@ package coachup.controller;
 
 import coachup.MainApp;
 import coachup.model.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 

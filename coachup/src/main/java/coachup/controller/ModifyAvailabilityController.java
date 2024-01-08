@@ -76,7 +76,7 @@ public class ModifyAvailabilityController implements Initializable {
                         Button deleteButton = new Button("Supprimer");
 
                         modifyButton.setOnAction(event -> {
-                            mainApp.openModifyCreneauDispoPage(item);
+                            //mainApp.openModifyCreneauDispoPage(item);
                         });
 
                         deleteButton.setOnAction(event -> {

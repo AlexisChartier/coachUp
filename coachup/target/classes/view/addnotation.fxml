@@ -5,7 +5,11 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.net.URL?>
 <VBox alignment="center" prefHeight="549.0" prefWidth="438.0" spacing="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coachup.controller.AddNotationController">
+    <stylesheets>
+        <URL value="@/css/application.css" />
+    </stylesheets>
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
