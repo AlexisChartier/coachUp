@@ -1,6 +1,10 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.facade.CoachFacade;
+import coachup.facade.UserFacade;
+import coachup.model.Coach;
+import coachup.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -8,6 +12,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 /**
  * Contrôleur pour la page de connexion (Login).
@@ -44,12 +49,31 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        // Authentifie l'utilisateur en vérifiant les informations de connexion
-        if (mainApp.authenticateUser(username, password)) {
-            // Affiche la page de bienvenue si l'authentification est réussie
+        UserFacade userFacade = UserFacade.getInstance();
+
+        boolean isAuthenticated = userFacade.loginUser(username, password);
+
+        if (isAuthenticated) {
+            User user = userFacade.getUserByEmail(username);
+            if(Objects.equals(user.getRole(), "student")){
+                mainApp.showWelcomePage(user);
+            }
+            else if(Objects.equals(user.getRole(), "admin")){
+                mainApp.showWelcomePageAdmin(user);
+            }
+            else if(Objects.equals(user.getRole(), "coach")){
+                CoachFacade coachFacade = CoachFacade.getInstance();
+                Coach coach = coachFacade.getCoachById(user.getIdUtilisateur());
+                coachFacade.setCurrentCoach(coach);
+                if(coach.getApproved()){
+                    //ShowWelcomePageCoach
+                }
+                else{
+                    mainApp.showLoginPage();
+                }
+            }
         } else {
-            // Affiche un message en cas d'échec de l'authentification
-            System.out.println("Login failed");
+            System.out.println("Authentication failed. Invalid email or password.");
         }
     }
 

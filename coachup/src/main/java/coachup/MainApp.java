@@ -166,43 +166,6 @@ public class MainApp extends Application {
         }
     }
 
-    /**
-     * Authentifie l'utilisateur en vérifiant les informations de connexion.
-     *
-     * @param email    L'adresse e-mail de l'utilisateur.
-     * @param password Le mot de passe de l'utilisateur.
-     * @return true si l'authentification est réussie, false sinon.
-     */
-    public boolean authenticateUser(String email, String password) throws SQLException, ClassNotFoundException, IOException {
-        UserFacade userFacade = UserFacade.getInstance();
-
-        boolean isAuthenticated = userFacade.loginUser(email, password);
-
-        if (isAuthenticated) {
-            User user = userFacade.getUserByEmail(email);
-            if(Objects.equals(user.getRole(), "student")){
-                showWelcomePage(user);
-            }
-            else if(Objects.equals(user.getRole(), "admin")){
-                showWelcomePageAdmin(user);
-            }
-            else if(Objects.equals(user.getRole(), "coach")){
-                CoachFacade coachFacade = CoachFacade.getInstance();
-                Coach coach = coachFacade.getCoachById(user.getIdUtilisateur());
-                coachFacade.setCurrentCoach(coach);
-                if(coach.getApproved()){
-                    //ShowWelcomePageCoach
-                }
-                else{
-                    showLoginPage();
-                }
-            }
-        } else {
-            System.out.println("Authentication failed. Invalid email or password.");
-        }
-
-        return isAuthenticated;
-    }
 
     /**
     public boolean addNotation(String comment, int notation, int CoachId, int UserId) throws SQLException, ClassNotFoundException {
@@ -412,27 +375,6 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-
-    public int registerStudentUser(User user) throws SQLException, ClassNotFoundException {
-        UserFacade userFacade  = UserFacade.getInstance();
-        return userFacade.addUser(user);
-    }
-
-    public void registerCoachUser(Coach coach) throws SQLException, ClassNotFoundException, IOException {
-        CoachFacade coachFacade = CoachFacade.getInstance();
-        User user = new User();
-        user.setEmail(coach.getEmail());
-        String email = coach.getEmail();
-        user.setNom(coach.getNom());
-        user.setMotDePasse(coach.getMotDePasse());
-        user.setRole("coach");
-        int iduser = UserFacade.getInstance().addUser(user);
-        user = UserFacade.getInstance().getUserById(iduser);
-        coach.setIdUtilisateur(user.getIdUtilisateur());
-        coachFacade.addCoach(coach);
-        this.showLoginPage();
-    }
-
 
 
     public void showCategoriesList(User currentUser) {

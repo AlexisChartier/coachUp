@@ -1,6 +1,7 @@
 package coachup.controller;
 
 import coachup.MainApp;
+import coachup.facade.UserFacade;
 import coachup.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,7 +51,9 @@ public class RegisterStudentController {
         newUser.setRole("student");
         // Appeler la méthode d'ajout d'utilisateur de votre façade ou service
         // Par exemple : mainApp.getUserFacade().addUser(newUser);
-        if(mainApp.registerStudentUser(newUser) != -1){
+        UserFacade userFacade  = UserFacade.getInstance();
+        int result = userFacade.addUser(newUser);
+        if(result != -1){
             mainApp.showLoginPage();
         }
         else{

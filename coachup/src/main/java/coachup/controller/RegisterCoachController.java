@@ -3,8 +3,10 @@ package coachup.controller;
 import coachup.MainApp;
 import coachup.facade.CategorieFacade;
 import coachup.facade.CoachFacade;
+import coachup.facade.UserFacade;
 import coachup.model.Categorie;
 import coachup.model.Coach;
+import coachup.model.User;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -104,6 +106,17 @@ public class RegisterCoachController {
         coach.setDiplome(diplome);
         coach.setMotDePasse(password);
         coach.setEmail(email);
-        mainApp.registerCoachUser(coach);
+        CoachFacade coachFacade = CoachFacade.getInstance();
+        User user = new User();
+        user.setEmail(coach.getEmail());
+        String emailcoach = coach.getEmail();
+        user.setNom(coach.getNom());
+        user.setMotDePasse(coach.getMotDePasse());
+        user.setRole("coach");
+        int iduser = UserFacade.getInstance().addUser(user);
+        user = UserFacade.getInstance().getUserById(iduser);
+        coach.setIdUtilisateur(user.getIdUtilisateur());
+        coachFacade.addCoach(coach);
+        mainApp.showLoginPage();
     }
 }
