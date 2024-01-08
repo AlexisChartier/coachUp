@@ -1,10 +1,7 @@
 package coachup.controller;
 
 import coachup.MainApp;
-import coachup.facade.CategorieFacade;
-import coachup.facade.CoachFacade;
-import coachup.facade.NotationFacade;
-import coachup.facade.UserFacade;
+import coachup.facade.*;
 import coachup.model.Categorie;
 import coachup.model.Coach;
 import javafx.collections.FXCollections;
@@ -103,7 +100,9 @@ public class RechercheCoachController {
                 }
             }
             // Effectuer la troisième recherche pour vérifier la disponibilité des coachs à la date sélectionnée
+            for(Coach coach : coachesAvailable){
 
+            }
 
             /*List<Coach> availableCoaches = new ArrayList<>();
             for (Coach coach : coachesByMinNote) {

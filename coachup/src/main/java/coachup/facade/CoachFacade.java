@@ -37,6 +37,16 @@ public class CoachFacade {
         return this.currentCoach;
     }
 
+    private static AbstractDAOFactory daoFactory;
+
+    static {
+        try {
+            daoFactory = AbstractDAOFactory.getInstance();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Méthode pour obtenir l'instance unique de CoachFacade.
      *
@@ -56,22 +66,18 @@ public class CoachFacade {
      * @return L'objet Coach correspondant à l'identifiant, ou null s'il n'existe pas.
      */
     public Coach getCoachById(int coachId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCoachDAO().getCoachById(coachId);
     }
 
     public List<Coach> getCoachesByCatId(int id) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCoachDAO().getCoachesByCategoryId(id);
     }
 
     public void denyCoach(int id) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         daoFactory.getCoachDAO().denyCoach(id);
     }
 
     public List<Categorie> getCategoriesByCoachID(int id) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCoachDAO().getCategoriesByCoachId(id);
     }
 
@@ -81,7 +87,6 @@ public class CoachFacade {
      * @return La liste des coachs.
      */
     public List<Coach> getAllCoaches() throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCoachDAO().getAllCoaches();
     }
 
@@ -92,7 +97,6 @@ public class CoachFacade {
      * @return true si l'ajout est réussi, false sinon.
      */
     public boolean addCoach(Coach coach) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCoachDAO().addCoach(coach);
     }
 
@@ -103,7 +107,6 @@ public class CoachFacade {
      * @return true si la mise à jour est réussie, false sinon.
      */
     public boolean updateCoach(Coach coach) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCoachDAO().updateCoach(coach);
     }
 
@@ -114,7 +117,6 @@ public class CoachFacade {
      * @return true si la suppression est réussie, false sinon.
      */
     public boolean deleteCoach(int coachId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCoachDAO().deleteCoach(coachId);
     }
 
@@ -124,7 +126,6 @@ public class CoachFacade {
      * @return La liste des coachs en attente d'approbation.
      */
     public List<Coach> getUnapprovedCoaches() throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCoachDAO().getUnapprovedCoaches();
     }
 
@@ -135,9 +136,7 @@ public class CoachFacade {
      * @return true si l'approbation est réussie, false sinon.
      */
     public boolean approveCoach(int coachId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getCoachDAO().approveCoach(coachId);
-        //return daoFactory.getCoachDAO().approveCoach(coachId);
     }
 
 

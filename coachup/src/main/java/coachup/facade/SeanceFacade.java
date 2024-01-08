@@ -12,6 +12,16 @@ public class SeanceFacade {
 
     private Seance managedSeance;
 
+    private static AbstractDAOFactory daoFactory;
+
+    static {
+        try {
+            daoFactory = AbstractDAOFactory.getInstance();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private SeanceFacade() {
     }
 
@@ -31,52 +41,42 @@ public class SeanceFacade {
     }
 
     public List<Seance> getSeancesPassedByUserId(int id) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getSeanceDAO().getSeancesPassedByUserId(id);
     }
 
     public List<Seance> getAllSeances() throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getSeanceDAO().getAllSeances();
     }
 
     public Seance getSeanceById(int id) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getSeanceDAO().getSeanceById(id);
     }
 
     public boolean addSeance(Seance seance) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getSeanceDAO().addSeance(seance);
     }
 
     public void updateSeance(Seance seance) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         daoFactory.getSeanceDAO().updateSeance(seance);
     }
 
     public void deleteSeance(int id) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         daoFactory.getSeanceDAO().deleteSeance(id);
     }
 
     public List<Seance> getPendingSeances(int id) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getSeanceDAO().getPendingPaymentsByUserId(id);
     }
 
     public List<Seance> getUpcomingSeances(int id) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         return daoFactory.getSeanceDAO().getUpcomingSessionsByUserId(id);
     }
 
     public void paySeance(Seance seance) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         daoFactory.getSeanceDAO().paySeance(seance.getIdSeance());
     }
 
     public void refundSeance(Seance seance) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         daoFactory.getSeanceDAO().refundSeance(seance.getIdSeance());
     }
 }
