@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import coachup.model.Creneau_dispo;
 import coachup.MainApp;
 import javafx.scene.control.Label;
+import coachup.facade.UserFacade;
 
 
 import java.net.URL;
@@ -58,7 +59,10 @@ public class AddAvailabilityController implements Initializable {
         ZonedDateTime newStartDate = creneau_dispo.getDateDebut().withHour(Integer.parseInt(startTime.substring(0,2)));
         String endTime = endTimePicker.getText();
         ZonedDateTime newEndDate = creneau_dispo.getDateFin().withHour(Integer.parseInt(endTime.substring(0,2)));
-        Creneau_dispo creneau_dispo = new Creneau_dispo(newStartDate,newEndDate,1,-1);
+        UserFacade userFacade = UserFacade.getInstance();
+        int coachId = userFacade.getCurrentUser().getIdUtilisateur();
+
+        Creneau_dispo creneau_dispo = new Creneau_dispo(newStartDate,newEndDate,coachId,-1);
         CreneauDispoFacade.getInstance().addCreneauDispo(creneau_dispo);
     }
 
