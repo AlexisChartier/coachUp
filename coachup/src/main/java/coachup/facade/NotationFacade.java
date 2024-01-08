@@ -15,6 +15,16 @@ public class NotationFacade {
 
     private Notation currentNotation;
 
+    private AbstractDAOFactory daoFactory;
+
+    {
+        try {
+            daoFactory = AbstractDAOFactory.getInstance();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Constructeur privé pour assurer que seule une instance de NotationFacade est créée (Singleton).
      */
@@ -35,39 +45,31 @@ public class NotationFacade {
     }
 
     public int addNotation(Notation notation) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        NotationDAO notationDAO = daoFactory.getNotationDAO();
-        return notationDAO.addNotation(notation);
+        return daoFactory.getNotationDAO().addNotation(notation);
+    }
+
+    public float getAvgNotationByCoachId(int id) throws SQLException, ClassNotFoundException {
+        return daoFactory.getNotationDAO().getAverageNotationByCoachId(id);
     }
 
     public boolean deleteNotation(int NotationId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        NotationDAO notationDAO = daoFactory.getNotationDAO();
-        return notationDAO.deleteNotation(NotationId);
+        return daoFactory.getNotationDAO().deleteNotation(NotationId);
     }
 
     public boolean modifyNotation(Notation notation) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        NotationDAO notationDAO = daoFactory.getNotationDAO();
-        return notationDAO.modifyNotation(notation);
+        return daoFactory.getNotationDAO().modifyNotation(notation);
     }
 
     public Notation getNotationById(int NotationId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        NotationDAO notationDAO = daoFactory.getNotationDAO();
-        return notationDAO.getNotationById(NotationId);
+        return daoFactory.getNotationDAO().getNotationById(NotationId);
     }
 
     public Notation[] getNotationByCoachId(int CoachId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        NotationDAO notationDAO = daoFactory.getNotationDAO();
-        return notationDAO.getNotationByCoachId(CoachId);
+        return daoFactory.getNotationDAO().getNotationByCoachId(CoachId);
     }
 
     public Notation[] getNotationByUserId(int UserId) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        NotationDAO notationDAO = daoFactory.getNotationDAO();
-        return notationDAO.getNotationByUserId(UserId);
+        return daoFactory.getNotationDAO().getNotationByUserId(UserId);
     }
     
 }

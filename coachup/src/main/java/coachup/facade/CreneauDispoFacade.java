@@ -18,6 +18,16 @@ public class CreneauDispoFacade {
 
     private Creneau_dispo currentCreneauDispo;
 
+    private AbstractDAOFactory daoFactory;
+
+    {
+        try {
+            daoFactory = AbstractDAOFactory.getInstance();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Constructeur privé pour assurer que seule une instance de NotationFacade est créée (Singleton).
      */
@@ -38,27 +48,25 @@ public class CreneauDispoFacade {
     }
 
     public int addCreneauDispo(Creneau_dispo creneau_dispo) throws SQLException, ClassNotFoundException {
-        AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-        CreneauDispoDAO creneauDispoDAO = daoFactory.getCreneauDispoDAO();
-        return creneauDispoDAO.addCreneauDispo(creneau_dispo);
+        return daoFactory.getCreneauDispoDAO().addCreneauDispo(creneau_dispo);
     }
 
     public List<Creneau_dispo> getCreneauByDay(Integer year, Integer month, Integer day) throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         CreneauDispoDAO creneauDispoDAO = daoFactory.getCreneauDispoDAO();
-        return creneauDispoDAO.getCreneauByDay(year, month, day);
+        return daoFactory.getCreneauDispoDAO().getCreneauByDay(year, month, day);
     }
 
     public boolean deleteCreneauDispo(int creneauDispoId) throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         CreneauDispoDAO creneauDispoDAO = daoFactory.getCreneauDispoDAO();
-        return creneauDispoDAO.deleteCreneauDispo(creneauDispoId);
+        return daoFactory.getCreneauDispoDAO().deleteCreneauDispo(creneauDispoId);
     }
 
     public boolean modifyCreneauDispo(Creneau_dispo creneau_dispo) throws SQLException, ClassNotFoundException {
         AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
         CreneauDispoDAO creneauDispoDAO = daoFactory.getCreneauDispoDAO();
-        return creneauDispoDAO.modifyCreneauDispo(creneau_dispo);
+        return daoFactory.getCreneauDispoDAO().modifyCreneauDispo(creneau_dispo);
     }
 
 }
