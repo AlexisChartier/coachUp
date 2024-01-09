@@ -13,9 +13,10 @@
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Welcome Admin"/>
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Bienvenue Admin"/>
 
     <Button text="Liste des utilisateurs" onAction="#userListButtonAction"/>
     <Button text="Approbation des coachs" onAction="#coachApprovalListButtonAction"/>
     <Button text="Gérer les catégories" onAction="#manageCategoriesButtonAction"/>
+    <Button onAction="#logoutButtonAction" text="Déconnexion" />
 </VBox>

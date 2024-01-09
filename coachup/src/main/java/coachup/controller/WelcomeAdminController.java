@@ -5,6 +5,9 @@ import coachup.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class WelcomeAdminController {
 
     private MainApp mainApp = new MainApp();
@@ -49,12 +52,11 @@ public class WelcomeAdminController {
         mainApp.showCoachApprovalList(currentUser);
     }
 
-    /**
-     * Gère l'action du bouton pour gérer les catégories.
-     *
-     * @param actionEvent L'événement d'action.
-     */
     @FXML
+    public void logoutButtonAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
+        this.currentUser = null;
+        mainApp.showLoginPage();
+    }
     public void manageCategoriesButtonAction(ActionEvent actionEvent) {
         mainApp.showCategoriesList(currentUser);
     }

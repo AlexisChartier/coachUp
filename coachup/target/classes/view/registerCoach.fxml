@@ -38,8 +38,6 @@
             <Label text="Prix séance"/>
             <IntegerField fx:id="prixField"/>
 
-            <!-- Autres champs du formulaire -->
-
             <Button text="S'inscrire" onAction="#handleRegisterButton" />
 
         </VBox>
