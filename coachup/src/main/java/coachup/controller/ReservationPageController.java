@@ -23,14 +23,23 @@ public class ReservationPageController {
 
     private MainApp mainApp;
 
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
-
     @FXML
     public ListView<Creneau_dispo> creneauListView;
 
+    /**
+     * Gère l'action du bouton de réservation d'un créneau.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     */
     @FXML
     public void handleReserverButton(ActionEvent actionEvent) {
         Creneau_dispo selectedCreneau = creneauListView.getSelectionModel().getSelectedItem();
@@ -45,21 +54,32 @@ public class ReservationPageController {
         }
     }
 
-    // Méthode pour initialiser la liste des créneaux disponibles pour un jour spécifique
+    /**
+     * Méthode pour initialiser la liste des créneaux disponibles pour un jour spécifique.
+     *
+     * @throws SQLException           En cas d'erreur SQL.
+     * @throws ClassNotFoundException Si la classe spécifiée n'a pas pu être trouvée.
+     */
     @FXML
     public void initialize() throws SQLException, ClassNotFoundException {
         try {
             // Logique pour récupérer les créneaux disponibles pour la date spécifiée
             Date date = UserFacade.getInstance().getSearchedDate();
             List<Creneau_dispo> creneauxDispos = CreneauDispoFacade.getInstance().getCreneauByDayAndCoachId(date.getYear(), date.getMonth(), date.getDay(), UserFacade.getInstance().getReserveCoach().getIdUtilisateur());
-            ObservableList<Creneau_dispo> creneauDispos = FXCollections.observableArrayList(creneauxDispos);
-            creneauListView.setItems(creneauDispos);
+            ObservableList<Creneau_dispo> creneauDisposObservableList = FXCollections.observableArrayList(creneauxDispos);
+            creneauListView.setItems(creneauDisposObservableList);
             creneauListView.setCellFactory(new CreneauDispoCellFactory());
         } catch (SQLException | ClassNotFoundException ex) {
             throw new RuntimeException(ex);
         }
     }
 
+    /**
+     * Affiche une boîte de dialogue d'information en cas de succès.
+     *
+     * @param title   Le titre de la boîte de dialogue.
+     * @param message Le message à afficher.
+     */
     public void showSuccessPopup(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -68,6 +88,12 @@ public class ReservationPageController {
         alert.showAndWait();
     }
 
+    /**
+     * Affiche une boîte de dialogue d'erreur en cas d'échec.
+     *
+     * @param title   Le titre de la boîte de dialogue.
+     * @param message Le message à afficher.
+     */
     public void showErrorPopup(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -76,6 +102,11 @@ public class ReservationPageController {
         alert.showAndWait();
     }
 
+    /**
+     * Gère l'action du bouton de retour vers la page de recherche des coachs.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     */
     @FXML
     public void handleReturnButton(ActionEvent actionEvent) {
         mainApp.showRechercheCoach();

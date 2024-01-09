@@ -19,8 +19,10 @@ public class ModifyNotationController implements Initializable {
 
     @FXML
     private Slider notationSlider;
+
     @FXML
     private TextArea commentField;
+
     @FXML
     private javafx.scene.control.Label coachnameLabel;
 
@@ -28,13 +30,30 @@ public class ModifyNotationController implements Initializable {
 
     private MainApp mainApp = new MainApp();
 
+    /**
+     * Initialise un nouveau contrôleur ModifyNotationController.
+     *
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     */
     public ModifyNotationController() throws SQLException, ClassNotFoundException {
     }
 
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
+    /**
+     * Initialise la page avec les valeurs par défaut.
+     *
+     * @param location L'emplacement pour l'initialisation.
+     * @param resources Les ressources.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         int noteid = userfacade.getNotationid();
@@ -55,17 +74,21 @@ public class ModifyNotationController implements Initializable {
         commentField.setText(notation.getComment());
     }
 
+    /**
+     * Gère l'action du bouton de modification de notation.
+     *
+     * @param event L'événement déclenché par le bouton.
+     */
     @FXML
     private void modifyNotationButtonAction(ActionEvent event) {
         try {
             int notationid = userfacade.getNotationid();
-        Notation notation = NotationFacade.getInstance().getNotationById(notationid);
+            Notation notation = NotationFacade.getInstance().getNotationById(notationid);
             notation.setComment(commentField.getText());
             notation.setNote((float) notationSlider.getValue());
-            if (NotationFacade.getInstance().modifyNotation(notation)){
+            if (NotationFacade.getInstance().modifyNotation(notation)) {
                 System.out.println("Notation modified");
-            }
-            else {
+            } else {
                 System.out.println("Notation modification failed");
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -73,14 +96,18 @@ public class ModifyNotationController implements Initializable {
         }
     }
 
+    /**
+     * Gère l'action du bouton de suppression de notation.
+     *
+     * @param event L'événement déclenché par le bouton.
+     */
     @FXML
     private void deleteNotationButtonAction(ActionEvent event) {
         try {
             int notationid = 1;
-            if (NotationFacade.getInstance().deleteNotation(notationid)){
+            if (NotationFacade.getInstance().deleteNotation(notationid)) {
                 System.out.println("Notation deleted");
-            }
-            else {
+            } else {
                 System.out.println("Notation delete failed");
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -88,6 +115,13 @@ public class ModifyNotationController implements Initializable {
         }
     }
 
+    /**
+     * Gère l'action du bouton de retour.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     */
     @FXML
     public void handleReturnButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         mainApp.showWelcomePage(UserFacade.getInstance().getCurrentUser());

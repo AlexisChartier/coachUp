@@ -14,6 +14,9 @@ import javafx.scene.control.ListView;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Contrôleur pour la vue d'historique des séances.
+ */
 public class HistSeanceController {
 
     private MainApp mainApp;
@@ -25,6 +28,13 @@ public class HistSeanceController {
     @FXML
     private ListView<Seance> histSeanceListView;
 
+    /**
+     * Gère le bouton pour afficher les détails d'une séance.
+     *
+     * @param actionEvent L'événement d'action.
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     */
     @FXML
     public void handleDetailButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         Seance selectedSeance = histSeanceListView.getSelectionModel().getSelectedItem();
@@ -32,6 +42,9 @@ public class HistSeanceController {
         mainApp.showDetailSeance();
     }
 
+    /**
+     * Initialise la vue avec l'historique des séances de l'utilisateur actuel.
+     */
     @FXML
     public void initialize() {
         try {
@@ -45,6 +58,13 @@ public class HistSeanceController {
         }
     }
 
+    /**
+     * Gère le bouton pour ajouter une notation à une séance.
+     *
+     * @param actionEvent L'événement d'action.
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     */
     @FXML
     public void handleAddNotationButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         Seance selectedSeance = histSeanceListView.getSelectionModel().getSelectedItem();
@@ -53,6 +73,13 @@ public class HistSeanceController {
         mainApp.showAddNotation();
     }
 
+    /**
+     * Gère le bouton de retour.
+     *
+     * @param actionEvent L'événement d'action.
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     */
     @FXML
     public void handleReturnButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         mainApp.showWelcomePage(UserFacade.getInstance().getCurrentUser());

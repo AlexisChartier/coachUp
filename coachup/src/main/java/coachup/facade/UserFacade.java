@@ -1,7 +1,6 @@
 package coachup.facade;
+
 import coachup.dao.AbstractDAOFactory;
-import coachup.dao.SQLDAOFactory;
-import coachup.dao.UserDAO;
 import coachup.model.Categorie;
 import coachup.model.Coach;
 import coachup.model.User;
@@ -11,33 +10,20 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Facade pour la gestion des utilisateurs, fournissant des méthodes pour effectuer des opérations sur les utilisateurs.
+ * La classe UserFacade est une façade pour gérer les opérations liées aux utilisateurs du côté de la logique métier.
+ * Elle agit comme un Singleton et utilise la factory DAO pour accéder aux opérations de la base de données.
  */
 public class UserFacade {
 
     private static UserFacade instance;
     private User currentUser;
-
     private int coachId;
     private User managedUser;
-
     private int notationid;
-
     private Date searchedDate;
-
     private Categorie searchedCategory;
-
-    public Coach getReserveCoach() {
-        return reserveCoach;
-    }
-
-    public void setReserveCoach(Coach reserveCoach) {
-        this.reserveCoach = reserveCoach;
-    }
-
     private Coach reserveCoach;
-
-
+    private List<Coach> coachSearch;
 
     public int getNotationid() {
         return notationid;
@@ -71,7 +57,13 @@ public class UserFacade {
         this.searchedCategory = searchedCategory;
     }
 
-    private List<Coach> coachSearch;
+    public Coach getReserveCoach() {
+        return reserveCoach;
+    }
+
+    public void setReserveCoach(Coach reserveCoach) {
+        this.reserveCoach = reserveCoach;
+    }
 
     public List<Coach> getCoachSearch() {
         return coachSearch;
@@ -89,30 +81,20 @@ public class UserFacade {
         return managedUser;
     }
 
+    private AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+
     /**
-     * Constructeur privé pour assurer que seul une instance de UserFacade est créée (Singleton).
+     * Constructeur privé pour assurer que seule une instance de UserFacade est créée (Singleton).
      */
-    private UserFacade(){
-    }
-
-    public User getCurrentUser(){
-        return this.currentUser;
-    }
-
-    private static AbstractDAOFactory daoFactory;
-
-    static {
-        try {
-            daoFactory = AbstractDAOFactory.getInstance();
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    private UserFacade() throws SQLException, ClassNotFoundException {
     }
 
     /**
-     * Méthode pour obtenir l'instance unique de UserFacade.
+     * Obtient l'instance unique de la façade (Singleton).
      *
-     * @return L'instance unique de UserFacade.
+     * @return L'instance de la façade.
+     * @throws SQLException            Si une erreur survient lors de l'accès à la base de données.
+     * @throws ClassNotFoundException  Si la classe du pilote de base de données n'est pas trouvée.
      */
     public static synchronized UserFacade getInstance() throws SQLException, ClassNotFoundException {
         if (instance == null) {
@@ -126,6 +108,8 @@ public class UserFacade {
      *
      * @param userId L'identifiant de l'utilisateur.
      * @return L'objet User correspondant à l'identifiant, ou null s'il n'existe pas.
+     * @throws SQLException            Si une erreur survient lors de l'accès à la base de données.
+     * @throws ClassNotFoundException  Si la classe du pilote de base de données n'est pas trouvée.
      */
     public User getUserById(int userId) throws SQLException, ClassNotFoundException {
         return daoFactory.getUserDAO().getUserById(userId);
@@ -136,6 +120,8 @@ public class UserFacade {
      *
      * @param email L'adresse e-mail de l'utilisateur.
      * @return L'objet User correspondant à l'adresse e-mail, ou null s'il n'existe pas.
+     * @throws SQLException            Si une erreur survient lors de l'accès à la base de données.
+     * @throws ClassNotFoundException  Si la classe du pilote de base de données n'est pas trouvée.
      */
     public User getUserByEmail(String email) throws SQLException, ClassNotFoundException {
         return daoFactory.getUserDAO().getUserByEmail(email);
@@ -145,16 +131,21 @@ public class UserFacade {
      * Ajoute un nouvel utilisateur.
      *
      * @param user L'objet User à ajouter.
-     * @return true si l'ajout est réussi, false sinon.
+     * @return L'identifiant de l'utilisateur ajouté.
+     * @throws SQLException            Si une erreur survient lors de l'accès à la base de données.
+     * @throws ClassNotFoundException  Si la classe du pilote de base de données n'est pas trouvée.
      */
     public int addUser(User user) throws SQLException, ClassNotFoundException {
         return daoFactory.getUserDAO().addUser(user);
     }
+
     /**
      * Met à jour les informations d'un utilisateur existant.
      *
      * @param user L'objet User contenant les nouvelles informations.
-     * @return true si la mise à jour est réussie, false sinon.
+     * @return L'identifiant de l'utilisateur mis à jour.
+     * @throws SQLException            Si une erreur survient lors de l'accès à la base de données.
+     * @throws ClassNotFoundException  Si la classe du pilote de base de données n'est pas trouvée.
      */
     public int updateUser(User user) throws SQLException, ClassNotFoundException {
         return daoFactory.getUserDAO().updateUser(user);
@@ -165,6 +156,8 @@ public class UserFacade {
      *
      * @param userId L'identifiant de l'utilisateur à supprimer.
      * @return true si la suppression est réussie, false sinon.
+     * @throws SQLException            Si une erreur survient lors de l'accès à la base de données.
+     * @throws ClassNotFoundException  Si la classe du pilote de base de données n'est pas trouvée.
      */
     public boolean deleteUser(int userId) throws SQLException, ClassNotFoundException {
         return daoFactory.getUserDAO().deleteUser(userId);
@@ -176,20 +169,34 @@ public class UserFacade {
      * @param email    L'adresse e-mail de l'utilisateur.
      * @param password Le mot de passe de l'utilisateur.
      * @return true si les informations de connexion sont valides, false sinon.
+     * @throws SQLException            Si une erreur survient lors de l'accès à la base de données.
+     * @throws ClassNotFoundException  Si la classe du pilote de base de données n'est pas trouvée.
      */
     public boolean loginUser(String email, String password) throws SQLException, ClassNotFoundException {
-        if(daoFactory.getUserDAO().loginUser(email,password)){
+        if (daoFactory.getUserDAO().loginUser(email, password)) {
             this.currentUser = getUserByEmail(email);
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
+    /**
+     * Récupère la liste de tous les utilisateurs.
+     *
+     * @return La liste de tous les utilisateurs.
+     * @throws SQLException            Si une erreur survient lors de l'accès à la base de données.
+     * @throws ClassNotFoundException  Si la classe du pilote de base de données n'est pas trouvée.
+     */
     public List<User> getAllUsers() throws SQLException, ClassNotFoundException {
         return daoFactory.getUserDAO().getAllUsers();
     }
 
+    public User getCurrentUser() {
+        return currentUser;
+    }
 
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
 }

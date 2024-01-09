@@ -10,10 +10,18 @@ import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 
+/**
+ * Contrôleur pour la vue d'ajout de catégorie.
+ */
 public class AjoutCategorieController {
 
     private MainApp mainApp;
 
+    /**
+     * Configure l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
@@ -24,6 +32,9 @@ public class AjoutCategorieController {
     @FXML
     private TextField descriptionField;
 
+    /**
+     * Gère l'action du bouton "Ajouter" pour ajouter une nouvelle catégorie.
+     */
     @FXML
     public void handleAjouterButton(ActionEvent actionEvent) {
         try {
@@ -37,6 +48,13 @@ public class AjoutCategorieController {
         }
     }
 
+    /**
+     * Gère l'action du bouton de retour à la page d'accueil de l'administrateur.
+     *
+     * @param actionEvent L'événement de l'action du bouton.
+     * @throws SQLException            En cas d'erreur SQL lors du retour à la page d'accueil de l'administrateur.
+     * @throws ClassNotFoundException Si la classe n'est pas trouvée lors du retour à la page d'accueil de l'administrateur.
+     */
     @FXML
     public void handleReturnButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         mainApp.showWelcomePageAdmin(UserFacade.getInstance().getCurrentUser());

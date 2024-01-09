@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 
+/**
+ * Contrôleur pour la page de modification d'une catégorie
+ */
 public class ModificationCategorieController {
 
     private MainApp mainApp;
@@ -25,16 +28,30 @@ public class ModificationCategorieController {
 
     private Categorie selectedCategorie;
 
+    /**
+     * Définit la catégorie sélectionnée pour la modification.
+     *
+     * @param categorie La catégorie à modifier.
+     */
     public void setSelectedCategorie(Categorie categorie) {
         this.selectedCategorie = categorie;
     }
 
+    /**
+     * Initialise les champs avec les données de la catégorie sélectionnée.
+     *
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     */
     @FXML
     public void initialize() throws SQLException, ClassNotFoundException {
         selectedCategorie = CategorieFacade.getInstance().getManagedCategorie();
         populateFields();
     }
 
+    /**
+     * Remplit les champs avec les données de la catégorie sélectionnée.
+     */
     private void populateFields() {
         if (selectedCategorie != null) {
             nomField.setText(selectedCategorie.getNom());
@@ -42,6 +59,9 @@ public class ModificationCategorieController {
         }
     }
 
+    /**
+     * Gère l'action du bouton de modification.
+     */
     @FXML
     public void handleModifierButton() {
         if (selectedCategorie != null) {
@@ -57,6 +77,12 @@ public class ModificationCategorieController {
         }
     }
 
+    /**
+     * Gère l'action du bouton de retour.
+     *
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     */
     @FXML
     public void handleReturnButton() throws SQLException, ClassNotFoundException {
         mainApp.showCategoriesList(UserFacade.getInstance().getCurrentUser());

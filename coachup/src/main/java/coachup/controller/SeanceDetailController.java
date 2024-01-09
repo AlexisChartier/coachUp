@@ -31,14 +31,28 @@ public class SeanceDetailController {
     @FXML
     private Button returnButton;
 
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
+    /**
+     * Définit les détails de la séance à afficher.
+     *
+     * @param seance La séance dont les détails doivent être affichés.
+     */
     public void setSeanceDetails(Seance seance) {
         this.currentSeance = seance;
     }
 
+    /**
+     * Initialise le contrôleur, appelé automatiquement après le chargement du fichier FXML.
+     * Affiche les détails de la séance sélectionnée.
+     */
     @FXML
     public void initialize() {
         try {
@@ -54,6 +68,9 @@ public class SeanceDetailController {
         }
     }
 
+    /**
+     * Gère l'action du bouton de retour vers la page d'historique des séances.
+     */
     @FXML
     public void handleReturnButton() {
         mainApp.showHistSeance();

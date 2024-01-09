@@ -41,6 +41,9 @@ public class LoginController {
      * Gère l'action du bouton de connexion.
      *
      * @param event L'événement déclenché par le bouton.
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     * @throws IOException              En cas d'erreur d'entrée/sortie.
      */
     @FXML
     private void loginButtonAction(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
@@ -55,20 +58,17 @@ public class LoginController {
 
         if (isAuthenticated) {
             User user = userFacade.getUserByEmail(username);
-            if(Objects.equals(user.getRole(), "student")){
+            if (Objects.equals(user.getRole(), "student")) {
                 mainApp.showWelcomePage(user);
-            }
-            else if(Objects.equals(user.getRole(), "admin")){
+            } else if (Objects.equals(user.getRole(), "admin")) {
                 mainApp.showWelcomePageAdmin(user);
-            }
-            else if(Objects.equals(user.getRole(), "coach")){
+            } else if (Objects.equals(user.getRole(), "coach")) {
                 CoachFacade coachFacade = CoachFacade.getInstance();
                 Coach coach = coachFacade.getCoachById(user.getIdUtilisateur());
                 coachFacade.setCurrentCoach(coach);
-                if(coach.getApproved()){
+                if (coach.getApproved()) {
                     mainApp.showWelcomePageCoach();
-                }
-                else{
+                } else {
                     mainApp.showLoginPage();
                 }
             }
@@ -88,13 +88,23 @@ public class LoginController {
         System.exit(1);
     }
 
+    /**
+     * Gère l'action du bouton d'inscription d'étudiant.
+     *
+     * @param event L'événement déclenché par le bouton.
+     */
     @FXML
     private void registerStudentButtonAction(ActionEvent event) {
         mainApp.showRegisterStudentPage();
     }
 
+    /**
+     * Gère l'action du bouton d'inscription de coach.
+     *
+     * @param event L'événement déclenché par le bouton.
+     */
     @FXML
-    private void registerCoachButtonAction(ActionEvent event){
+    private void registerCoachButtonAction(ActionEvent event) {
         mainApp.showRegisterCoachPage();
     }
 }

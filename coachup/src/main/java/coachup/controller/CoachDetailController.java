@@ -23,8 +23,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Contrôleur pour la vue de détail du coach.
+ */
 public class CoachDetailController {
-
 
     @FXML
     public TextField newNameTextField;
@@ -66,43 +68,55 @@ public class CoachDetailController {
     @FXML
     public Label getCurrentDiplomaLabel;
 
-
+    /**
+     * Gère le bouton de retour.
+     *
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     */
     @FXML
     public void handleReturnButton() throws SQLException, ClassNotFoundException {
-        if(UserFacade.getInstance().getCurrentUser().getRole().equals("admin")){
+        if (UserFacade.getInstance().getCurrentUser().getRole().equals("admin")) {
             mainApp.showCoachApprovalList(UserFacade.getInstance().getCurrentUser());
-        }
-        else{
+        } else {
             mainApp.showWelcomePageCoach();
         }
     }
 
+    /**
+     * Gère le bouton de suppression.
+     *
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     * @throws IOException              En cas d'erreur d'entrée/sortie.
+     */
     @FXML
     public void handleDeleteButton() throws SQLException, ClassNotFoundException, IOException {
         if (coach != null) {
             int id = coach.getIdUtilisateur();
-                if(CoachFacade.getInstance().getCoachById(coach.getIdUtilisateur()) != null){
-                    CoachFacade.getInstance().deleteCoach(coach.getIdUtilisateur());
-                }
-                UserFacade.getInstance().deleteUser(id);
-                coach = null;
-                if(UserFacade.getInstance().getCurrentUser().getRole().equals("admin")){
-                    mainApp.showCoachApprovalList(UserFacade.getInstance().getCurrentUser());
-                }
-                else{
-                    mainApp.showLoginPage();
-                }
+            if (CoachFacade.getInstance().getCoachById(coach.getIdUtilisateur()) != null) {
+                CoachFacade.getInstance().deleteCoach(coach.getIdUtilisateur());
+            }
+            UserFacade.getInstance().deleteUser(id);
+            coach = null;
+            if (UserFacade.getInstance().getCurrentUser().getRole().equals("admin")) {
+                mainApp.showCoachApprovalList(UserFacade.getInstance().getCurrentUser());
+            } else {
+                mainApp.showLoginPage();
+            }
         }
     }
 
+    /**
+     * Initialise la vue.
+     */
     @FXML
     public void initialize() {
-        try{
+        try {
             CoachFacade coachFacade = CoachFacade.getInstance();
-            if(UserFacade.getInstance().getCurrentUser().getRole().equals("admin")){
+            if (UserFacade.getInstance().getCurrentUser().getRole().equals("admin")) {
                 coach = CoachFacade.getInstance().getManagedCoach();
-            }
-            else{
+            } else {
                 coach = CoachFacade.getInstance().getCurrentCoach();
             }
             List<Categorie> allCategories = coachFacade.getCategoriesByCoachID(coach.getIdUtilisateur());
@@ -159,8 +173,14 @@ public class CoachDetailController {
         }
     }
 
-
-
+    /**
+     * Gère le bouton de sauvegarde.
+     *
+     * @param actionEvent L'événement d'action.
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     * @throws IOException              En cas d'erreur d'entrée/sortie.
+     */
     @FXML
     public void handleSaveButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, IOException {
         String nom = newNameTextField.getText();
@@ -183,12 +203,10 @@ public class CoachDetailController {
                     selectedCategoryIds.add(categoryId);
                 }
             }
-
-            // Ajouter votre logique pour gérer l'inscription du coach ici
         }
+
         Coach coach = new Coach();
-        Integer[] arr = null;
-        arr = selectedCategoryIds.toArray(selectedCategoryIds.toArray(new Integer[0]));
+        Integer[] arr = selectedCategoryIds.toArray(new Integer[0]);
         coach.setCategories(arr);
         coach.setNom(nom);
         coach.setDiplome(diplome);
@@ -206,13 +224,11 @@ public class CoachDetailController {
         user = UserFacade.getInstance().getUserById(iduser);
         coach.setIdUtilisateur(user.getIdUtilisateur());
         coachFacade.updateCoach(coach);
-        if(UserFacade.getInstance().getCurrentUser().getRole().equals("coach")){
+        if (UserFacade.getInstance().getCurrentUser().getRole().equals("coach")) {
             mainApp.showWelcomePageCoach();
-        }
-        else{
+        } else {
             mainApp.showWelcomePageAdmin(UserFacade.getInstance().getCurrentUser());
         }
-
     }
 
     private void loadCategories() {

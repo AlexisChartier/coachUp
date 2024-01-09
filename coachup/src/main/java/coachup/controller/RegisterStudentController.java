@@ -33,10 +33,24 @@ public class RegisterStudentController {
         this.mainApp = mainApp;
     }
 
+    /**
+     * Gère l'action du bouton de retour vers la page de connexion.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     * @throws IOException En cas d'erreur d'entrée/sortie.
+     */
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
         mainApp.showLoginPage();
     }
 
+    /**
+     * Gère l'action du bouton d'inscription d'un étudiant.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     * @throws SQLException           En cas d'erreur SQL.
+     * @throws ClassNotFoundException Si la classe spécifiée n'a pas pu être trouvée.
+     * @throws IOException            En cas d'erreur d'entrée/sortie.
+     */
     @FXML
     public void registerButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, IOException {
         String nom = nomField.getText();
@@ -49,16 +63,18 @@ public class RegisterStudentController {
         newUser.setEmail(email);
         newUser.setMotDePasse(password);
         newUser.setRole("student");
-        // Appeler la méthode d'ajout d'utilisateur de votre façade ou service
-        // Par exemple : mainApp.getUserFacade().addUser(newUser);
-        UserFacade userFacade  = UserFacade.getInstance();
-        int result = userFacade.addUser(newUser);
-        if(result != -1){
-            mainApp.showLoginPage();
-        }
-        else{
 
+        // Appeler la méthode d'ajout d'utilisateur de votre façade ou service
+        UserFacade userFacade = UserFacade.getInstance();
+        int result = userFacade.addUser(newUser);
+
+        // Vérifier le résultat de l'ajout et naviguer vers la page de connexion si réussi
+        if (result != -1) {
+            mainApp.showLoginPage();
+        } else {
+            // Gérer les erreurs d'inscription si nécessaire
         }
+
         // Réinitialiser les champs du formulaire après l'inscription
         nomField.clear();
         emailField.clear();

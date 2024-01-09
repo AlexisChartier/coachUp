@@ -15,7 +15,12 @@ public class WelcomeController {
 
     private MainApp mainApp = new MainApp();
 
-    public void setMainApp(MainApp mainApp){
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
+    public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
@@ -39,10 +44,8 @@ public class WelcomeController {
      */
     private void updateWelcomeLabel() {
         if (user != null) {
-            System.out.println(user.getNom());
-            String welc = "Welcome, " + user.getNom();
-            welcomeLabel.setText(welc);
-            //welcomeLabel.setText("Welcome, ".concat(user.getNom()));
+            String welcomeMessage = "Welcome, " + user.getNom();
+            welcomeLabel.setText(welcomeMessage);
         }
     }
 
@@ -50,51 +53,105 @@ public class WelcomeController {
      * Gère l'action du bouton de déconnexion.
      *
      * @param actionEvent L'événement déclenché par le bouton.
+     * @throws IOException En cas d'erreur lors de la redirection vers la page de connexion.
      */
     @FXML
-    public void logoutButtonAction(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void logoutButtonAction(ActionEvent actionEvent) throws IOException {
         this.user = null;
         mainApp.showLoginPage();
     }
 
+    /**
+     * Gère l'action du bouton de profil.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     */
     @FXML
     public void profileButtonAction(ActionEvent actionEvent) {
         mainApp.showDetailPage(user, null);
     }
-    public void AddNotationButtonAction(javafx.event.ActionEvent event) throws IOException {
+
+    /**
+     * Gère l'action du bouton d'ajout de notation.
+     *
+     * @param event L'événement déclenché par le bouton.
+     * @throws IOException En cas d'erreur lors de la redirection vers la page d'ajout de notation.
+     */
+    @FXML
+    public void AddNotationButtonAction(ActionEvent event) throws IOException {
         mainApp.showAddNotation();
     }
 
+    /**
+     * Gère l'action du bouton de modification de notation.
+     *
+     * @param event L'événement déclenché par le bouton.
+     * @throws IOException En cas d'erreur lors de la redirection vers la page de modification de notation.
+     */
     @FXML
-    public void ModifyNotationButtonAction(javafx.event.ActionEvent event) throws IOException {
+    public void ModifyNotationButtonAction(ActionEvent event) throws IOException {
         mainApp.showModifyNotation();
     }
 
+    /**
+     * Gère l'action du bouton pour afficher toutes les notations des coachs.
+     *
+     * @param event L'événement déclenché par le bouton.
+     * @throws IOException En cas d'erreur lors de la redirection vers la page des notations des coachs.
+     */
     @FXML
-    public void showAllCoachNotationsButtonAction(javafx.event.ActionEvent event) throws IOException {
+    public void showAllCoachNotationsButtonAction(ActionEvent event) throws IOException {
         mainApp.ShowAllCoachNotations();
     }
 
+    /**
+     * Gère l'action du bouton pour afficher toutes les notations des utilisateurs.
+     *
+     * @param event L'événement déclenché par le bouton.
+     * @throws IOException En cas d'erreur lors de la redirection vers la page des notations des utilisateurs.
+     */
     @FXML
-    public void showAllUserNotationsButtonAction(javafx.event.ActionEvent event) throws IOException {
+    public void showAllUserNotationsButtonAction(ActionEvent event) throws IOException {
         mainApp.ShowAllUserNotations();
     }
 
+    /**
+     * Gère l'action du bouton pour afficher le calendrier.
+     *
+     * @param event L'événement déclenché par le bouton.
+     * @throws IOException En cas d'erreur lors de la redirection vers la page du calendrier.
+     */
     @FXML
-    public void showCalendarButtonAction(javafx.event.ActionEvent event) throws IOException {
+    public void showCalendarButtonAction(ActionEvent event) throws IOException {
         mainApp.showCalendarPage();
     }
 
+    /**
+     * Gère l'action du bouton pour afficher l'historique des séances.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     */
     @FXML
     public void seanceHistoryButtonAction(ActionEvent actionEvent) {
         mainApp.showHistSeance();
     }
 
+    /**
+     * Gère l'action du bouton pour la gestion des paiements.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     */
     @FXML
     public void paymentGestionButtonAction(ActionEvent actionEvent) {
         mainApp.showHubPayment();
     }
 
+    /**
+     * Gère l'action du bouton pour la recherche de coachs.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     */
+    @FXML
     public void RechercheCoachButtonAction(ActionEvent actionEvent) {
         mainApp.showRechercheCoach();
     }

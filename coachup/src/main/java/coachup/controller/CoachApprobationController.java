@@ -17,16 +17,29 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Contrôleur pour la vue d'approbation des coachs.
+ */
 public class CoachApprobationController implements Initializable {
 
     private User user;
 
+    /**
+     * Définit l'utilisateur associé à ce contrôleur.
+     *
+     * @param user L'utilisateur.
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
     private MainApp mainApp;
 
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
@@ -36,6 +49,11 @@ public class CoachApprobationController implements Initializable {
 
     private Coach selectedCoach;
 
+    /**
+     * Récupère le coach sélectionné.
+     *
+     * @return Le coach sélectionné.
+     */
     public Coach getSelectedCoach() {
         return selectedCoach;
     }
@@ -52,8 +70,8 @@ public class CoachApprobationController implements Initializable {
         ObservableList<Coach> coachObservableList = FXCollections.observableArrayList(coaches);
         coachListView.setItems(coachObservableList);
         coachListView.setCellFactory(new CoachCellFactory());
-        coachListView.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue) ->
-              selectedCoach = newValue  );
+        coachListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+                selectedCoach = newValue);
     }
 
     @FXML
@@ -67,7 +85,7 @@ public class CoachApprobationController implements Initializable {
 
     @FXML
     public void handleApproveButton(ActionEvent event) throws SQLException, ClassNotFoundException {
-        if(selectedCoach != null){
+        if (selectedCoach != null) {
             CoachFacade.getInstance().approveCoach(selectedCoach.getIdUtilisateur());
             List<Coach> coaches = CoachFacade.getInstance().getUnapprovedCoaches();
 

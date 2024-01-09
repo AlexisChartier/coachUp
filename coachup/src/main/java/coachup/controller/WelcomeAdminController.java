@@ -11,25 +11,50 @@ public class WelcomeAdminController {
 
     private User currentUser;
 
+    /**
+     * Définit l'utilisateur actuellement connecté.
+     *
+     * @param currentUser L'utilisateur actuellement connecté.
+     */
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
 
-
-    public void setMainApp(MainApp mainApp){
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
+    public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
+    /**
+     * Gère l'action du bouton pour afficher la liste des utilisateurs.
+     *
+     * @param event L'événement d'action.
+     */
     @FXML
     public void userListButtonAction(ActionEvent event) {
         mainApp.showUserList(currentUser);
     }
 
+    /**
+     * Gère l'action du bouton pour afficher la liste des coachs en attente d'approbation.
+     *
+     * @param event L'événement d'action.
+     */
     @FXML
     public void coachApprovalListButtonAction(ActionEvent event) {
         mainApp.showCoachApprovalList(currentUser);
     }
 
+    /**
+     * Gère l'action du bouton pour gérer les catégories.
+     *
+     * @param actionEvent L'événement d'action.
+     */
+    @FXML
     public void manageCategoriesButtonAction(ActionEvent actionEvent) {
         mainApp.showCategoriesList(currentUser);
     }

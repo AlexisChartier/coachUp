@@ -25,6 +25,12 @@ public class PendingPaymentsController {
     @FXML
     private Button detailButton;
 
+    /**
+     * Gère l'action du bouton de détail pour les paiements en attente.
+     *
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     */
     @FXML
     public void handleDetailButton() throws SQLException, ClassNotFoundException {
         Seance selectedSeance = seanceListView.getSelectionModel().getSelectedItem();
@@ -34,11 +40,18 @@ public class PendingPaymentsController {
         }
     }
 
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
-    // Méthode pour initialiser la liste des séances à payer
+    /**
+     * Initialise la liste des séances à payer.
+     */
     @FXML
     public void initialize() {
         try {
@@ -52,6 +65,11 @@ public class PendingPaymentsController {
         }
     }
 
+    /**
+     * Gère l'action du bouton de retour.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     */
     @FXML
     public void handleReturnButton(ActionEvent actionEvent) {
         mainApp.showHubPayment();

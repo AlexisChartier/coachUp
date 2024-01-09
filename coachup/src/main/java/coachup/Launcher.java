@@ -1,5 +1,8 @@
 package coachup;
 
+/**
+ * Classe principale de lancement de l'application.
+ */
 public class Launcher {
     /**
      * Méthode principale qui lance l'application.
@@ -9,5 +12,4 @@ public class Launcher {
     public static void main(String[] args) {
         MainApp.main(args);
     }
-
 }

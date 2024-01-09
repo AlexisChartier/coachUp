@@ -29,5 +29,6 @@
             </ListView>
         </VBox>
     </children>
+    <Button onAction="#handleReserveButton" text="Réserver"/>
     <Button onAction="#handleReturnButton" text="Retour"/>
 </AnchorPane>

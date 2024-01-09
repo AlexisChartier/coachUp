@@ -10,6 +10,7 @@ import java.util.List;
  * Implémentation de l'interface CategorieDAO pour la gestion des opérations CRUD (Create, Read, Update, Delete) d'une catégorie dans une base de données PostgreSQL.
  */
 public class CategorieDAOPGSQL extends CategorieDAO {
+
     private Connection connection; // initialisation de la connexion
 
     /**
@@ -93,8 +94,8 @@ public class CategorieDAOPGSQL extends CategorieDAO {
                 statement.executeUpdate();
                 try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
-                        return generatedKeys.getInt(1);                    }
-                    else {
+                        return generatedKeys.getInt(1);
+                    } else {
                         throw new SQLException("Creating user failed, no ID obtained.");
                     }
                 }

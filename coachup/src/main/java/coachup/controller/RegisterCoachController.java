@@ -18,8 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.sql.Array;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,13 +44,27 @@ public class RegisterCoachController {
 
     private CoachFacade coachFacade = CoachFacade.getInstance();
 
+    /**
+     * Constructeur par défaut.
+     *
+     * @throws SQLException           Si une erreur SQL survient.
+     * @throws ClassNotFoundException Si la classe spécifiée n'a pas pu être trouvée.
+     */
     public RegisterCoachController() throws SQLException, ClassNotFoundException {
     }
 
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
+    /**
+     * Initialise les éléments graphiques, notamment les catégories.
+     */
     @FXML
     public void initialize() {
         // Appeler la méthode pour charger les catégories depuis la base de données
@@ -60,6 +72,9 @@ public class RegisterCoachController {
         categoriesBox.setAlignment(Pos.CENTER);
     }
 
+    /**
+     * Charge les catégories depuis la base de données et crée des CheckBox pour chaque catégorie.
+     */
     private void loadCategories() {
         try {
             // Récupérer la liste des catégories depuis la base de données
@@ -78,6 +93,13 @@ public class RegisterCoachController {
         }
     }
 
+    /**
+     * Gère l'action du bouton d'inscription d'un coach.
+     *
+     * @throws SQLException           Si une erreur SQL survient.
+     * @throws ClassNotFoundException Si la classe spécifiée n'a pas pu être trouvée.
+     * @throws IOException            Si une erreur d'entrée/sortie survient.
+     */
     @FXML
     public void handleRegisterButton() throws SQLException, ClassNotFoundException, IOException {
         String nom = nameField.getText();

@@ -55,6 +55,9 @@ public class MainApp extends Application {
         this.primaryStage.show();
     }
 
+    /**
+     * Affiche la page de connexion.
+     */
     public void showLoginPage() throws IOException {
         this.primaryStage.close();
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/login.fxml")));
@@ -90,6 +93,9 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Affiche la page d'accueil pour un coach.
+     */
     public void showWelcomePageCoach(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/welcomeCoach.fxml")));
@@ -109,6 +115,9 @@ public class MainApp extends Application {
     }
 
 
+    /**
+     * Affiche la page d'inscription pour les étudiants.
+     */
     public void showRegisterStudentPage(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/registerStudent.fxml")));
@@ -127,6 +136,9 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Affiche la page d'inscription pour les coachs.
+     */
     public void showRegisterCoachPage(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/registerCoach.fxml")));
@@ -145,6 +157,11 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Affiche la liste des utilisateurs.
+     *
+     * @param user L'utilisateur administrateur.
+     */
     public void showUserList(User user){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/userList.fxml")));
@@ -164,6 +181,12 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Affiche la page de détail du profil d'un utilisateur.
+     *
+     * @param user      L'utilisateur dont le profil doit être affiché.
+     * @param userAdmin L'utilisateur administrateur.
+     */
     public void showDetailPage(User user, User userAdmin){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/detailProfile.fxml")));
@@ -192,6 +215,11 @@ public class MainApp extends Application {
 
 */
 
+    /**
+     * Affiche la page d'accueil pour un administrateur.
+     *
+     * @param user L'utilisateur administrateur.
+     */
     public void showWelcomePageAdmin(User user){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/welcomeAdmin.fxml")));
@@ -211,6 +239,9 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Affiche le détail d'un coach
+     */
     public void showDetailCoach(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/coachDetail.fxml")));
@@ -230,6 +261,9 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Affiche la page d'ajout de notation
+     */
     public void showAddNotation(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/addnotation.fxml")));
@@ -248,6 +282,9 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Affiche la page de modification de notation
+     */
     public void showModifyNotation(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/modifynotation.fxml")));
@@ -266,6 +303,9 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Montre toutes les notations d'un coach
+     */
     public void ShowAllCoachNotations(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/showAllCoachNotations.fxml")));
@@ -284,6 +324,9 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Montre toutes les notes attribuées par un user
+     */
     public void ShowAllUserNotations(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/showAllUserNotations.fxml")));
@@ -302,6 +345,9 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Montre la page de gestion du calendrier du coach
+     */
     public void showCalendarPage() {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/calendar.fxml")));
@@ -319,6 +365,10 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Montre la page d'ajout de disponibilité du coach
+     * @param creneau
+     */
     public void openAddAvailabilityPage(Creneau_dispo creneau){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddAvailability.fxml"));
@@ -355,6 +405,7 @@ public class MainApp extends Application {
         }
     }
 
+
     public void openModifyCreneauDispoPage(Creneau_dispo creneau_dispo){
         try{
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/ModifyCreneauDispo.fxml")));
@@ -374,6 +425,11 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Affiche la liste des coachs en attente d'approbation.
+     *
+     * @param user L'utilisateur administrateur.
+     */
     public void showCoachApprovalList(User user){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/coachApprobationList.fxml")));
@@ -395,6 +451,11 @@ public class MainApp extends Application {
     }
 
 
+    /**
+     * Affiche la liste des catégories disponibles.
+     *
+     * @param currentUser L'utilisateur connecté.
+     */
     public void showCategoriesList(User currentUser) {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/listCategorie.fxml")));
@@ -415,6 +476,10 @@ public class MainApp extends Application {
         }
     }
 
+
+    /**
+     * Affiche la page d'ajout d'une nouvelle catégorie.
+     */
     public void showAddCategoriePage(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/ajoutCategorie.fxml")));
@@ -434,6 +499,9 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Affiche la page de modification d'une catégorie existante.
+     */
     public void showModfiCatPage(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/modifCategorie.fxml")));
@@ -453,6 +521,10 @@ public class MainApp extends Application {
         }
     }
 
+
+    /**
+     * Affiche la page d'historique des séances.
+     */
     public void showHistSeance() {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/histSeance.fxml")));
@@ -472,6 +544,10 @@ public class MainApp extends Application {
         }
     }
 
+
+    /**
+     * Affiche la page de détails d'une séance.
+     */
     public void showDetailSeance() {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/seanceDetail.fxml")));
@@ -491,6 +567,10 @@ public class MainApp extends Application {
         }
     }
 
+
+    /**
+     * Affiche le hub de paiement.
+     */
     public void showHubPayment() {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/hubPayment.fxml")));
@@ -510,6 +590,10 @@ public class MainApp extends Application {
         }
     }
 
+
+    /**
+     * Affiche la liste des paiements en attente.
+     */
     public void showPendingPayment() {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/pendingPayments.fxml")));
@@ -530,6 +614,9 @@ public class MainApp extends Application {
     }
 
 
+    /**
+     * Affiche la liste des prochaines séances.
+     */
     public void showUpComingSessions() {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/upcomingSessions.fxml")));
@@ -549,6 +636,10 @@ public class MainApp extends Application {
         }
     }
 
+
+    /**
+     * Affiche la page des paiements en attente pour une séance spécifique.
+     */
     public void showPaymentPage() {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/pendingSeance.fxml")));
@@ -568,6 +659,10 @@ public class MainApp extends Application {
         }
     }
 
+
+    /**
+     * Affiche la page des détails d'une séance à venir.
+     */
     public void showUpcomingDetail() {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/upcomingSeance.fxml")));
@@ -588,6 +683,9 @@ public class MainApp extends Application {
     }
 
 
+    /**
+     * Affiche la liste des coachs.
+     */
     public void showListCoachPage() {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/listCoach.fxml")));
@@ -607,6 +705,9 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Affiche la page de recherche de coachs.
+     */
     public void showRechercheCoach(){
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/rechercheCoach.fxml")));
@@ -626,6 +727,9 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Affiche la page de réservation.
+     */
     public void showReservationPage() {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/view/reservationPage.fxml")));

@@ -33,6 +33,12 @@ public class UserDAOPGSQL extends UserDAO {
         connection = DriverManager.getConnection(url, username, password);
     }
 
+    /**
+     * Obtient un utilisateur à partir de son identifiant.
+     *
+     * @param userId L'identifiant de l'utilisateur.
+     * @return L'utilisateur correspondant à l'identifiant.
+     */
     @Override
     public User getUserById(int userId) {
         try {
@@ -54,6 +60,12 @@ public class UserDAOPGSQL extends UserDAO {
         return null;
     }
 
+    /**
+     * Obtient un utilisateur à partir de son adresse e-mail.
+     *
+     * @param email L'adresse e-mail de l'utilisateur.
+     * @return L'utilisateur correspondant à l'adresse e-mail.
+     */
     @Override
     public User getUserByEmail(String email) {
         try {
@@ -76,6 +88,12 @@ public class UserDAOPGSQL extends UserDAO {
         return null;
     }
 
+    /**
+     * Ajoute un nouvel utilisateur à la base de données.
+     *
+     * @param user L'utilisateur à ajouter.
+     * @return L'identifiant de l'utilisateur ajouté.
+     */
     @Override
     public int addUser(User user) {
         try {
@@ -92,8 +110,8 @@ public class UserDAOPGSQL extends UserDAO {
                 int rowsAffected = statement.executeUpdate();
                 try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
-                        return generatedKeys.getInt(1);                    }
-                    else {
+                        return generatedKeys.getInt(1);
+                    } else {
                         throw new SQLException("Creating user failed, no ID obtained.");
                     }
                 }
@@ -105,6 +123,12 @@ public class UserDAOPGSQL extends UserDAO {
         return -1;
     }
 
+    /**
+     * Met à jour les informations d'un utilisateur dans la base de données.
+     *
+     * @param user L'utilisateur avec les nouvelles informations.
+     * @return L'identifiant de l'utilisateur mis à jour.
+     */
     @Override
     public int updateUser(User user) {
         try {
@@ -122,8 +146,8 @@ public class UserDAOPGSQL extends UserDAO {
                 int rowsAffected = statement.executeUpdate();
                 try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
-                        return generatedKeys.getInt(1);                    }
-                    else {
+                        return generatedKeys.getInt(1);
+                    } else {
                         throw new SQLException("Creating user failed, no ID obtained.");
                     }
                 }
@@ -135,6 +159,12 @@ public class UserDAOPGSQL extends UserDAO {
         return -1;
     }
 
+    /**
+     * Supprime un utilisateur de la base de données.
+     *
+     * @param userId L'identifiant de l'utilisateur à supprimer.
+     * @return True si l'utilisateur est supprimé avec succès, sinon False.
+     */
     @Override
     public boolean deleteUser(int userId) {
         try {
@@ -154,6 +184,13 @@ public class UserDAOPGSQL extends UserDAO {
         return false;
     }
 
+    /**
+     * Vérifie les informations de connexion d'un utilisateur.
+     *
+     * @param email    L'adresse e-mail de l'utilisateur.
+     * @param password Le mot de passe de l'utilisateur.
+     * @return True si les informations de connexion sont valides, sinon False.
+     */
     @Override
     public boolean loginUser(String email, String password) {
         try {
@@ -174,6 +211,11 @@ public class UserDAOPGSQL extends UserDAO {
         return false;
     }
 
+    /**
+     * Obtient la liste de tous les utilisateurs dans la base de données.
+     *
+     * @return La liste des utilisateurs.
+     */
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
 
@@ -198,7 +240,11 @@ public class UserDAOPGSQL extends UserDAO {
     }
 
     /**
-     * Méthode pour mapper les résultats d'une requête à un objet User
+     * Méthode pour mapper les résultats d'une requête à un objet User.
+     *
+     * @param resultSet Le ResultSet contenant les résultats de la requête.
+     * @return L'objet User correspondant aux résultats.
+     * @throws SQLException Si une erreur survient lors du mapping.
      */
     private User mapResultSetToUser(ResultSet resultSet) throws SQLException {
         User user = new User();
@@ -210,4 +256,3 @@ public class UserDAOPGSQL extends UserDAO {
         return user;
     }
 }
-

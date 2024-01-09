@@ -25,6 +25,12 @@ public class UpcomingSessionsController {
     @FXML
     private Button detailButton;
 
+    /**
+     * Gère l'action du bouton de détail pour la séance sélectionnée.
+     *
+     * @throws SQLException           Si une erreur SQL survient.
+     * @throws ClassNotFoundException Si la classe n'est pas trouvée.
+     */
     @FXML
     public void handleDetailButton() throws SQLException, ClassNotFoundException {
         Seance selectedSeance = seanceListView.getSelectionModel().getSelectedItem();
@@ -34,17 +40,25 @@ public class UpcomingSessionsController {
         }
     }
 
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
-    // Méthode pour initialiser la liste des séances à venir
+    /**
+     * Initialise le contrôleur, appelé automatiquement après le chargement du fichier FXML.
+     * Initialise la liste des séances à venir.
+     */
     @FXML
     public void initialize() {
         try {
             SeanceFacade seanceFacade = SeanceFacade.getInstance();
-            List<Seance> pendingSeances = seanceFacade.getUpcomingSeances(UserFacade.getInstance().getCurrentUser().getIdUtilisateur());
-            ObservableList<Seance> seancesObservableList = FXCollections.observableArrayList(pendingSeances);
+            List<Seance> upcomingSeances = seanceFacade.getUpcomingSeances(UserFacade.getInstance().getCurrentUser().getIdUtilisateur());
+            ObservableList<Seance> seancesObservableList = FXCollections.observableArrayList(upcomingSeances);
             seanceListView.setItems(seancesObservableList);
             seanceListView.setCellFactory(new HistSeanceCellFactory());
         } catch (SQLException | ClassNotFoundException e) {
@@ -52,6 +66,11 @@ public class UpcomingSessionsController {
         }
     }
 
+    /**
+     * Gère l'action du bouton de retour vers la page du hub de paiement.
+     *
+     * @param actionEvent L'événement d'action.
+     */
     @FXML
     public void handleReturnButton(ActionEvent actionEvent) {
         mainApp.showHubPayment();

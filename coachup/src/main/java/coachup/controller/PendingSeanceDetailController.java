@@ -30,11 +30,21 @@ public class PendingSeanceDetailController {
     @FXML
     private Button refundButton;
 
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
-
+    /**
+     * Initialise les éléments graphiques avec les détails de la séance en attente.
+     *
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     */
     @FXML
     public void initialize() throws SQLException, ClassNotFoundException {
         seance = SeanceFacade.getInstance().getManagedSeance();
@@ -43,12 +53,23 @@ public class PendingSeanceDetailController {
         coachLabel.setText(CoachFacade.getInstance().getCoachById(seance.getIdCoach()).getNom());
     }
 
-
+    /**
+     * Gère l'action du bouton de retour.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     */
     @FXML
     public void handleReturnButton(ActionEvent actionEvent) {
         mainApp.showPendingPayment();
     }
 
+    /**
+     * Gère l'action du bouton de paiement de la séance.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     * @throws SQLException             En cas d'erreur SQL.
+     * @throws ClassNotFoundException En cas de classe non trouvée.
+     */
     @FXML
     public void handlePayButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         SeanceFacade.getInstance().paySeance(seance);

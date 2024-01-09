@@ -23,23 +23,45 @@ public class ShowAllCoachNotationsController implements Initializable {
 
     private User user;
 
+    /**
+     * Définit l'utilisateur associé à ce contrôleur.
+     *
+     * @param user L'utilisateur associé.
+     */
     public void setUser(User user) {
         this.user = user;
     }
+
     private MainApp mainApp = new MainApp();
 
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
-
+    /**
+     * Gère l'action du bouton de retour.
+     *
+     * @param actionEvent L'événement d'action.
+     */
     @FXML
-    public void backButtonAction() {
-
+    public void backButtonAction(ActionEvent actionEvent) {
+        // Ajoutez le code pour traiter l'action du bouton de retour ici
     }
 
+    /**
+     * Initialise le contrôleur, appelé automatiquement après le chargement du fichier FXML.
+     * Affiche toutes les notations du coach actuel.
+     *
+     * @param location  L'emplacement utilisé pour résoudre les chemins relatifs des objets racine ou null si l'emplacement n'est pas connu.
+     * @param resources Les ressources utilisées pour localiser l'objet racine, ou null si l'objet racine n'est pas localisé.
+     */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {;
+    public void initialize(URL location, ResourceBundle resources) {
         Notation[] notations = new Notation[0];
         try {
             notations = NotationFacade.getInstance().getNotationByCoachId(CoachFacade.getInstance().getCurrentCoach().getIdUtilisateur());
@@ -57,6 +79,11 @@ public class ShowAllCoachNotationsController implements Initializable {
         }
     }
 
+    /**
+     * Gère l'action du bouton de retour vers la page d'accueil du coach.
+     *
+     * @param actionEvent L'événement d'action.
+     */
     @FXML
     public void handleReturnButton(ActionEvent actionEvent) {
         mainApp.showWelcomePageCoach();

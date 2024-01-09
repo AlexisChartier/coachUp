@@ -12,7 +12,7 @@ public class User {
     private String role;
 
     /**
-     * Constructeur par défaut.
+     * Constructeur par défaut de la classe User.
      */
     public User() {
         // Constructeur par défaut

@@ -9,10 +9,7 @@ import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.*;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -26,6 +23,11 @@ public class RechercheCoachController {
 
     private MainApp mainApp;
 
+    /**
+     * Définit l'application principale pour ce contrôleur.
+     *
+     * @param mainApp L'application principale.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
@@ -41,6 +43,9 @@ public class RechercheCoachController {
     @FXML
     private DatePicker datePicker;
 
+    /**
+     * Initialise les éléments graphiques, notamment les listes déroulantes.
+     */
     @FXML
     public void initialize() {
         try {
@@ -62,6 +67,11 @@ public class RechercheCoachController {
         }
     }
 
+    /**
+     * Gère l'action du bouton de recherche de coachs.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     */
     @FXML
     public void handleRechercheButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         try {
@@ -121,6 +131,9 @@ public class RechercheCoachController {
         }
     }
 
+    /**
+     * Affiche une alerte indiquant qu'aucun coach n'est disponible.
+     */
     private void showNoResultsAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Aucun résultat");
@@ -136,6 +149,11 @@ public class RechercheCoachController {
         }
     }
 
+    /**
+     * Gère l'action du bouton de retour.
+     *
+     * @param actionEvent L'événement déclenché par le bouton.
+     */
     @FXML
     public void handleReturnButton(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         mainApp.showWelcomePage(UserFacade.getInstance().getCurrentUser());

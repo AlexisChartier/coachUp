@@ -7,14 +7,29 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implémentation de l'interface CoachDAO pour la gestion des opérations CRUD (Create, Read, Update, Delete) d'un coach dans une base de données PostgreSQL.
+ */
 public class CoachDAOPGSQL extends CoachDAO {
 
     private Connection connection;
 
+    /**
+     * Constructeur de la classe. Établit une connexion à la base de données PostgreSQL.
+     *
+     * @throws SQLException           Si une erreur survient lors de la connexion à la base de données.
+     * @throws ClassNotFoundException Si la classe du pilote JDBC n'est pas trouvée.
+     */
     public CoachDAOPGSQL() throws SQLException, ClassNotFoundException {
         connect();
     }
 
+    /**
+     * Méthode pour établir la connexion à la base de données PostgreSQL.
+     *
+     * @throws SQLException           Si une erreur survient lors de la connexion à la base de données.
+     * @throws ClassNotFoundException Si la classe du pilote JDBC n'est pas trouvée.
+     */
     private void connect() throws SQLException, ClassNotFoundException {
         String url = "jdbc:postgresql://dpg-clotmjpoh6hc73bo1gng-a.oregon-postgres.render.com/coachup";
         String username = "root";
@@ -23,6 +38,12 @@ public class CoachDAOPGSQL extends CoachDAO {
         connection = DriverManager.getConnection(url, username, password);
     }
 
+    /**
+     * Renvoie un coach en fonction de son identifiant.
+     *
+     * @param coachId L'identifiant du coach.
+     * @return Un objet Coach correspondant à l'identifiant donné.
+     */
     @Override
     public Coach getCoachById(int coachId) {
         try {
@@ -41,6 +62,11 @@ public class CoachDAOPGSQL extends CoachDAO {
         return null;
     }
 
+    /**
+     * Renvoie la liste de tous les coaches.
+     *
+     * @return Une liste de tous les objets Coach dans la base de données.
+     */
     @Override
     public List<Coach> getAllCoaches() {
         List<Coach> coaches = new ArrayList<>();
@@ -59,13 +85,19 @@ public class CoachDAOPGSQL extends CoachDAO {
         return coaches;
     }
 
+    /**
+     * Ajoute un coach à la base de données.
+     *
+     * @param coach L'objet Coach à ajouter.
+     * @return True si l'ajout a réussi, False sinon.
+     */
     @Override
     public boolean addCoach(Coach coach) {
         try {
-            String query = "INSERT INTO coach (idcoach,nom, email, motDePasse, categories, disponibilites, approved, diplome, prixseance) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
+            String query = "INSERT INTO coach (idcoach, nom, email, motDePasse, categories, disponibilites, approved, diplome, prixseance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 Integer[] cats = coach.getCategories();
-                Array arrayCat = connection.createArrayOf("Integer",cats);
+                Array arrayCat = connection.createArrayOf("Integer", cats);
                 Integer[] disp = coach.getDisponibilites();
                 Array arrayDisp = connection.createArrayOf("Integer", disp);
                 statement.setInt(1, coach.getIdUtilisateur());
@@ -75,8 +107,8 @@ public class CoachDAOPGSQL extends CoachDAO {
                 statement.setArray(5, arrayCat);
                 statement.setArray(6, arrayDisp);
                 statement.setBoolean(7, false);
-                statement.setString(8,coach.getDiplome());
-                statement.setInt(9,coach.getPrix());
+                statement.setString(8, coach.getDiplome());
+                statement.setInt(9, coach.getPrix());
                 int rowsAffected = statement.executeUpdate();
                 return rowsAffected > 0;
             }
@@ -86,13 +118,19 @@ public class CoachDAOPGSQL extends CoachDAO {
         return false;
     }
 
+    /**
+     * Met à jour les informations d'un coach dans la base de données.
+     *
+     * @param coach L'objet Coach à mettre à jour.
+     * @return True si la mise à jour a réussi, False sinon.
+     */
     @Override
     public boolean updateCoach(Coach coach) {
         try {
             String query = "UPDATE coach SET nom = ?, email = ?, motDePasse = ?, categories = ?, disponibilites = ?, prixseance = ? WHERE idcoach = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 Integer[] cats = coach.getCategories();
-                Array arrayCat = connection.createArrayOf("Integer",cats);
+                Array arrayCat = connection.createArrayOf("Integer", cats);
                 Integer[] disp = coach.getDisponibilites();
                 Array arrayDisp = connection.createArrayOf("Integer", disp);
                 statement.setString(1, coach.getNom());
@@ -111,6 +149,12 @@ public class CoachDAOPGSQL extends CoachDAO {
         return false;
     }
 
+    /**
+     * Supprime un coach de la base de données en fonction de son identifiant.
+     *
+     * @param coachId L'identifiant du coach à supprimer.
+     * @return True si la suppression a réussi, False sinon.
+     */
     @Override
     public boolean deleteCoach(int coachId) {
         try {
@@ -126,11 +170,16 @@ public class CoachDAOPGSQL extends CoachDAO {
         return false;
     }
 
+    /**
+     * Renvoie la liste des coaches non approuvés.
+     *
+     * @return Une liste des objets Coach non approuvés dans la base de données.
+     */
     @Override
     public List<Coach> getUnapprovedCoaches() {
         List<Coach> unapprovedCoaches = new ArrayList<>();
         try {
-            String query = "SELECT * FROM coach WHERE approved = false AND denied= false";
+            String query = "SELECT * FROM coach WHERE approved = false AND denied = false";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
@@ -148,8 +197,6 @@ public class CoachDAOPGSQL extends CoachDAO {
      * Met à jour l'attribut 'denied' du coach avec l'ID spécifié.
      *
      * @param coachId L'ID du coach à rejeter.
-     * @return true si la mise à jour est réussie, false sinon.
-     *
      */
     @Override
     public void denyCoach(int coachId) {
@@ -173,6 +220,7 @@ public class CoachDAOPGSQL extends CoachDAO {
      * @param id L'identifiant du coach.
      * @return La liste des catégories associées au coach.
      */
+    @Override
     public List<Categorie> getCategoriesByCoachId(int id) {
         List<Categorie> categories = new ArrayList<>();
 
@@ -200,7 +248,12 @@ public class CoachDAOPGSQL extends CoachDAO {
         return categories;
     }
 
-
+    /**
+     * Approuve un coach en fonction de son identifiant.
+     *
+     * @param id L'identifiant du coach à approuver.
+     * @return True si l'approbation a réussi, False sinon.
+     */
     @Override
     public boolean approveCoach(int id) {
         try {
@@ -219,6 +272,12 @@ public class CoachDAOPGSQL extends CoachDAO {
         return false;
     }
 
+    /**
+     * Renvoie la liste des coaches associés à une catégorie en fonction de l'identifiant de la catégorie.
+     *
+     * @param idCategorie L'identifiant de la catégorie.
+     * @return Une liste des objets Coach associés à la catégorie.
+     */
     @Override
     public List<Coach> getCoachesByCategoryId(int idCategorie) {
         List<Coach> coaches = new ArrayList<>();
@@ -244,7 +303,13 @@ public class CoachDAOPGSQL extends CoachDAO {
         return coaches;
     }
 
-
+    /**
+     * Méthode pour mapper les résultats d'une requête à un objet Coach.
+     *
+     * @param resultSet Le ResultSet résultant de la requête.
+     * @return Un objet Coach.
+     * @throws SQLException Si une erreur survient lors de la manipulation du ResultSet.
+     */
     private Coach mapResultSetToCoach(ResultSet resultSet) throws SQLException {
         Array cats = resultSet.getArray("categories");
         Array disp = resultSet.getArray("disponibilites");
@@ -252,7 +317,7 @@ public class CoachDAOPGSQL extends CoachDAO {
         String nom = resultSet.getString("nom");
         String email = resultSet.getString("email");
         String motDePasse = resultSet.getString("motdepasse");
-        Integer[] categories = (Integer[])cats.getArray();
+        Integer[] categories = (Integer[]) cats.getArray();
         Integer[] disponibilites = (Integer[]) disp.getArray();
         String diplome = resultSet.getString("diplome");
         boolean approved = resultSet.getBoolean("approved");
